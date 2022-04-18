@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using RestFit.API.Models;
 using RestFit.API.Services;
+using RestFit.Data;
+using RestFit.Repository.Abstract;
 
 namespace RestFit.API.Controllers
 {
@@ -10,11 +12,13 @@ namespace RestFit.API.Controllers
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
-        private IUserService _userService;
+        private readonly IUserService _userService;
+        private readonly IUserAccess _userAccess;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService, IUserAccess userAccess)
         {
             _userService = userService;
+            _userAccess = userAccess;
         }
 
         [AllowAnonymous]
@@ -34,6 +38,14 @@ namespace RestFit.API.Controllers
         {
             var users = await _userService.GetAll();
             return Ok(users);
+        }
+
+        [AllowAnonymous, HttpPost]
+        public async Task<IActionResult> AddUser([FromBody] User user)
+        {
+            await Task.Yield();
+            _userAccess.InsertDocument(user);
+            return Ok();
         }
     }
 }

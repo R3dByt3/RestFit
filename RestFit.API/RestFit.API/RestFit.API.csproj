@@ -16,7 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RestFit.Data\RestFit.Data.csproj" />
+    <ProjectReference Include="..\RestFit.Repository.Abstract\RestFit.Repository.Abstract.csproj" />
+    <ProjectReference Include="..\RestFit.Repository\RestFit.Repository.csproj" />
   </ItemGroup>
 
 </Project>

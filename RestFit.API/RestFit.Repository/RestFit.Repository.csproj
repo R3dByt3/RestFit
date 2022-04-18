@@ -13,4 +13,8 @@
     <PackageReference Include="Serilog.Sinks.MongoDB" Version="5.1.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RestFit.Repository.Abstract\RestFit.Repository.Abstract.csproj" />
+  </ItemGroup>
+
 </Project>

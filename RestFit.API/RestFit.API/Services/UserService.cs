@@ -1,5 +1,6 @@
 ﻿using RestFit.API.Extensions;
 using RestFit.Data;
+using RestFit.Repository.Abstract;
 
 namespace RestFit.API.Services
 {
@@ -11,27 +12,27 @@ namespace RestFit.API.Services
 
     public class UserService : IUserService
     {
-        // users hardcoded for simplicity, store in a db with hashed passwords in production applications
-        private List<User> _users = new List<User>
+        private readonly IUserAccess _userAccess;
+
+        public UserService(IUserAccess userAccess)
         {
-            new User { Id = 1, FirstName = "Test", LastName = "User", Username = "test", Password = "test" }
-        };
+            _userAccess = userAccess;
+        }
 
         public async Task<User?> Authenticate(string username, string password)
         {
-            var user = await Task.Run(() => _users.SingleOrDefault(x => x.Username == username && x.Password == password));
+            var users = _userAccess.RetrieveDocuments();
+            var user = await Task.Run(() => users.SingleOrDefault(x => x.Username == username && x.Password == password));
 
-            // return null if user not found
             if (user == null)
                 return null;
 
-            // authentication successful so return user details without password
             return user.WithoutPassword();
         }
 
         public async Task<IEnumerable<User>> GetAll()
         {
-            return await Task.Run(() => _users.WithoutPasswords());
+            return await Task.Run(() => _userAccess.RetrieveDocuments());
         }
     }
 }
