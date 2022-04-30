@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.IdGenerators;
-using RestFit.Data;
+﻿using RestFit.Data;
 using RestFit.Repository.Abstract;
 
 namespace RestFit.Repository

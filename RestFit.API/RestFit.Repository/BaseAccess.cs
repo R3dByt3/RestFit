@@ -20,11 +20,6 @@ namespace RestFit.Repository
             EnsureViews();
         }
 
-        public ICollection<TDocument> RetrieveDocuments(FilterDefinition<TDocument>? filterDefinition = null)
-        {
-            return Collection.Find(filterDefinition ?? new BsonDocument()).ToList();
-        }
-
         protected void CreateIndex(bool unique, bool sparse, Expression < Func<TDocument, object>> action)
         {
             var indexOptions = new CreateIndexOptions
@@ -64,6 +59,16 @@ namespace RestFit.Repository
         public void InsertDocument(TDocument document)
         {
             Collection.InsertOne(document);
+        }
+
+        public ICollection<TDocument> RetrieveDocuments(FilterDefinition<TDocument>? filterDefinition = null)
+        {
+            return Collection.Find(filterDefinition ?? new BsonDocument()).ToList();
+        }
+
+        public long CountDocuments(FilterDefinition<TDocument>? filterDefinition = null)
+        {
+            return Collection.CountDocuments(filterDefinition);
         }
     }
 }

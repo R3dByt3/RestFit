@@ -13,12 +13,12 @@ namespace RestFit.API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
-        private readonly IUserAccess _userAccess;
+        private readonly IUserRepository _userRepository;
 
-        public UsersController(IUserService userService, IUserAccess userAccess)
+        public UsersController(IUserService userService, IUserRepository userRepository)
         {
             _userService = userService;
-            _userAccess = userAccess;
+            _userRepository = userRepository;
         }
 
         [AllowAnonymous]
@@ -44,7 +44,7 @@ namespace RestFit.API.Controllers
         public async Task<IActionResult> AddUser([FromBody] User user)
         {
             await Task.Yield();
-            _userAccess.InsertDocument(user);
+            _userRepository.Insert(user);
             return Ok();
         }
     }

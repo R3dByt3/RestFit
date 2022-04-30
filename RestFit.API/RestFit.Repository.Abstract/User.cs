@@ -1,6 +1,6 @@
 ﻿namespace RestFit.Data
 {
-    public class User
+    public record User
     {
         public string Id { get; set; } = string.Empty;
         public string Username { get; set; } = string.Empty;

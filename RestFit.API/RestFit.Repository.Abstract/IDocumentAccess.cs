@@ -6,5 +6,6 @@ namespace RestFit.Repository.Abstract
     {
         public ICollection<TDocument> RetrieveDocuments(FilterDefinition<TDocument>? filterDefinition = null);
         public void InsertDocument(TDocument document);
+        public long CountDocuments(FilterDefinition<TDocument>? filterDefinition = null);
     }
 }

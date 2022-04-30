@@ -1,10 +1,8 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.OpenApi.Models;
-using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.IdGenerators;
 using RestFit.API.Extensions;
 using RestFit.API.Middleware;
-using RestFit.Data;
+using RestFit.Repository.Abstract.ClassMaps;
 using Serilog;
 using System.Reflection;
 
@@ -14,18 +12,7 @@ namespace RestFitAPI
     {
         public static void Main(string[] args)
         {
-            BsonClassMap.RegisterClassMap<User>(cm =>
-            {
-                cm.MapIdField(c => c.Id)
-                    .SetIdGenerator(StringObjectIdGenerator.Instance)
-                    .SetElementName("id");
-
-                cm.MapField(c => c.Username)
-                    .SetElementName("username");
-
-                cm.MapField(c => c.Password)
-                    .SetElementName("password");
-            });
+            ClassMapCollection.Init();
 
             using var log = new LoggerConfiguration()
                 .WriteTo.MongoDBBson("mongodb://mymongodb/logs")
