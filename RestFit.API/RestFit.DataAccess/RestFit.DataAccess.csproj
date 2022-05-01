@@ -7,11 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="RestSharp" Version="107.3.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.15.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RestFit.Client.Abstract\RestFit.Client.Abstract.csproj" />
     <ProjectReference Include="..\RestFit.DataAccess.Abstract\RestFit.DataAccess.Abstract.csproj" />
   </ItemGroup>
 

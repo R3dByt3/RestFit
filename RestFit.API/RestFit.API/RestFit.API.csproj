@@ -6,18 +6,23 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
+    <DocumentationFile></DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Serilog" Version="2.11.0" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="4.2.0" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="3.1.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
     <PackageReference Include="Serilog.Sinks.MongoDB" Version="5.1.5" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.3.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RestFit.Repository.Abstract\RestFit.Repository.Abstract.csproj" />
-    <ProjectReference Include="..\RestFit.Repository\RestFit.Repository.csproj" />
+    <ProjectReference Include="..\RestFit.DataAccess.Abstract\RestFit.DataAccess.Abstract.csproj" />
+    <ProjectReference Include="..\RestFit.DataAccess\RestFit.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

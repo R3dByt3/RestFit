@@ -2,8 +2,9 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.OpenApi.Models;
 using RestFit.API.Extensions;
 using RestFit.API.Middleware;
-using RestFit.Repository.Abstract.ClassMaps;
+using RestFit.DataAccess.Abstract.ClassMaps;
 using Serilog;
+using Swashbuckle.AspNetCore.Filters;
 using System.Reflection;
 
 namespace RestFitAPI
@@ -14,11 +15,15 @@ namespace RestFitAPI
         {
             ClassMapCollection.Init();
 
-            using var log = new LoggerConfiguration()
-                .WriteTo.MongoDBBson("mongodb://mymongodb/logs")
-                .CreateLogger();
+            Serilog.Debugging.SelfLog.Enable(msg => Console.WriteLine(msg));
 
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Host.UseSerilog((hostContext, services, configuration) => {
+                configuration
+                .WriteTo.Console()
+                .WriteTo.MongoDBBson("mongodb://localhost:27017/RestFit", "Log", Serilog.Events.LogEventLevel.Verbose, 50, TimeSpan.FromSeconds(5), 1024, 50000);
+            });
 
             // Add services to the container.
 
@@ -45,10 +50,13 @@ namespace RestFitAPI
                         Url = new Uri("https://example.com/license")
                     }*/
                 });
-                
+                options.ExampleFilters();
+
                 var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
             });
+
+            builder.Services.AddSwaggerExamplesFromAssemblies(Assembly.GetEntryAssembly());
 
             builder.Services.AddAuthentication("BasicAuthentication")
                 .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
@@ -65,7 +73,7 @@ namespace RestFitAPI
                 app.UseSwaggerUI(options =>
                 {
                     options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-                    options.RoutePrefix = string.Empty;
+                    options.RoutePrefix = "swagger";
                 });
             }
 

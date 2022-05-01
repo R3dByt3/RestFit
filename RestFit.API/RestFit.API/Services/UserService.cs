@@ -1,6 +1,6 @@
 ﻿using RestFit.API.Extensions;
 using RestFit.Data;
-using RestFit.Repository.Abstract;
+using RestFit.DataAccess.Abstract;
 
 namespace RestFit.API.Services
 {

@@ -1,4 +1,4 @@
-﻿using RestFit.Client.Abstract;
+﻿using RestFit.Client.Abstract.Exceptions;
 using RestSharp;
 using RestSharp.Authenticators;
 
@@ -32,13 +32,13 @@ namespace RestFit.Client
 
         private void ThrowOnInvalidResponse(RestResponse response)
         {
-            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            if (!response.IsSuccessful)
                 throw new RequestFailedException($"StatusCode: {response.StatusCode}; Message: {response.ErrorMessage}");
         }
 
         private void ThrowOnInvalidResponse<T>(RestResponse<T> response)
         {
-            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            if (!response.IsSuccessful)
                 throw new RequestFailedException($"StatusCode: {response.StatusCode}; Message: {response.ErrorMessage}");
 
             if (response.Data == null)
