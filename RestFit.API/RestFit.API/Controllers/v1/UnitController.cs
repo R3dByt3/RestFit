@@ -19,7 +19,7 @@ namespace RestFit.API.Controllers.v1
 
         [HttpPost]
         [Consumes("application/json")]
-        public async Task<IActionResult> AddUnit([FromBody] Unit unit)
+        public async Task<IActionResult> AddUnitAsync([FromBody] Unit unit)
         {
             await Task.Yield();
             _unitRepository.Insert(unit);

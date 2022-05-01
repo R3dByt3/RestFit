@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RestFit.Logic.Abstract\RestFit.Logic.Abstract.csproj" />
+  </ItemGroup>
+
 </Project>

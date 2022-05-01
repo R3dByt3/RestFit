@@ -28,7 +28,7 @@ namespace RestFit.API.Controllers.v1
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public async Task<IActionResult> Authenticate([FromBody] AuthenticateModel model)
+        public async Task<IActionResult> AuthenticateAsync([FromBody] AuthenticateModel model)
         {
             var user = await _userService.Authenticate(model.Username, model.Password);
 
@@ -53,7 +53,7 @@ namespace RestFit.API.Controllers.v1
         });
 
         [AllowAnonymous, HttpPost]
-        public async Task<IActionResult> AddUser([FromBody] User user)
+        public async Task<IActionResult> AddUserAsync([FromBody] User user)
         {
             await Task.Yield();
             _userRepository.Insert(user);
