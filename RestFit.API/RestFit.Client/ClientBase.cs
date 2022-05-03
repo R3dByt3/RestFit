@@ -15,7 +15,7 @@ namespace RestFit.Client
         protected abstract string BaseUrl { get; }
         private RestClient _client { get; }
 
-        protected ClientBase(string username, string password)
+        protected ClientBase(string username, string password) //ToDo: Configuration
         {
             var options = new RestClientOptions(Server + BaseUrl);
             _client = new RestClient(options)
@@ -42,7 +42,7 @@ namespace RestFit.Client
             }
         }
 
-        private void ThrowOnInvalidResponseGeneric<T>(RestResponse<T> response, T data)
+        private void ThrowOnInvalidResponse<T>(RestResponse response, T data)
         {
             if (!response.IsSuccessful)
             {
@@ -60,11 +60,11 @@ namespace RestFit.Client
             var request = new RestRequest(path, Method.Get);
             AddParams(request, @params);
 
-            var response = await _client.ExecuteGetAsync<T>(request).ConfigureAwait(false);
+            var response = await _client.ExecuteGetAsync(request).ConfigureAwait(false);
 
             var data = JsonConvert.DeserializeObject<T>(response.Content ?? string.Empty);
 
-            ThrowOnInvalidResponseGeneric(response!, data);
+            ThrowOnInvalidResponse(response!, data);
 
             return data!;
         }
@@ -76,7 +76,7 @@ namespace RestFit.Client
 
             request.AddStringBody(JsonConvert.SerializeObject(data), DataFormat.Json);
 
-            var response = await _client.ExecutePostAsync<T>(request).ConfigureAwait(false);
+            var response = await _client.ExecutePostAsync(request).ConfigureAwait(false);
 
             ThrowOnInvalidResponse(response);
         }

@@ -14,12 +14,12 @@ namespace RestFit.Client.v1
 
         }
 
-        public async Task<IList<UnitDto>> GetUnits(UnitSearchDto? search = null)
+        public async Task<IList<UnitDto>> GetUnitsAsync(UnitSearchDto? search = null)
         {
             return await ExecuteGetAsync<List<UnitDto>>(null, search.GetParameters()).ConfigureAwait(false);
         }
 
-        public async Task AddUnit(UnitDto unit)
+        public async Task AddUnitAsync(UnitDto unit)
         {
             await ExecutePostAsync(null, unit).ConfigureAwait(false);
         }

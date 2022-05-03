@@ -6,7 +6,7 @@ using RestFit.DataAccess.Abstract.KnownSearches;
 
 IClientHub clientHub = new RestFit.Client.ClientHub("marvin", "5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8");
 
-await clientHub.V1.UnitClient.AddUnit(new UnitDto
+await clientHub.V1.UnitClient.AddUnitAsync(new UnitDto
 {
     Type = "SitUps",
     Duration = TimeSpan.FromSeconds(1),
@@ -14,7 +14,7 @@ await clientHub.V1.UnitClient.AddUnit(new UnitDto
     UserId = Guid.NewGuid().ToString()
 });
 
-await clientHub.V1.UnitClient.AddUnit(new UnitDto
+await clientHub.V1.UnitClient.AddUnitAsync(new UnitDto
 {
     Type = "SitUps",
     Duration = TimeSpan.FromSeconds(2),
@@ -22,7 +22,7 @@ await clientHub.V1.UnitClient.AddUnit(new UnitDto
     UserId = Guid.NewGuid().ToString()
 });
 
-await clientHub.V1.UnitClient.AddUnit(new UnitDto
+await clientHub.V1.UnitClient.AddUnitAsync(new UnitDto
 {
     Type = "SitUps",
     Duration = TimeSpan.FromSeconds(3),
@@ -30,4 +30,4 @@ await clientHub.V1.UnitClient.AddUnit(new UnitDto
     UserId = Guid.NewGuid().ToString()
 });
 
-Console.WriteLine(JsonConvert.SerializeObject(await clientHub.V1.UnitClient.GetUnits()));
+Console.WriteLine(JsonConvert.SerializeObject(await clientHub.V1.UnitClient.GetUnitsAsync()));
