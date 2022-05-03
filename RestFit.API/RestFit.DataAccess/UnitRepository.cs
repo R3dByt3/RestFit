@@ -20,9 +20,9 @@ namespace RestFit.DataAccess
             if (!string.IsNullOrWhiteSpace(unit.Id))
                 throw new InsufficientDataException($"{nameof(unit.Id)} must be empty");
             if (string.IsNullOrWhiteSpace(unit.UserId))
-                throw new InsufficientDataException($"{nameof(unit.Id)} must be filled");
+                throw new InsufficientDataException($"{nameof(unit.UserId)} must be filled");
             if (string.IsNullOrWhiteSpace(unit.Type))
-                throw new InsufficientDataException($"{nameof(unit.Id)} must be filled");
+                throw new InsufficientDataException($"{nameof(unit.Type)} must be filled");
             _unitAccess.InsertDocument(unit);
         }
 
@@ -47,6 +47,11 @@ namespace RestFit.DataAccess
 
             var filter = UnitFilters.Empty;
             return search == null ? filter : search.ToKeyValuePairs().Aggregate(filter, AddFilter);
+        }
+
+        public ICollection<Unit> GetAll()
+        {
+            return _unitAccess.RetrieveDocuments();
         }
     }
 }

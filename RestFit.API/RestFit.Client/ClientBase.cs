@@ -1,4 +1,6 @@
-﻿using RestFit.Client.Abstract.Exceptions;
+﻿using Newtonsoft.Json;
+using RestFit.Client.Abstract.Exceptions;
+using RestFit.Client.Abstract.Model;
 using RestSharp;
 using RestSharp.Authenticators;
 
@@ -6,19 +8,19 @@ namespace RestFit.Client
 {
     public abstract class ClientBase : IDisposable
     {
-        private static string ClientId = "";
-        private static string ClientSecret = "";
+        private static readonly string Server = "https://localhost:7190/";
+
         private bool disposedValue;
 
         protected abstract string BaseUrl { get; }
         private RestClient _client { get; }
 
-        protected ClientBase()
+        protected ClientBase(string username, string password)
         {
-            var options = new RestClientOptions(BaseUrl);
+            var options = new RestClientOptions(Server + BaseUrl);
             _client = new RestClient(options)
             {
-                Authenticator = new HttpBasicAuthenticator(ClientId, ClientSecret),
+                Authenticator = new HttpBasicAuthenticator(username, password),
             };
         }
 
@@ -33,28 +35,50 @@ namespace RestFit.Client
         private void ThrowOnInvalidResponse(RestResponse response)
         {
             if (!response.IsSuccessful)
-                throw new RequestFailedException($"StatusCode: {response.StatusCode}; Message: {response.ErrorMessage}");
+            {
+                var error = JsonConvert.DeserializeObject<ErrorDataDto>(response.Content ?? string.Empty);
+
+                throw new RequestFailedException($"StatusCode: {response.StatusCode}; Message: {error?.Message}");
+            }
         }
 
-        private void ThrowOnInvalidResponse<T>(RestResponse<T> response)
+        private void ThrowOnInvalidResponseGeneric<T>(RestResponse<T> response, T data)
         {
             if (!response.IsSuccessful)
-                throw new RequestFailedException($"StatusCode: {response.StatusCode}; Message: {response.ErrorMessage}");
+            {
+                var error = JsonConvert.DeserializeObject<ErrorDataDto>(response.Content ?? string.Empty);
 
-            if (response.Data == null)
+                throw new RequestFailedException($"StatusCode: {response.StatusCode}; Message: {error?.Message}");
+            }
+
+            if (data == null)
                 throw new DataSerializationException($"Response could not be parsed; Content: {response.Content}");
         }
 
-        protected async Task<T> ExecuteGetAsync<T>(string path, ParametersCollection @params)
+        protected async Task<T> ExecuteGetAsync<T>(string? path, ParametersCollection @params)
         {
-            var request = new RestRequest(path);
+            var request = new RestRequest(path, Method.Get);
             AddParams(request, @params);
 
             var response = await _client.ExecuteGetAsync<T>(request).ConfigureAwait(false);
 
-            ThrowOnInvalidResponse(response);
+            var data = JsonConvert.DeserializeObject<T>(response.Content ?? string.Empty);
 
-            return response.Data!;
+            ThrowOnInvalidResponseGeneric(response!, data);
+
+            return data!;
+        }
+
+        protected async Task ExecutePostAsync<T>(string? path, T data) where T : class
+        {
+            var request = new RestRequest(path, Method.Post);
+            request.AddHeader("Content-type", "application/json");
+
+            request.AddStringBody(JsonConvert.SerializeObject(data), DataFormat.Json);
+
+            var response = await _client.ExecutePostAsync<T>(request).ConfigureAwait(false);
+
+            ThrowOnInvalidResponse(response);
         }
 
         protected virtual void Dispose(bool disposing)

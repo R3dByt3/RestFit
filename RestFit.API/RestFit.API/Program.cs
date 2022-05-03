@@ -60,6 +60,7 @@ namespace RestFitAPI
 
             builder.Services.AddAuthentication("BasicAuthentication")
                 .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+            builder.Services.AddMvc().AddNewtonsoftJson();
 
             // configure DI for application services
             builder.Services.AddStartup();

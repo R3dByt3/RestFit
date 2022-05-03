@@ -10,7 +10,9 @@ namespace RestFit.API.Extensions
         {
             return services.AddSingleton<IUserAccess, UserAccess>()
                 .AddSingleton<IUserRepository, UserRepository>()
-                .AddSingleton<IUserService, UserService>();
+                .AddSingleton<IUserService, UserService>()
+                .AddSingleton<IUnitRepository, UnitRepository>()
+                .AddSingleton<IUnitAccess, UnitAccess>();
         }
     }
 }

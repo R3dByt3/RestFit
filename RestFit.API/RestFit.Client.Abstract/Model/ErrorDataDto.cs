@@ -1,11 +1,11 @@
-﻿namespace RestFit.API.Models
+﻿namespace RestFit.Client.Abstract.Model
 {
-    public record ErrorData
+    public record ErrorDataDto
     {
         public string Message { get; set; } = string.Empty;
         public string AdditionalInfo { get; set; } = string.Empty;
 
-        public ErrorData(string message)
+        public ErrorDataDto(string message)
         {
             Message = message;
         }

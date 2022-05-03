@@ -3,7 +3,7 @@ using Swashbuckle.AspNetCore.Filters;
 
 namespace RestFit.API.Controllers.v1.Examples
 {
-    public class UsersExampleProvider : IExamplesProvider<List<User>>
+    public class UserDtoExampleProvider : IExamplesProvider<List<User>>
     {
         public List<User> GetExamples()
         {

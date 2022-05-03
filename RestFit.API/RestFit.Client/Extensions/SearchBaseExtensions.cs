@@ -5,7 +5,7 @@ namespace RestFit.Client.Extensions
 {
     public static class SearchBaseExtensions
     {
-        public static ParametersCollection GetParameters<T>(this SearchBase<T>? search) where T : Enum
+        public static ParametersCollection GetParameters<T>(this SearchBaseDto<T>? search) where T : Enum
         {
             var parameters = new ParametersCollection();
 

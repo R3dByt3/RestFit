@@ -10,6 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Serilog" Version="2.11.0" />
     <PackageReference Include="Serilog.Extensions.Hosting" Version="4.2.0" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="3.1.0" />
@@ -21,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RestFit.Client.Abstract\RestFit.Client.Abstract.csproj" />
     <ProjectReference Include="..\RestFit.DataAccess.Abstract\RestFit.DataAccess.Abstract.csproj" />
     <ProjectReference Include="..\RestFit.DataAccess\RestFit.DataAccess.csproj" />
   </ItemGroup>
