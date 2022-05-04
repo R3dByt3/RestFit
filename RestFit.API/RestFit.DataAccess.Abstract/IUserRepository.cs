@@ -4,7 +4,7 @@ namespace RestFit.DataAccess.Abstract
 {
     public interface IUserRepository
     {
-        public ICollection<User> GetAllUsers();
-        public void Insert(User user);
+        public Task<ICollection<User>> GetUsersAsync();
+        public Task CreateUserAsync(User user);
     }
 }

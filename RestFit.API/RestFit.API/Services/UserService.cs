@@ -21,8 +21,8 @@ namespace RestFit.API.Services
 
         public async Task<User?> Authenticate(string username, string password)
         {
-            var users = _userAccess.RetrieveDocuments();
-            var user = await Task.Run(() => users.SingleOrDefault(x => x.Username == username && x.Password == password));
+            var users = await _userAccess.RetrieveDocumentsAsync();
+            var user = users.SingleOrDefault(x => x.Username == username && x.Password == password);
 
             if (user == null)
                 return null;
@@ -32,7 +32,7 @@ namespace RestFit.API.Services
 
         public async Task<IEnumerable<User>> GetAll()
         {
-            return await Task.Run(() => _userAccess.RetrieveDocuments());
+            return await Task.Run(() => _userAccess.RetrieveDocumentsAsync());
         }
     }
 }

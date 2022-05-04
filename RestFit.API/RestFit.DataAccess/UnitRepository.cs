@@ -1,7 +1,7 @@
 ﻿using MongoDB.Driver;
 using RestFit.DataAccess.Abstract;
 using RestFit.DataAccess.Abstract.Exceptions;
-using RestFit.DataAccess.Abstract.KnownFilters;
+using RestFit.DataAccess.KnownFilters;
 using RestFit.DataAccess.Abstract.KnownSearches;
 
 namespace RestFit.DataAccess
@@ -15,7 +15,7 @@ namespace RestFit.DataAccess
             _unitAccess = unitAccess;
         }
 
-        public void Insert(Unit unit)
+        public async Task CreateUnitAsync(Unit unit)
         {
             if (!string.IsNullOrWhiteSpace(unit.Id))
                 throw new InsufficientDataException($"{nameof(unit.Id)} must be empty");
@@ -23,13 +23,13 @@ namespace RestFit.DataAccess
                 throw new InsufficientDataException($"{nameof(unit.UserId)} must be filled");
             if (string.IsNullOrWhiteSpace(unit.Type))
                 throw new InsufficientDataException($"{nameof(unit.Type)} must be filled");
-            _unitAccess.InsertDocument(unit);
+            await _unitAccess.InsertDocumentAsync(unit).ConfigureAwait(false);
         }
 
-        public ICollection<Unit> GetUnits(UnitSearch? search = null)
+        public async Task<ICollection<Unit>> GetUnitsAsync(UnitSearch? search = null)
         {
             var filter = BuildFilter(search);
-            return _unitAccess.RetrieveDocuments(filter);
+            return await _unitAccess.RetrieveDocumentsAsync(filter).ConfigureAwait(false);
         }
 
         private static FilterDefinition<Unit> BuildFilter(UnitSearch? search = null)
@@ -47,11 +47,6 @@ namespace RestFit.DataAccess
 
             var filter = UnitFilters.Empty;
             return search == null ? filter : search.ToKeyValuePairs().Aggregate(filter, AddFilter);
-        }
-
-        public ICollection<Unit> GetAll()
-        {
-            return _unitAccess.RetrieveDocuments();
         }
     }
 }

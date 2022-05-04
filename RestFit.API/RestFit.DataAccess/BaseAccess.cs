@@ -57,11 +57,11 @@ namespace RestFit.DataAccess
         protected abstract void EnsureIndices();
         protected abstract void EnsureViews();
 
-        public void InsertDocument(TDocument document)
+        public async Task InsertDocumentAsync(TDocument document)
         {
             try
             {
-                Collection.InsertOne(document);
+                await Collection.InsertOneAsync(document).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -69,11 +69,12 @@ namespace RestFit.DataAccess
             }
         }
 
-        public ICollection<TDocument> RetrieveDocuments(FilterDefinition<TDocument>? filterDefinition = null)
+        public async Task<ICollection<TDocument>> RetrieveDocumentsAsync(FilterDefinition<TDocument>? filterDefinition = null)
         {
             try
             {
-                return Collection.Find(filterDefinition ?? new BsonDocument()).ToList();
+                var documents = await Collection.FindAsync(filterDefinition ?? new BsonDocument()).ConfigureAwait(false);
+                return documents.ToList();
             }
             catch (Exception ex)
             {
@@ -81,11 +82,11 @@ namespace RestFit.DataAccess
             }
         }
 
-        public long CountDocuments(FilterDefinition<TDocument>? filterDefinition = null)
+        public async Task<long> CountDocumentsAsync(FilterDefinition<TDocument>? filterDefinition = null)
         {
             try
             {
-                return Collection.CountDocuments(filterDefinition);
+                return await Collection.CountDocumentsAsync(filterDefinition).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -93,11 +94,11 @@ namespace RestFit.DataAccess
             }
         }
 
-        public void Update(FilterDefinition<TDocument>? filterDefinition = null, UpdateDefinition<TDocument>? updateDefinition = null)
+        public async Task UpdateAsync(FilterDefinition<TDocument>? filterDefinition = null, UpdateDefinition<TDocument>? updateDefinition = null)
         {
             try
             {
-                Collection.UpdateMany(filterDefinition, updateDefinition);
+                await Collection.UpdateManyAsync(filterDefinition, updateDefinition).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -105,11 +106,11 @@ namespace RestFit.DataAccess
             }
         }
 
-        public bool Exists(FilterDefinition<TDocument>? filterDefinition = null)
+        public async Task<bool> ExistsAsync(FilterDefinition<TDocument>? filterDefinition = null)
         {
             try
             {
-                return Collection.CountDocuments(filterDefinition, new CountOptions { Limit = 1 }) == 1;
+                return await Collection.CountDocumentsAsync(filterDefinition, new CountOptions { Limit = 1 }).ConfigureAwait(false) == 1;
             }
             catch (Exception ex)
             {

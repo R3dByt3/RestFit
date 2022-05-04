@@ -26,6 +26,7 @@
     <ProjectReference Include="..\RestFit.Client.Abstract\RestFit.Client.Abstract.csproj" />
     <ProjectReference Include="..\RestFit.DataAccess.Abstract\RestFit.DataAccess.Abstract.csproj" />
     <ProjectReference Include="..\RestFit.DataAccess\RestFit.DataAccess.csproj" />
+    <ProjectReference Include="..\RestFit.Logic.Abstract\RestFit.Logic.Abstract.csproj" />
   </ItemGroup>
 
 </Project>

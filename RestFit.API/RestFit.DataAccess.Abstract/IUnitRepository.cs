@@ -1,8 +1,10 @@
-﻿namespace RestFit.DataAccess.Abstract
+﻿using RestFit.DataAccess.Abstract.KnownSearches;
+
+namespace RestFit.DataAccess.Abstract
 {
     public interface IUnitRepository
     {
-        public void Insert(Unit unit);
-        public ICollection<Unit> GetAll();
+        public Task CreateUnitAsync(Unit unit);
+        public Task<ICollection<Unit>> GetUnitsAsync(UnitSearch? search = null);
     }
 }

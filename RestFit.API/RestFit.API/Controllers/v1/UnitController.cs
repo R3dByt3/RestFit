@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using RestFit.DataAccess.Abstract;
 using RestFit.DataAccess.Abstract.Exceptions;
 using Swashbuckle.AspNetCore.Annotations;
 using Swashbuckle.AspNetCore.Filters;
 using System.Net;
 using RestFit.API.Controllers.v1.Examples;
 using RestFit.Client.Abstract.Model;
-using RestFit.API.Controllers.v1.Mappers;
+using RestFit.DataAccess.Abstract.KnownSearches;
 
 namespace RestFit.API.Controllers.v1
 {
@@ -16,11 +15,11 @@ namespace RestFit.API.Controllers.v1
     [Route("[controller]")]
     public class UnitController : ControllerWithExceptionHandling
     {
-        private readonly IUnitRepository _unitRepository;
+        private readonly IUnitControllerV1Processor _processor;
 
-        public UnitController(IUnitRepository unitRepository, ILoggerFactory loggerFactory) : base(loggerFactory.CreateLogger<UnitController>())
+        public UnitController(IUnitControllerV1Processor processor, ILoggerFactory loggerFactory) : base(loggerFactory.CreateLogger<UnitController>())
         {
-            _unitRepository = unitRepository;
+            _processor = processor;
         }
 
         [HttpPost]
@@ -32,10 +31,9 @@ namespace RestFit.API.Controllers.v1
         [SwaggerResponseExample((int)HttpStatusCode.GatewayTimeout, typeof(ErrorDataDtoExampleProvider))]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, "Wenn ein unerwarteter Fehler auftritt", typeof(ErrorDataDto))]
         [SwaggerResponseExample((int)HttpStatusCode.InternalServerError, typeof(ErrorDataDtoExampleProvider))]
-        public async Task<IActionResult> AddUnitAsync([FromBody] UnitDto unit) => await ExecuteSafeAsync(async () =>
+        public async Task<IActionResult> AddUnitsAsync([FromBody] UnitDto unit) => await ExecuteSafeAsync(async () =>
         {
-            await Task.Yield();
-            _unitRepository.Insert(UnitDtoMapper.Instance.Convert(unit));
+            await _processor.CreateUnitAsync(unit).ConfigureAwait(false);
             return Ok();
         });
 
@@ -47,10 +45,9 @@ namespace RestFit.API.Controllers.v1
         [SwaggerResponseExample((int)HttpStatusCode.GatewayTimeout, typeof(ErrorDataDtoExampleProvider))]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, "Wenn ein unerwarteter Fehler auftritt", typeof(ErrorDataDto))]
         [SwaggerResponseExample((int)HttpStatusCode.InternalServerError, typeof(ErrorDataDtoExampleProvider))]
-        public async Task<IActionResult> GetUnitsAsync() => await ExecuteSafeAsync(async () =>
+        public async Task<IActionResult> GetUnitsAsync(UnitSearchDto search) => await ExecuteSafeAsync(async () =>
         {
-            await Task.Yield();
-            return Ok(_unitRepository.GetAll().Select(x => UnitDtoMapper.Instance.Convert(x)));
+            return Ok(await _processor.GetUnitsAsync(search));
         });
 
         protected override async Task<IActionResult> HandleExceptionAsync(Exception ex)

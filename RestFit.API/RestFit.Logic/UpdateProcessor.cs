@@ -2,7 +2,7 @@
 
 namespace RestFit.Logic
 {
-    public class UserProcessor : IUserProcessor
+    public class UpdateProcessor : IUpdateProcessor
     {
     }
 }

@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.OpenApi.Models;
 using RestFit.API.Extensions;
 using RestFit.API.Middleware;
-using RestFit.DataAccess.Abstract.ClassMaps;
+using RestFit.DataAccess.ClassMaps;
 using Serilog;
 using Swashbuckle.AspNetCore.Filters;
 using System.Reflection;

@@ -1,8 +1,9 @@
 ﻿using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.IdGenerators;
 using MongoDB.Bson.Serialization.Serializers;
+using RestFit.DataAccess.Abstract;
 
-namespace RestFit.DataAccess.Abstract.ClassMaps
+namespace RestFit.DataAccess.ClassMaps
 {
     public static class UnitClassMap
     {

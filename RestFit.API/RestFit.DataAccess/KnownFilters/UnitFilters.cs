@@ -1,6 +1,7 @@
 ﻿using MongoDB.Driver;
+using RestFit.DataAccess.Abstract;
 
-namespace RestFit.DataAccess.Abstract.KnownFilters
+namespace RestFit.DataAccess.KnownFilters
 {
     public static class UnitFilters
     {

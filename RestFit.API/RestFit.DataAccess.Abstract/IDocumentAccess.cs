@@ -4,10 +4,10 @@ namespace RestFit.DataAccess.Abstract
 {
     public interface IDocumentAccess<TDocument>
     {
-        public ICollection<TDocument> RetrieveDocuments(FilterDefinition<TDocument>? filterDefinition = null);
-        public void InsertDocument(TDocument document);
-        public long CountDocuments(FilterDefinition<TDocument>? filterDefinition = null);
-        public void Update(FilterDefinition<TDocument>? filterDefinition = null, UpdateDefinition<TDocument>? updateDefinition = null);
-        public bool Exists(FilterDefinition<TDocument>? filterDefinition = null);
+        public Task<ICollection<TDocument>> RetrieveDocumentsAsync(FilterDefinition<TDocument>? filterDefinition = null);
+        public Task InsertDocumentAsync(TDocument document);
+        public Task<long> CountDocumentsAsync(FilterDefinition<TDocument>? filterDefinition = null);
+        public Task UpdateAsync(FilterDefinition<TDocument>? filterDefinition = null, UpdateDefinition<TDocument>? updateDefinition = null);
+        public Task<bool> ExistsAsync(FilterDefinition<TDocument>? filterDefinition = null);
     }
 }

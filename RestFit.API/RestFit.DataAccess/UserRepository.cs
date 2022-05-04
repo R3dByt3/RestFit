@@ -12,14 +12,14 @@ namespace RestFit.DataAccess
             _userAccess = userAccess;
         }
 
-        public ICollection<User> GetAllUsers()
+        public async Task<ICollection<User>> GetUsersAsync()
         {
-            return _userAccess.RetrieveDocuments();
+            return await _userAccess.RetrieveDocumentsAsync().ConfigureAwait(false);
         }
 
-        public void Insert(User user)
+        public async Task CreateUserAsync(User user)
         {
-            _userAccess.InsertDocument(user);
+            await _userAccess.InsertDocumentAsync(user).ConfigureAwait(false);
         }
     }
 }

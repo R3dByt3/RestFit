@@ -16,12 +16,12 @@ namespace RestFit.API.Controllers.v1
     [Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class UsersController : ControllerWithExceptionHandling
+    public class UserController : ControllerWithExceptionHandling
     {
         private readonly IUserService _userService;
         private readonly IUserRepository _userRepository;
 
-        public UsersController(IUserService userService, IUserRepository userRepository, ILoggerFactory loggerFactory) : base(loggerFactory.CreateLogger<UnitController>())
+        public UserController(IUserService userService, IUserRepository userRepository, ILoggerFactory loggerFactory) : base(loggerFactory.CreateLogger<UnitController>())
         {
             _userService = userService;
             _userRepository = userRepository;
@@ -56,8 +56,7 @@ namespace RestFit.API.Controllers.v1
         [AllowAnonymous, HttpPost]
         public async Task<IActionResult> AddUserAsync([FromBody] User user)
         {
-            await Task.Yield();
-            _userRepository.Insert(user);
+            await _userRepository.CreateUserAsync(user).ConfigureAwait(false);
             return Ok();
         }
 

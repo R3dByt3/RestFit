@@ -1,4 +1,4 @@
-﻿namespace RestFit.DataAccess.Abstract.ClassMaps
+﻿namespace RestFit.DataAccess.ClassMaps
 {
     public static class ClassMapCollection
     {
