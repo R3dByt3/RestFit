@@ -3,6 +3,7 @@ using RestFit.Client.Abstract.Exceptions;
 using RestFit.Client.Abstract.Model;
 using RestSharp;
 using RestSharp.Authenticators;
+using RestSharp.Serializers.NewtonsoftJson;
 
 namespace RestFit.Client
 {
@@ -22,6 +23,16 @@ namespace RestFit.Client
             {
                 Authenticator = new HttpBasicAuthenticator(username, password),
             };
+            _client.UseNewtonsoftJson(new JsonSerializerSettings
+            {
+                Error = HandleDeserializationError
+            });
+        }
+
+        private void HandleDeserializationError(object? sender, Newtonsoft.Json.Serialization.ErrorEventArgs errorArgs)
+        {
+            //var currentError = errorArgs.ErrorContext.Error.Message;
+            errorArgs.ErrorContext.Handled = true;
         }
 
         private void AddParams(RestRequest request, ParametersCollection @params)
@@ -60,9 +71,9 @@ namespace RestFit.Client
             var request = new RestRequest(path, Method.Get);
             AddParams(request, @params);
 
-            var response = await _client.ExecuteGetAsync(request).ConfigureAwait(false);
+            var response = await _client.ExecuteGetAsync<T>(request).ConfigureAwait(false);
 
-            var data = JsonConvert.DeserializeObject<T>(response.Content ?? string.Empty);
+            var data = response.Data;
 
             ThrowOnInvalidResponse(response!, data);
 
@@ -74,7 +85,7 @@ namespace RestFit.Client
             var request = new RestRequest(path, Method.Post);
             request.AddHeader("Content-type", "application/json");
 
-            request.AddStringBody(JsonConvert.SerializeObject(data), DataFormat.Json);
+            request.AddJsonBody(data);
 
             var response = await _client.ExecutePostAsync(request).ConfigureAwait(false);
 

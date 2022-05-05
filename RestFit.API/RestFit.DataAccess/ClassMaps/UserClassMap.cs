@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.IdGenerators;
-using RestFit.Data;
+using RestFit.DataAccess.Abstract;
 
 namespace RestFit.DataAccess.ClassMaps
 {

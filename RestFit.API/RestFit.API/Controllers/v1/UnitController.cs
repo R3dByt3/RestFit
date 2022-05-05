@@ -45,7 +45,7 @@ namespace RestFit.API.Controllers.v1
         [SwaggerResponseExample((int)HttpStatusCode.GatewayTimeout, typeof(ErrorDataDtoExampleProvider))]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, "Wenn ein unerwarteter Fehler auftritt", typeof(ErrorDataDto))]
         [SwaggerResponseExample((int)HttpStatusCode.InternalServerError, typeof(ErrorDataDtoExampleProvider))]
-        public async Task<IActionResult> GetUnitsAsync(UnitSearchDto search) => await ExecuteSafeAsync(async () =>
+        public async Task<IActionResult> GetUnitsAsync([FromQuery] UnitSearchDto search) => await ExecuteSafeAsync(async () =>
         {
             return Ok(await _processor.GetUnitsAsync(search));
         });

@@ -5,5 +5,6 @@ namespace RestFit.Logic.Abstract
     public interface IInsertProcessor
     {
         public Task CreateUnitAsync(Unit unit);
+        public Task CreateUserAsync(User user);
     }
 }

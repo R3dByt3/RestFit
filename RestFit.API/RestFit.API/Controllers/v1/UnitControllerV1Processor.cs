@@ -22,7 +22,7 @@ namespace RestFit.API.Controllers.v1
         public async Task<IEnumerable<UnitDto>> GetUnitsAsync(UnitSearchDto? searchDto = null)
         {
             var search = UnitSearchDtoMapper.Instance.Convert(searchDto);
-            var units = await _processorHub.SearchProcessor.GetUnits().ConfigureAwait(false);
+            var units = await _processorHub.SearchProcessor.GetUnits(search).ConfigureAwait(false);
             return units.Select(x => UnitDtoMapper.Instance.Convert(x));
         }
     }

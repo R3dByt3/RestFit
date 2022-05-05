@@ -1,4 +1,4 @@
-﻿using RestFit.Data;
+﻿using RestFit.DataAccess.Abstract;
 
 namespace RestFit.API.Extensions
 {

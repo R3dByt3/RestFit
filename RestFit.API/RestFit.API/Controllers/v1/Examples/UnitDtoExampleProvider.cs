@@ -1,5 +1,4 @@
 ﻿using RestFit.Client.Abstract.Model;
-using RestFit.Data;
 using Swashbuckle.AspNetCore.Filters;
 
 namespace RestFit.API.Controllers.v1.Examples

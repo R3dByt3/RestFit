@@ -30,4 +30,8 @@ await clientHub.V1.UnitClient.AddUnitAsync(new UnitDto
     UserId = Guid.NewGuid().ToString()
 });
 
-Console.WriteLine(JsonConvert.SerializeObject(await clientHub.V1.UnitClient.GetUnitsAsync()));
+Console.WriteLine(JsonConvert.SerializeObject((await clientHub.V1.UnitClient.GetUnitsAsync()).Count));
+Console.WriteLine(JsonConvert.SerializeObject((await clientHub.V1.UnitClient.GetUnitsAsync(new UnitSearchDto
+{
+    Type = "SitUps"
+})).Count));

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 using RestFit.API.Services;
-using RestFit.Data;
+using RestFit.DataAccess.Abstract;
 
 namespace RestFit.API.Middleware
 {

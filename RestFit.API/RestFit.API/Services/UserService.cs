@@ -1,38 +1,32 @@
 ﻿using RestFit.API.Extensions;
-using RestFit.Data;
 using RestFit.DataAccess.Abstract;
+using RestFit.DataAccess.Abstract.KnownSearches;
+using RestFit.Logic.Abstract;
 
 namespace RestFit.API.Services
 {
     public interface IUserService
     {
         Task<User?> Authenticate(string username, string password);
-        Task<IEnumerable<User>> GetAll();
     }
 
     public class UserService : IUserService
     {
-        private readonly IUserAccess _userAccess;
+        private readonly IProcessorHub _processorHub;
 
-        public UserService(IUserAccess userAccess)
+        public UserService(IProcessorHub processorHub)
         {
-            _userAccess = userAccess;
+            _processorHub = processorHub;
         }
 
         public async Task<User?> Authenticate(string username, string password)
         {
-            var users = await _userAccess.RetrieveDocumentsAsync();
-            var user = users.SingleOrDefault(x => x.Username == username && x.Password == password);
+            var user = await _processorHub.SearchProcessor.GetUserAsync(new UserSearch { Username = username, Password = password }).ConfigureAwait(false);
 
             if (user == null)
                 return null;
 
             return user.WithoutPassword();
-        }
-
-        public async Task<IEnumerable<User>> GetAll()
-        {
-            return await Task.Run(() => _userAccess.RetrieveDocumentsAsync());
         }
     }
 }

@@ -24,9 +24,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RestFit.Client.Abstract\RestFit.Client.Abstract.csproj" />
-    <ProjectReference Include="..\RestFit.DataAccess.Abstract\RestFit.DataAccess.Abstract.csproj" />
-    <ProjectReference Include="..\RestFit.DataAccess\RestFit.DataAccess.csproj" />
+    <ProjectReference Include="..\RestFit.Client.Extensions\RestFit.Client.Extensions.csproj" />
+    <ProjectReference Include="..\RestFit.DataAccess.Extensions\RestFit.DataAccess.Extensions.csproj" />
     <ProjectReference Include="..\RestFit.Logic.Abstract\RestFit.Logic.Abstract.csproj" />
+    <ProjectReference Include="..\RestFit.Logic.Extensions\RestFit.Logic.Extensions.csproj" />
   </ItemGroup>
 
 </Project>

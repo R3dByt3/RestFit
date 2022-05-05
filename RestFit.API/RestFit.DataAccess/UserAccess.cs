@@ -1,5 +1,4 @@
-﻿using RestFit.Data;
-using RestFit.DataAccess.Abstract;
+﻿using RestFit.DataAccess.Abstract;
 
 namespace RestFit.DataAccess
 {
