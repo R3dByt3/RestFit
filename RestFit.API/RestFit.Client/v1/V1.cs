@@ -4,13 +4,13 @@ namespace RestFit.Client.v1
 {
     public class V1 : IV1
     {
-        private readonly IUnitClient _unitClient;
-
-        public IUnitClient UnitClient => _unitClient;
+        public IUnitClient UnitClient { get; }
+        public IUserClient UserClient { get; }
 
         public V1(string username, string password)
         {
-            _unitClient = new UnitClient(username, password);
+            UnitClient = new UnitClient(username, password);
+            UserClient = new UserClient(username, password);
         }
     }
 }

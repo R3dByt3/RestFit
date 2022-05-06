@@ -15,7 +15,8 @@ namespace RestFit.API.Extensions
                 .AddSingleton<IUnitControllerV1Processor, UnitControllerV1Processor>()
                 .AddClient()
                 .AddDataAccess()
-                .AddLogic();
+                .AddLogic()
+                .AddHttpContextAccessor();
         }
     }
 }

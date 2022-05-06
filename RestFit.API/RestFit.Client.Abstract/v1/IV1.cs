@@ -3,5 +3,6 @@
     public interface IV1
     {
         IUnitClient UnitClient { get; }
+        IUserClient UserClient { get; }
     }
 }

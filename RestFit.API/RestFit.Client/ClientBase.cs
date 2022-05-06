@@ -35,8 +35,11 @@ namespace RestFit.Client
             errorArgs.ErrorContext.Handled = true;
         }
 
-        private void AddParams(RestRequest request, ParametersCollection @params)
+        private void AddParams(RestRequest request, ParametersCollection? @params)
         {
+            if (@params == null)
+                return;
+
             foreach (var param in @params)
             {
                 request.AddParameter(param);
@@ -66,7 +69,7 @@ namespace RestFit.Client
                 throw new DataSerializationException($"Response could not be parsed; Content: {response.Content}");
         }
 
-        protected async Task<T> ExecuteGetAsync<T>(string? path, ParametersCollection @params)
+        protected async Task<T> ExecuteGetAsync<T>(string? path, ParametersCollection? @params)
         {
             var request = new RestRequest(path, Method.Get);
             AddParams(request, @params);

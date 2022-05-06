@@ -1,8 +1,6 @@
 ﻿using Rest.WPF.FitnessTrackingAndPlanning;
 using RestFit.Client;
-using RestFit.Client.Abstract.Model;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -61,12 +59,21 @@ namespace FitnessTrackingAndPlanning.ViewModels
 
         public LoginViewModel()
         {
-            _loginCommand = new RelayCommand(_ => Login());
+            _loginCommand = new RelayCommand(async _ => await Login());
         }
 
-        private void Login()
+        private async Task Login()
         {
             Kernel.ClientHub = new ClientHub(UserName, Password);
+            
+            var myUser = await Kernel.ClientHub.V1.UserClient.GetMyUser().ConfigureAwait(false);
+            Console.WriteLine();
+
+            //ToDo: GetMyUser knallt wenn Login nicht valide;
+            //ToDo: Password falsch anzeigen
+            //ToDo: Immer über Kernel.ClientHub.V1.<DataType>Client.Get / Create arbeiten (noch nicht alles da)
+            //ToDo: Marvin: Datenmodelle gleichziehen, alle Routen / Clients implementieren
+            //ToDo: Bei async immer hinter den Aufruf ConfigureAwait(false) bei Logik und true bei GUI (glaube ich)
         }
     }
 }
