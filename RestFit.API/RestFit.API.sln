@@ -19,11 +19,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestFit.DataAccess.Abstract
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestClient", "TestClient\TestClient.csproj", "{DCCA3CBB-FDDC-4DBA-A2D4-69883A4CC706}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestFit.Client.Extensions", "RestFit.Client.Extensions\RestFit.Client.Extensions.csproj", "{94D01BE4-7FDA-4B98-BF27-B46FF156B716}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestFit.Client.Extensions", "RestFit.Client.Extensions\RestFit.Client.Extensions.csproj", "{94D01BE4-7FDA-4B98-BF27-B46FF156B716}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestFit.DataAccess.Extensions", "RestFit.DataAccess.Extensions\RestFit.DataAccess.Extensions.csproj", "{DEA58D4B-85B6-4CE1-A918-74494C735E94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestFit.DataAccess.Extensions", "RestFit.DataAccess.Extensions\RestFit.DataAccess.Extensions.csproj", "{DEA58D4B-85B6-4CE1-A918-74494C735E94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestFit.Logic.Extensions", "RestFit.Logic.Extensions\RestFit.Logic.Extensions.csproj", "{CFB85718-F2F7-421D-B5FD-E07D9992A57B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestFit.Logic.Extensions", "RestFit.Logic.Extensions\RestFit.Logic.Extensions.csproj", "{CFB85718-F2F7-421D-B5FD-E07D9992A57B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rest.WPF.FitnessTrackingAndPlanning", "Rest.WPF.FitnessTrackingAndPlanning\Rest.WPF.FitnessTrackingAndPlanning.csproj", "{B71C3F6F-287B-4FED-89B5-866C50BF2906}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{CFB85718-F2F7-421D-B5FD-E07D9992A57B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFB85718-F2F7-421D-B5FD-E07D9992A57B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFB85718-F2F7-421D-B5FD-E07D9992A57B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B71C3F6F-287B-4FED-89B5-866C50BF2906}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B71C3F6F-287B-4FED-89B5-866C50BF2906}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B71C3F6F-287B-4FED-89B5-866C50BF2906}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B71C3F6F-287B-4FED-89B5-866C50BF2906}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
