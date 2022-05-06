@@ -1,12 +1,31 @@
-﻿using System.Windows.Input;
+﻿using Rest.WPF.FitnessTrackingAndPlanning;
+using RestFit.Client;
+using RestFit.Client.Abstract.Model;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace FitnessTrackingAndPlanning.ViewModels
 {
     public sealed class LoginViewModel : ViewModelBase
     {
-        private bool _userName;
 
-        public bool UserName
+        private ICommand _loginCommand;
+
+        public ICommand LoginCommand
+        {
+            get => _loginCommand;
+            set
+            {
+                _loginCommand = value;
+                OnPropertyChanged(nameof(LoginCommand));
+            }
+        }
+
+        private string _userName = string.Empty;
+
+        public string UserName
         {
             get => _userName;
             set
@@ -16,9 +35,9 @@ namespace FitnessTrackingAndPlanning.ViewModels
             }
         }
 
-        private bool _password;
+        private string _password = string.Empty;
 
-        public bool Password
+        public string Password
         {
             get => _password;
             set
@@ -38,6 +57,16 @@ namespace FitnessTrackingAndPlanning.ViewModels
                 _loginWasSuccessful = value;
                 OnPropertyChanged(nameof(LoginWasSuccessful));
             }
+        }
+
+        public LoginViewModel()
+        {
+            _loginCommand = new RelayCommand(_ => Login());
+        }
+
+        private void Login()
+        {
+            Kernel.ClientHub = new ClientHub(UserName, Password);
         }
     }
 }
