@@ -13,15 +13,23 @@ namespace RestFit.DataAccess.ClassMaps
                 .SetIdGenerator(StringObjectIdGenerator.Instance)
                 .SetElementName("id");
 
+            cm.MapField(c => c.UserId)
+                .SetElementName("user_id");
+
             cm.MapField(c => c.Type)
                 .SetElementName("type");
+
+            cm.MapField(c => c.Sets)
+                .SetElementName("sets");
 
             cm.MapField(c => c.Repitions)
                 .SetElementName("repitions");
 
-            cm.MapField(c => c.Duration)
-                .SetElementName("duration")
-                .SetSerializer(new TimeSpanSerializer());
+            cm.MapField(c => c.Weight)
+                .SetElementName("weight");
+
+            cm.MapField(c => c.Comment)
+                .SetElementName("comment");
         });
     }
 }

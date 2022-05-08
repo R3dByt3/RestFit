@@ -2,10 +2,12 @@
 {
     public record UnitDto
     {
-        public string Id = string.Empty;
-        public string UserId = string.Empty;
-        public string Type = string.Empty;
-        public ulong Repitions = 0;
-        public TimeSpan Duration = TimeSpan.Zero;
+        public string Id { get; set; } = string.Empty;
+        public string UserId { get; set; } = string.Empty;
+        public string Type { get; set; } = string.Empty;
+        public ulong Sets { get; set; } = 0;
+        public ulong Repitions { get; set; } = 0;
+        public double Weight { get; set; } = 0;
+        public string Comment { get; set; } = string.Empty;
     }
 }

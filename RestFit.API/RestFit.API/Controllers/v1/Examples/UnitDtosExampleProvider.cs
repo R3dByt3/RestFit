@@ -12,18 +12,22 @@ namespace RestFit.API.Controllers.v1.Examples
                 new UnitDto
                 {
                     Id = Guid.NewGuid().ToString(),
-                    Duration = TimeSpan.FromMinutes(Random.Shared.NextDouble()),
                     Repitions = (ulong)Random.Shared.NextInt64(),
                     Type = "Squats",
                     UserId = Guid.NewGuid().ToString(),
+                    Comment = "Some comment",
+                    Sets = (ulong)Random.Shared.NextInt64(),
+                    Weight = Random.Shared.NextDouble()
                 },
                 new UnitDto
                 {
                     Id = Guid.NewGuid().ToString(),
-                    Duration = TimeSpan.FromMinutes(Random.Shared.NextDouble()),
                     Repitions = (ulong)Random.Shared.NextInt64(),
                     Type = "SitUps",
                     UserId = Guid.NewGuid().ToString(),
+                    Comment = "Some comment",
+                    Sets = (ulong)Random.Shared.NextInt64(),
+                    Weight = Random.Shared.NextDouble()
                 }
             };
         }

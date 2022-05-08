@@ -5,7 +5,7 @@ namespace RestFit.API.Controllers.v1.Mappers
 {
     public class UserDtoMapper : DtoMapperBase<UserDto, User>
     {
-        public static readonly UserDtoMapper Instance = new UserDtoMapper();
+        public static readonly UserDtoMapper Instance = new();
 
         protected override UserDto ConvertData(User element)
         {

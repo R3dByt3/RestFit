@@ -5,17 +5,19 @@ namespace RestFit.API.Controllers.v1.Mappers
 {
     public class UnitDtoMapper : DtoMapperBase<UnitDto, Unit>
     {
-        public static readonly UnitDtoMapper Instance = new UnitDtoMapper();
+        public static readonly UnitDtoMapper Instance = new();
 
         protected override UnitDto ConvertData(Unit element)
         {
             return new UnitDto
             {
                 Id = element.Id,
-                Duration = element.Duration,
+                Comment = element.Comment,
                 Repitions = element.Repitions,
                 Type = element.Type,
-                UserId = element.UserId
+                UserId = element.UserId,
+                Sets = element.Sets,
+                Weight = element.Weight
             };
         }
 
@@ -24,10 +26,12 @@ namespace RestFit.API.Controllers.v1.Mappers
             return new Unit
             {
                 Id = element.Id,
-                Duration = element.Duration,
+                Comment = element.Comment,
                 Repitions = element.Repitions,
                 Type = element.Type,
-                UserId = element.UserId
+                UserId = element.UserId,
+                Sets = element.Sets,
+                Weight = element.Weight
             };
         }
     }
