@@ -2,7 +2,10 @@
 using Microsoft.AspNetCore.Authorization;
 using RestFit.DataAccess.Abstract.Exceptions;
 using RestFit.Client.Abstract.Model;
-using System.Security.Claims;
+using Swashbuckle.AspNetCore.Filters;
+using Swashbuckle.AspNetCore.Annotations;
+using System.Net;
+using RestFit.API.Controllers.v1.Examples;
 
 namespace RestFit.API.Controllers.v1
 {
@@ -11,12 +14,10 @@ namespace RestFit.API.Controllers.v1
     [Route("[controller]")]
     public class UserController : ControllerWithExceptionHandling
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUserControllerV1Processor _processor;
 
-        public UserController(IHttpContextAccessor httpContextAccessor, IUserControllerV1Processor processor, ILoggerFactory loggerFactory) : base(loggerFactory.CreateLogger<UnitController>())
+        public UserController(IUserControllerV1Processor processor, ILoggerFactory loggerFactory) : base(loggerFactory.CreateLogger<UnitController>())
         {
-            _httpContextAccessor = httpContextAccessor;
             _processor = processor;
         }
 
@@ -28,15 +29,14 @@ namespace RestFit.API.Controllers.v1
         });
 
         [HttpGet]
+        [Produces("application/json")]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Der authentifizierte Benutzer", typeof(UnitDto))]
+        [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(UserDtoExampleProvider))]
+        [SwaggerResponse((int)HttpStatusCode.InternalServerError, "Wenn ein unerwarteter Fehler auftritt", typeof(ErrorDataDto))]
+        [SwaggerResponseExample((int)HttpStatusCode.InternalServerError, typeof(ErrorDataDtoExampleProvider))]
         public async Task<IActionResult> GetMyUser() => await ExecuteSafeAsync(async () =>
         {
-            await Task.Yield();
-
-            return Ok(new UserDto 
-            {
-                Id = _httpContextAccessor.HttpContext!.User.FindFirst(ClaimTypes.NameIdentifier)!.Value,
-                Username = _httpContextAccessor.HttpContext!.User.FindFirst(ClaimTypes.Name)!.Value
-            });
+            return Ok(await _processor.GetMyUserAsync().ConfigureAwait(false));
         });
 
         protected override async Task<IActionResult> HandleExceptionAsync(Exception ex)

@@ -51,10 +51,16 @@ namespace RestFitAPI
                     }*/
                 });
                 options.ExampleFilters();
+                options.SchemaFilter<SwaggerExcludeFilter>();
+                options.OperationFilter<SwaggerQueryParameterAttributeFilter>();
+                options.ParameterFilter<SwaggerQueryParameterAttributeFilter>();
+                options.EnableAnnotations();
+                options.CustomSchemaIds(type => type.FullName);
+                options.IncludeClassXmlDocs();
 
                 var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
-            });
+            }).AddSwaggerGenNewtonsoftSupport();
 
             builder.Services.AddSwaggerExamplesFromAssemblies(Assembly.GetEntryAssembly());
 

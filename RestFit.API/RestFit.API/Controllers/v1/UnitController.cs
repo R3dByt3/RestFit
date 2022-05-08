@@ -7,6 +7,7 @@ using System.Net;
 using RestFit.API.Controllers.v1.Examples;
 using RestFit.Client.Abstract.Model;
 using RestFit.DataAccess.Abstract.KnownSearches;
+using RestFit.API.Attributes;
 
 namespace RestFit.API.Controllers.v1
 {
@@ -24,28 +25,33 @@ namespace RestFit.API.Controllers.v1
 
         [HttpPost]
         [Consumes("application/json")]
-        [SwaggerResponse((int)HttpStatusCode.OK, "Objekt gespeichert")]
+        [SwaggerResponse((int)HttpStatusCode.Created, "Objekt gespeichert")]
+        [SwaggerResponseExample((int)HttpStatusCode.Created, typeof(UnitDtoExampleProvider))]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, "Wenn das Objekt unvollständig ist", typeof(ErrorDataDto))]
         [SwaggerResponseExample((int)HttpStatusCode.BadRequest, typeof(ErrorDataDtoExampleProvider))]
         [SwaggerResponse((int)HttpStatusCode.GatewayTimeout, "Wenn es ein Problem mit der Datenbank gibt", typeof(ErrorDataDto))]
         [SwaggerResponseExample((int)HttpStatusCode.GatewayTimeout, typeof(ErrorDataDtoExampleProvider))]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, "Wenn ein unerwarteter Fehler auftritt", typeof(ErrorDataDto))]
         [SwaggerResponseExample((int)HttpStatusCode.InternalServerError, typeof(ErrorDataDtoExampleProvider))]
-        public async Task<IActionResult> AddUnitsAsync([FromBody] UnitDto unit) => await ExecuteSafeAsync(async () =>
+        [SwaggerRequestExample(typeof(UnitDto), typeof(UnitDtosExampleProvider))]
+        public async Task<IActionResult> AddUnitsAsync([FromBody, SwaggerParameter(Description = "Body", Required = true)] UnitDto unit) => await ExecuteSafeAsync(async () =>
         {
             await _processor.CreateUnitAsync(unit).ConfigureAwait(false);
-            return Ok();
+            return CreatedAtAction(nameof(AddUnitsAsync), new { id = unit.Id }, unit);
         });
 
         [HttpGet]
         [Produces("application/json")]
+        [MethodQueryParameter(nameof(UnitSearchDto.Id), "Suche anhand von Id")]
+        [MethodQueryParameter(nameof(UnitSearchDto.Type), "Suche anhand von Type")]
+        [MethodQueryParameter(nameof(UnitSearchDto.UserId), "Suche anhand von UserId")]
         [SwaggerResponse((int)HttpStatusCode.OK, "Alle Unit Objekte", typeof(List<UnitDto>))]
-        [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(UnitDtoExampleProvider))]
+        [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(UnitDtosExampleProvider))]
         [SwaggerResponse((int)HttpStatusCode.GatewayTimeout, "Wenn es ein Problem mit der Datenbank gibt", typeof(ErrorDataDto))]
         [SwaggerResponseExample((int)HttpStatusCode.GatewayTimeout, typeof(ErrorDataDtoExampleProvider))]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, "Wenn ein unerwarteter Fehler auftritt", typeof(ErrorDataDto))]
         [SwaggerResponseExample((int)HttpStatusCode.InternalServerError, typeof(ErrorDataDtoExampleProvider))]
-        public async Task<IActionResult> GetUnitsAsync([FromQuery] UnitSearchDto search) => await ExecuteSafeAsync(async () =>
+        public async Task<IActionResult> GetUnitsAsync([FromQuery, SwaggerIgnoreParameter] UnitSearchDto search) => await ExecuteSafeAsync(async () =>
         {
             return Ok(await _processor.GetUnitsAsync(search));
         });
