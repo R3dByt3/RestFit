@@ -2,6 +2,7 @@
 {
     public class NavigationViewModel : ViewModelBase
     {
+        #region Properties
         private ViewModelBase _trainingPage;
 
         public ViewModelBase TrainingPage
@@ -49,13 +50,14 @@
                 OnPropertyChanged(nameof(HistoryPage));
             }
         }
+        #endregion
 
         public NavigationViewModel()
         {
-            TrainingPage = new TrainingViewModel();
-            FriendsPage = new FriendsViewModel();
-            HealthDataPage = new HealthDataViewModel();
-            //HistoryPage = new HistoryViewModel();
+            _trainingPage = new TrainingViewModel();
+            _friendsPage = new FriendsViewModel();
+            _healthDataPage = new HealthDataViewModel();
+            _historyPage = new HistoryViewModel();
         }
 
     }

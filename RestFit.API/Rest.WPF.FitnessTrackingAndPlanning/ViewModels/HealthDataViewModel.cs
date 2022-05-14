@@ -4,6 +4,21 @@ namespace FitnessTrackingAndPlanning.ViewModels
 {
     public sealed class HealthDataViewModel : ViewModelBase
     {
+        #region Commands
+        private ICommand _saveHealthDataCommand;
+
+        public ICommand SaveHealthDataCommand
+        {
+            get => _saveHealthDataCommand;
+            set
+            {
+                _saveHealthDataCommand = value;
+                OnPropertyChanged(nameof(SaveHealthDataCommand));
+            }
+        }
+        #endregion
+
+        #region Properties
         private double _weight;
 
         public double Weight
@@ -63,18 +78,7 @@ namespace FitnessTrackingAndPlanning.ViewModels
                 OnPropertyChanged(nameof(ThighSize));
             }
         }
-
-        private ICommand _saveHealthDataCommand;
-
-        public ICommand SaveHealthDataCommand
-        {
-            get => _saveHealthDataCommand;
-            set
-            {
-                _saveHealthDataCommand = value;
-                OnPropertyChanged(nameof(SaveHealthDataCommand));
-            }
-        }
+        #endregion
 
         public HealthDataViewModel()
         {

@@ -1,11 +1,15 @@
-﻿using System.Collections.ObjectModel;
+﻿using Rest.WPF.FitnessTrackingAndPlanning;
+using RestFit.Client.Abstract.Model;
+using System;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace FitnessTrackingAndPlanning.ViewModels
 {
     public class TrainingViewModel : ViewModelBase
     {
-
+        #region Commands
         private ICommand _saveTrainingsDataCommand;
 
         public ICommand SaveTrainingsDataCommand
@@ -29,10 +33,12 @@ namespace FitnessTrackingAndPlanning.ViewModels
                 OnPropertyChanged(nameof(AddExerciseCommand));
             }
         }
+        #endregion
 
-        private ObservableCollection<Exercise> _exercises;
+        #region Properties
+        private ObservableCollection<UnitDto> _exercises;
 
-        public ObservableCollection<Exercise> Exercises
+        public ObservableCollection<UnitDto> Exercises
         {
             get => _exercises;
             set
@@ -41,60 +47,38 @@ namespace FitnessTrackingAndPlanning.ViewModels
                 OnPropertyChanged(nameof(Exercises));
             }
         }
-
-        private ExercisesNames _selectedExercise;
-        public ExercisesNames SelectedExercise
-        {
-            get { return _selectedExercise; }
-            set
-            {
-                _selectedExercise = value;
-                OnPropertyChanged(nameof(_selectedExercise));
-            }
-        }
+        #endregion
 
         public TrainingViewModel()
         {
-            Exercises = new ObservableCollection<Exercise>();
-            Exercises.Add(new Exercise("Kniebeuge", 3, 10, 10, ""));
-            Exercises.Add(new Exercise("Pushup", 4, 10, 0, ""));
+            _exercises = new ObservableCollection<UnitDto> { new UnitDto() };
 
-            _saveTrainingsDataCommand = new RelayCommand(p => SaveTrainingsData());
+            _saveTrainingsDataCommand = new RelayCommand(async _ => await SaveTrainingsData());
             _addExerciseCommand = new RelayCommand(p => AddExercise());
         }
 
         private void AddExercise()
         {
-            Exercises.Add(new Exercise("", 0, 0, 0, ""));
+            _exercises.Add(new UnitDto());
         }
 
-        private void SaveTrainingsData()
+        private async Task SaveTrainingsData()
         {
-            //TODO: Implementieren
+            foreach (var exercise in _exercises)
+            {
+                if(exercise != new UnitDto())
+                {
+                    try
+                    {
+                        await Kernel.ClientHub.V1.UnitClient.AddUnitAsync(exercise);
+                    }
+                    catch
+                    {
+                        //TODO: Implementieren
+                        Console.WriteLine("Fehler bei " + exercise.Type);
+                    }
+                }
+            }
         }
-    }
-
-    public class Exercise
-    {
-        public string Name { get; set; }
-        public int Sets { get; set; }
-        public int Reps { get; set; }
-        public float Weight { get; set; }
-        public string Comment { get; set; }
-
-        public Exercise(string name, int sets, int reps, float weight, string comment)
-        {
-            Name = name;
-            Sets = sets;
-            Reps = reps;
-            Weight = weight;
-            Comment = comment;
-        }
-    }
-
-    public enum ExercisesNames
-    {
-        Kniebeuge,
-        Pushup
     }
 }

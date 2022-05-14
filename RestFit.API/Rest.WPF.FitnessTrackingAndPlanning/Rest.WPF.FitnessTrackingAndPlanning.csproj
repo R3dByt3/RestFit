@@ -12,4 +12,10 @@
     <ProjectReference Include="..\RestFit.Client\RestFit.Client.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="Views\HistoryView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+  </ItemGroup>
+
 </Project>

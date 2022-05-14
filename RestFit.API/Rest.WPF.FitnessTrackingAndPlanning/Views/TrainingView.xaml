@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance viewModels:TrainingViewModel}">
-    
+
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -16,7 +16,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-
+    
     <DockPanel Background="DimGray">
         
         <DataGrid DockPanel.Dock="Top" 
@@ -24,18 +24,19 @@
                   Margin="{StaticResource NavigationPageMargin}" 
                   Background="DimGray" 
                   AutoGenerateColumns="False" 
-                  GridLinesVisibility="None">
+                  GridLinesVisibility="None"
+                  CanUserAddRows="False">
             <DataGrid.Columns>
                 <!-- Exercise -->
                 <DataGridTextColumn Header="{StaticResource TrainingExerciseHeaderString}" 
-                                    Binding="{Binding Name}" 
+                                    Binding="{Binding Type}" 
                                     Width="150">
                     <DataGridTextColumn.CellStyle>
                         <Style TargetType="{x:Type DataGridCell}">
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type DataGridCell}">
-                                        <TextBox Text="{Binding Name}" 
+                                        <TextBox Text="{Binding Type, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                                  Margin="{StaticResource RightMargin}"
                                                  Height="25" 
                                                  VerticalAlignment="Center"/>
@@ -53,7 +54,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type DataGridCell}">
-                                        <TextBox Text="{Binding Sets}"
+                                        <TextBox Text="{Binding Sets, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                  Margin="{StaticResource RightMargin}"
                                                  Height="25" 
                                                  VerticalAlignment="Center" 
@@ -66,13 +67,13 @@
                 </DataGridTextColumn>
                 <!-- Reps -->
                 <DataGridTextColumn Header="{StaticResource TrainingRepsHeaderString}" 
-                                    Binding="{Binding Reps}">
+                                    Binding="{Binding Repitions}">
                     <DataGridTextColumn.CellStyle>
                         <Style TargetType="{x:Type DataGridCell}">
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type DataGridCell}">
-                                        <TextBox Text="{Binding Reps}" 
+                                        <TextBox Text="{Binding Repitions, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                                  Margin="{StaticResource RightMargin}"
                                                  Height="25" 
                                                  VerticalAlignment="Center" 
@@ -91,7 +92,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type DataGridCell}">
-                                        <TextBox Text="{Binding Weight}"
+                                        <TextBox Text="{Binding Weight, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                  Margin="{StaticResource RightMargin}"
                                                  Height="25" 
                                                  VerticalAlignment="Center" 
@@ -111,7 +112,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type DataGridCell}">
-                                        <TextBox Text="{Binding Comment}"
+                                        <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                  Height="25" 
                                                  VerticalAlignment="Center"/>
                                     </ControlTemplate>
