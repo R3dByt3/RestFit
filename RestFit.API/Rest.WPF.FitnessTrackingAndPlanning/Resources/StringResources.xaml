@@ -1,0 +1,43 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!--Login Page-->
+    <sys:String x:Key="LoginUserNameString">Benutzername:</sys:String>
+    <sys:String x:Key="LoginPasswordString">Passwort:</sys:String>
+    <sys:String x:Key="LoginWrongUserCredentialsString">Falscher Benutzername oder Passwort!</sys:String>
+    
+    <!--Navigation-->
+    <sys:String x:Key="UnitHeaderString">Trainingseinheit</sys:String>
+    <sys:String x:Key="FriendsHeaderString">Freunde</sys:String>
+    <sys:String x:Key="HealthDataHeaderString">Gesundheitsdaten</sys:String>
+    <sys:String x:Key="HistoryHeaderString">Historie</sys:String>
+
+    <!--Trainings Page-->
+    <sys:String x:Key="TrainingExerciseHeaderString">Übung</sys:String>
+    <sys:String x:Key="TrainingSetsHeaderString">Sätze</sys:String>
+    <sys:String x:Key="TrainingRepsHeaderString">Wiederholungen</sys:String>
+    <sys:String x:Key="TrainingWeightHeaderString">Gewicht</sys:String>
+    <sys:String x:Key="TrainingCommentHeaderString">Bemerkung</sys:String>
+
+    <!--HealthData Page-->
+    <sys:String x:Key="HealthDataWeightString">Gewicht:</sys:String>
+    <sys:String x:Key="HealthDataArmSizeString">Armumfang:</sys:String>
+    <sys:String x:Key="HealthDataWaistSizeString">Taillenumfang:</sys:String>
+    <sys:String x:Key="HealthDataHipSizeString">Hüftumfang:</sys:String>
+    <sys:String x:Key="HealthDataThighSizeString">Oberschenkelumfang:</sys:String>
+    
+    <!--Friends Page-->
+    <sys:String x:Key="FriendsAverageString">Durchschnitt:</sys:String>
+    <sys:String x:Key="FriendsSetsString">Sätze:</sys:String>
+    <sys:String x:Key="FriendsRepsString">Wiederholungen:</sys:String>
+    <sys:String x:Key="FriendsWeightString">Gewicht:</sys:String>
+    <sys:String x:Key="FriendsString">Freunde</sys:String>
+    
+    <!--Button Strings-->
+    <sys:String x:Key="LoginButtonString">Anmelden</sys:String>
+    <sys:String x:Key="EditButtonString">Bearbeiten</sys:String>
+    <sys:String x:Key="RequestButtonString">Anfragen</sys:String>
+    <sys:String x:Key="AddButtonString">Hinzufügen</sys:String>
+    <sys:String x:Key="SaveButtonString">Speichern</sys:String>
+</ResourceDictionary>

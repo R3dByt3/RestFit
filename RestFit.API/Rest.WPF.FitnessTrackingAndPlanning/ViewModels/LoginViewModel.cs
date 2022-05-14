@@ -1,6 +1,5 @@
 ﻿using Rest.WPF.FitnessTrackingAndPlanning;
 using RestFit.Client;
-using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -8,7 +7,9 @@ namespace FitnessTrackingAndPlanning.ViewModels
 {
     public sealed class LoginViewModel : ViewModelBase
     {
+        public delegate void Notify();
 
+        #region Commands
         private ICommand _loginCommand;
 
         public ICommand LoginCommand
@@ -20,7 +21,9 @@ namespace FitnessTrackingAndPlanning.ViewModels
                 OnPropertyChanged(nameof(LoginCommand));
             }
         }
+        #endregion
 
+        #region Properties
         private string _userName = string.Empty;
 
         public string UserName
@@ -45,17 +48,20 @@ namespace FitnessTrackingAndPlanning.ViewModels
             }
         }
 
-        private bool _loginWasSuccessful;
+        private bool _loginFailed;
 
-        public bool LoginWasSuccessful
+        public bool LoginFailed
         {
-            get => _loginWasSuccessful;
+            get => _loginFailed;
             set
             {
-                _loginWasSuccessful = value;
-                OnPropertyChanged(nameof(LoginWasSuccessful));
+                _loginFailed = value;
+                OnPropertyChanged(nameof(LoginFailed));
             }
         }
+        #endregion
+
+        public event Notify? ChangeView;
 
         public LoginViewModel()
         {
@@ -65,14 +71,17 @@ namespace FitnessTrackingAndPlanning.ViewModels
         private async Task Login()
         {
             Kernel.ClientHub = new ClientHub(UserName, Password);
+            try
+            {
+                var myUser = await Kernel.ClientHub.V1.UserClient.GetMyUser().ConfigureAwait(false);
+                ChangeView?.Invoke();
+            }
+            catch
+            {
+                LoginFailed = true;
+            }
             
-            var myUser = await Kernel.ClientHub.V1.UserClient.GetMyUser().ConfigureAwait(false);
-            Console.WriteLine();
-
-            //ToDo: GetMyUser knallt wenn Login nicht valide;
-            //ToDo: Password falsch anzeigen
             //ToDo: Immer über Kernel.ClientHub.V1.<DataType>Client.Get / Create arbeiten (noch nicht alles da)
-            //ToDo: Marvin: Datenmodelle gleichziehen, alle Routen / Clients implementieren
             //ToDo: Bei async immer hinter den Aufruf ConfigureAwait(false) bei Logik und true bei GUI (glaube ich)
         }
     }

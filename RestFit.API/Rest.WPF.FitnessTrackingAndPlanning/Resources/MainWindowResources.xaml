@@ -19,6 +19,4 @@
         <views:HealthDataView/>
     </DataTemplate>
 
-    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-
 </ResourceDictionary>

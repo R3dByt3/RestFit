@@ -1,46 +1,36 @@
-﻿using System.Windows.Input;
-
-namespace FitnessTrackingAndPlanning.ViewModels
+﻿namespace FitnessTrackingAndPlanning.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        private ViewModelBase _currentPage;
+        #region Properties
 
-        public ViewModelBase CurrentPage
+        private ViewModelBase? _currentPage;
+
+        public ViewModelBase? CurrentPage
         {
             get => _currentPage;
             set
             {
                 _currentPage = value;
                 OnPropertyChanged(nameof(CurrentPage));
+
             }
         }
+        
+        #endregion
 
-        private ICommand _changeToNavigationCommand;
-
-        public ICommand ChangeToNavigationCommand
-        {
-            get => _changeToNavigationCommand;
-            set
-            {
-                _changeToNavigationCommand = value;
-                OnPropertyChanged(nameof(ChangeToNavigationCommand));
-            }
-        }
-
+        /// <summary>
+        /// Konstruktor für das MainWindowViewModel
+        /// </summary>
         public MainWindowViewModel()
         {
             CurrentPage = new LoginViewModel();
-            _changeToNavigationCommand = new RelayCommand(p => ChangeToNavigationViewModel());
+            if (CurrentPage is LoginViewModel loginViewModel)
+                loginViewModel.ChangeView += OnChangeView;
         }
 
-        public void ChangeToNavigationViewModel()
+        private void OnChangeView()
         {
-            if (CurrentPage is LoginViewModel loginViewModel)
-            {
-                loginViewModel.LoginWasSuccessful = true;
-            }
-
             CurrentPage = new NavigationViewModel();
         }
     }
