@@ -3,17 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:FitnessTrackingAndPlanning.Views"
+             xmlns:viewModels="clr-namespace:FitnessTrackingAndPlanning.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance viewModels:FriendsViewModel}">
+    
     <UserControl.Resources>
-        <Style TargetType="Button">
-            <Setter Property="Height" Value="35"/>
-            <Setter Property="Width" Value="200"/>
-            <Setter Property="Background" Value="DeepPink"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="14"/>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/StringResources.xaml"/>
+                <ResourceDictionary Source="../Resources/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid>
@@ -28,7 +29,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <ComboBox Grid.Row="0" Margin="20"/>
-            <Grid Grid.Row="1"  Margin="20 0 20 20">
+            <Grid Grid.Row="1"  Margin="{StaticResource DoubleLeftRightBottomMargin}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -39,25 +40,48 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Label Grid.Column="0" Grid.Row="0" Content="Durchschnitt" FontSize="14" Foreground="White"/>
-                <Label Grid.Column="0" Grid.Row="1" Content="Sätze:" FontSize="14" Foreground="White"/>
-                <Label Grid.Column="1" Grid.Row="1" Content="3" FontSize="14" Foreground="White"/>
-                <Label Grid.Column="0" Grid.Row="2" Content="Wiederholungen:" FontSize="14" Foreground="White"/>
-                <Label Grid.Column="1" Grid.Row="2" Content="12" FontSize="14" Foreground="White"/>
-                <Label Grid.Column="0" Grid.Row="3" Content="Gewicht" FontSize="14" Foreground="White"/>
-                <Label Grid.Column="1" Grid.Row="3" Content="50kg" FontSize="14" Foreground="White"/>
+                <Label Grid.Column="0" 
+                       Grid.Row="0" 
+                       Content="{StaticResource FriendsAverageString}"/>
+                <Label Grid.Column="0" 
+                       Grid.Row="1" 
+                       Content="{StaticResource FriendsSetsString}"/>
+                <Label Grid.Column="1" 
+                       Grid.Row="1" 
+                       Content="{Binding AverageSets}"/>
+                <Label Grid.Column="0" 
+                       Grid.Row="2" 
+                       Content="{StaticResource FriendsRepsString}"/>
+                <Label Grid.Column="1" 
+                       Grid.Row="2" 
+                       Content="{Binding AverageReps}"/>
+                <Label Grid.Column="0" 
+                       Grid.Row="3" 
+                       Content="{StaticResource FriendsWeightString}"/>
+                <Label Grid.Column="1" 
+                       Grid.Row="3" 
+                       Content="{Binding AverageWeight}"/>
             </Grid>
-            <StackPanel Grid.Row="2" Background="DeepPink" Margin="20 0 20 20">
-                <Label Content="Du schaffst das!" FontSize="14" Foreground="White"/>
+            <StackPanel Grid.Row="2" 
+                        Background="DeepPink" 
+                        Margin="{StaticResource DoubleLeftRightBottomMargin}">
+                <Label Content="{Binding MotivationString}"/>
             </StackPanel>
         </Grid>
-        <StackPanel Grid.Column="1" Background="#404040" Orientation="Vertical">
-            <Label Content="Freunde" FontSize="14" Foreground="White" VerticalAlignment="Top"/>
-            <Border BorderBrush="DimGray" BorderThickness="0 0 0 1" />
-            <Label Content="Anne" FontSize="14" Foreground="White" />
-            <Button Content="Bearbeiten" VerticalAlignment="Bottom" />
-            <Button Content="Anfragen" VerticalAlignment="Bottom" />
-            <Button Content="Hinzufügen" VerticalAlignment="Bottom" Margin ="0"/>
+        <StackPanel Grid.Column="1" 
+                    Background="#404040" 
+                    Orientation="Vertical">
+            <Label Content="{StaticResource FriendsString}" 
+                   VerticalAlignment="Top"/>
+            <Border BorderBrush="DimGray" 
+                    BorderThickness="0 0 0 1" />
+            <Label Content="Anne" />
+            <Button Content="{StaticResource EditButtonString}" 
+                    VerticalAlignment="Bottom" />
+            <Button Content="{StaticResource RequestButtonString}" 
+                    VerticalAlignment="Bottom" />
+            <Button Content="{StaticResource AddButtonString}" 
+                    VerticalAlignment="Bottom" Margin ="0"/>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -3,27 +3,47 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:fitnessTrackingAndPlanning="clr-namespace:FitnessTrackingAndPlanning"
              xmlns:viewModels="clr-namespace:FitnessTrackingAndPlanning.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="450" 
-             d:DesignWidth="400"
+             d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance viewModels:LoginViewModel}">
 
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/StringResources.xaml"/>
+                <ResourceDictionary Source="../Resources/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid Background="DimGray">
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="200">
-            <Label Content="Benutzername:" Foreground="White" HorizontalAlignment="Center" FontSize="14"
-                   Margin="0 0 0 5" />
-            <TextBox Height="20" Margin="0 0 0 5" Text="{Binding UserName}"/>
-            <Label Content="Passwort:" Foreground="White" HorizontalAlignment="Center" FontSize="14" Margin="0 0 0 5" />
-            <TextBox Height="20" Margin="0 0 0 5" Text="{Binding Password}"/>
-            <Label Content="Fehler" Foreground="Red" HorizontalAlignment="Center" FontSize="14" Margin="0 0 0 5" Visibility="{Binding LoginWasSuccessful, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"/>
-            <Button Content="Anmelden" Height="40" FontSize="14" Background="DeepPink" Foreground="White"
-                    Command="{Binding LoginCommand}" />
+        <StackPanel VerticalAlignment="Center" 
+                    HorizontalAlignment="Center" 
+                    Width="200">
+            <Label Content="{StaticResource LoginUserNameString}"
+                   Margin="{StaticResource HalfBottomMargin}" 
+                   HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding UserName}"
+                     Margin="{StaticResource HalfBottomMargin}"
+                     Height="20"/>
+            <Label Content="{StaticResource LoginPasswordString}" 
+                   Margin="{StaticResource HalfBottomMargin}" 
+                   HorizontalAlignment="Center"/>
+            <PasswordBox x:Name="passwordBox" 
+                        Margin="{StaticResource HalfBottomMargin}" 
+                        Height="20"/>
+            <TextBlock Text="{StaticResource LoginWrongUserCredentialsString}"
+                       Style="{StaticResource WrongUserCredentialsLabelStyle}"
+                       Margin="{StaticResource HalfBottomMargin}"
+                       Visibility="{Binding LoginFailed, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
+                       HorizontalAlignment="Center" 
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"/>
+            <Button Content="{StaticResource LoginButtonString}" 
+                    Command="{Binding LoginCommand}"
+                    CommandParameter="{Binding ElementName=passwordBox}"
+                    Height="40"/>
         </StackPanel>
     </Grid>
 </UserControl>
