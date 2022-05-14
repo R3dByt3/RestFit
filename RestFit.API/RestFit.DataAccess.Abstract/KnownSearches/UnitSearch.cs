@@ -19,5 +19,11 @@
             get => GetFirst(UnitFields.Type);
             set => SetSingle(UnitFields.Type, value);
         }
+
+        public string? NotProcessedBy
+        {
+            get => GetFirst(UnitFields.NotProcessedBy);
+            set => SetSingle(UnitFields.NotProcessedBy, value);
+        }
     }
 }

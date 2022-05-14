@@ -117,5 +117,17 @@ namespace RestFit.DataAccess
                 throw new DataAccessMongoDbException("Exists failed. See inner exception for more details", ex);
             }
         }
+
+        public async Task<long> SumAsync(FilterDefinition<TDocument>? filterDefinition = null)
+        {
+            try
+            {
+                return 0;// await Collection.AggregateAsync().ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                throw new DataAccessMongoDbException("Exists failed. See inner exception for more details", ex);
+            }
+        }
     }
 }

@@ -34,10 +34,10 @@ namespace RestFit.API.Controllers.v1
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, "Wenn ein unerwarteter Fehler auftritt", typeof(ErrorDataDto))]
         [SwaggerResponseExample((int)HttpStatusCode.InternalServerError, typeof(ErrorDataDtoExampleProvider))]
         [SwaggerRequestExample(typeof(UnitDto), typeof(UnitDtosExampleProvider))]
-        public async Task<IActionResult> AddUnitsAsync([FromBody, SwaggerParameter(Description = "Body", Required = true)] UnitDto unit) => await ExecuteSafeAsync(async () =>
+        public async Task<IActionResult> AddUnitAsync([FromBody, SwaggerParameter(Description = "Body", Required = true)] UnitDto unit) => await ExecuteSafeAsync(async () =>
         {
             await _processor.CreateUnitAsync(unit).ConfigureAwait(false);
-            return CreatedAtAction(nameof(AddUnitsAsync), new { id = unit.Id }, unit);
+            return Ok();//CreatedAtAction(nameof(GetUnitsAsync), new { id = unit.Id }, unit);
         });
 
         [HttpGet]

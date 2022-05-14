@@ -11,7 +11,9 @@ namespace RestFit.DataAccess.Extensions
                 .AddSingleton<IUserRepository, UserRepository>()
                 .AddSingleton<IUnitRepository, UnitRepository>()
                 .AddSingleton<IUnitAccess, UnitAccess>()
-                .AddSingleton<IRepositoryHub, RepositoryHub>();
+                .AddSingleton<IRepositoryHub, RepositoryHub>()
+                .AddSingleton<IFriendAccess, FriendAccess>()
+                .AddSingleton<IFriendRepository, FriendRepository>();
         }
     }
 }

@@ -23,7 +23,30 @@ namespace RestFit.DataAccess
                 throw new InsufficientDataException($"{nameof(unit.UserId)} must be filled");
             if (string.IsNullOrWhiteSpace(unit.Type))
                 throw new InsufficientDataException($"{nameof(unit.Type)} must be filled");
+            if (unit.Repitions == 0)
+                throw new InsufficientDataException($"{nameof(unit.Repitions)} must be filled");
+            if (unit.Weight <= 0)
+                throw new InsufficientDataException($"{nameof(unit.Weight)} must be filled");
+            if (unit.Sets == 0)
+                throw new InsufficientDataException($"{nameof(unit.Sets)} must be filled");
             await _unitAccess.InsertDocumentAsync(unit).ConfigureAwait(false);
+        }
+
+        public async Task<UnitGroup?> GetUnitGroupAsync(UnitSearch search)
+        {
+            if (string.IsNullOrWhiteSpace(search.UserId))
+                throw new InsufficientDataException($"{nameof(search.UserId)} must be filled");
+
+            var filter = BuildFilter(search);
+            var hasUnits = await _unitAccess.ExistsAsync(filter);
+
+            if (!hasUnits) return null;
+
+            return new UnitGroup
+            {
+                UserId = search.UserId,
+                //RepitionsCount = _unitAccess.
+            };
         }
 
         public async Task<ICollection<Unit>> GetUnitsAsync(UnitSearch? search = null)
@@ -41,6 +64,7 @@ namespace RestFit.DataAccess
                     UnitFields.Id => empty & UnitFilters.GetById(search.Id),
                     UnitFields.UserId => empty & UnitFilters.GetByUserId(search.UserId),
                     UnitFields.Type => empty & UnitFilters.GetByType(search.Type),
+                    UnitFields.NotProcessedBy => empty & UnitFilters.GetIfNotProcessedBy(search.NotProcessedBy),
                     _ => empty
                 };
             }

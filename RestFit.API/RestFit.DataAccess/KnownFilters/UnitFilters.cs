@@ -14,5 +14,6 @@ namespace RestFit.DataAccess.KnownFilters
         public static FilterDefinition<Unit> GetByUserId(string? userId) => Filter.Eq(x => x.UserId, userId);
 
         public static FilterDefinition<Unit> GetByType(string? type) => Filter.Eq(x => x.Type, type);
+        public static FilterDefinition<Unit> GetIfNotProcessedBy(string? type) => Filter.Not(Filter.AnyEq(x => x.ProcessedFor, type));
     }
 }

@@ -1,5 +1,4 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using Newtonsoft.Json;
 using RestFit.Client.Abstract;
 using RestFit.Client.Abstract.Model;
 using RestFit.DataAccess.Abstract.KnownSearches;
@@ -9,25 +8,31 @@ IClientHub clientHub = new RestFit.Client.ClientHub("marvin", "5baa61e4c9b93f3f0
 await clientHub.V1.UnitClient.AddUnitAsync(new UnitDto
 {
     Type = "SitUps",
-    Duration = TimeSpan.FromSeconds(1),
     Repitions = 1,
-    UserId = Guid.NewGuid().ToString()
+    UserId = "62700f1dbd25f22e1e8cab2a",
+    Comment = "Some comment1",
+    Sets = 10,
+    Weight = 5.5
 });
 
 await clientHub.V1.UnitClient.AddUnitAsync(new UnitDto
 {
-    Type = "SitUps",
-    Duration = TimeSpan.FromSeconds(2),
+    Type = "Squads",
     Repitions = 2,
-    UserId = Guid.NewGuid().ToString()
+    UserId = "62700f1dbd25f22e1e8cab2a",
+    Comment = "Some comment2",
+    Sets = 5,
+    Weight = 7.7
 });
 
 await clientHub.V1.UnitClient.AddUnitAsync(new UnitDto
 {
-    Type = "SitUps",
-    Duration = TimeSpan.FromSeconds(3),
+    Type = "PushUps",
     Repitions = 3,
-    UserId = Guid.NewGuid().ToString()
+    UserId = "62700f1dbd25f22e1e8cab2a",
+    Comment = "Some comment3",
+    Sets = 9,
+    Weight = 10.10
 });
 
 Console.WriteLine((await clientHub.V1.UnitClient.GetUnitsAsync()).Count);

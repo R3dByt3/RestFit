@@ -1,4 +1,5 @@
 ﻿using RestFit.API.Controllers.v1;
+using RestFit.API.HostedServices;
 using RestFit.API.Services;
 using RestFit.Client.Extensions;
 using RestFit.DataAccess.Extensions;
@@ -13,6 +14,8 @@ namespace RestFit.API.Extensions
             return services.AddSingleton<IUserService, UserService>()
                 .AddSingleton<IUserControllerV1Processor, UserControllerV1Processor>()
                 .AddSingleton<IUnitControllerV1Processor, UnitControllerV1Processor>()
+                .AddSingleton<IFriendHostedServiceProcessor, FriendHostedServiceProcessor>()
+                .AddHostedService<FriendHostedService>()
                 .AddClient()
                 .AddDataAccess()
                 .AddLogic()

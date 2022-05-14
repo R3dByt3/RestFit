@@ -2,6 +2,7 @@
 {
     public record Friend
     {
+        public string Id { get; set; } = string.Empty;
         public double AverageSets { get; set; } = 0;
         public double AverageRepitions { get; set; } = 0;
         public double AverageWeight { get; set; } = 0;

@@ -2,6 +2,7 @@
 {
     public enum FriendFields
     {
+        Id,
         UserId,
         FriendId
     }

@@ -1,6 +1,5 @@
 ﻿using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.IdGenerators;
-using MongoDB.Bson.Serialization.Serializers;
 using RestFit.DataAccess.Abstract;
 
 namespace RestFit.DataAccess.ClassMaps
@@ -30,6 +29,9 @@ namespace RestFit.DataAccess.ClassMaps
 
             cm.MapField(c => c.Comment)
                 .SetElementName("comment");
+
+            cm.MapField(c => c.ProcessedFor)
+                .SetElementName("processed_for");
         });
     }
 }

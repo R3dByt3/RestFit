@@ -32,7 +32,7 @@ namespace RestFit.API.Controllers.v1
             searchDto.UserId = GetCurrentUserId();
 
             var search = UnitSearchDtoMapper.Instance.Convert(searchDto);
-            var units = await _processorHub.SearchProcessor.GetUnits(search).ConfigureAwait(false);
+            var units = await _processorHub.SearchProcessor.GetUnitsAsync(search).ConfigureAwait(false);
             return units.Select(x => UnitDtoMapper.Instance.Convert(x));
         }
     }
