@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using FitnessTrackingAndPlanning.ViewModels;
+using Rest.WPF.FitnessTrackingAndPlanning.ViewModels;
 
 namespace FitnessTrackingAndPlanning
 {

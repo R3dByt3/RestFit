@@ -3,16 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:viewModels="clr-namespace:FitnessTrackingAndPlanning.ViewModels"
+             xmlns:viewModels1="clr-namespace:Rest.WPF.FitnessTrackingAndPlanning.ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800"
-             d:DataContext="{d:DesignInstance viewModels:HealthDataViewModel}">
+             d:DataContext="{d:DesignInstance viewModels1:HealthDataViewModel}">
 
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Resources/StringResources.xaml"/>
-                <ResourceDictionary Source="../Resources/Styles.xaml"/>
+                <ResourceDictionary Source="../Resources/StringResources.xaml" />
+                <ResourceDictionary Source="../Resources/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -31,51 +31,51 @@
                     <RowDefinition Height="40" />
                     <RowDefinition Height="40" />
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" 
-                       Grid.Column="0" 
-                       VerticalAlignment="Center" 
-                       Content="{StaticResource HealthDataWeightString}"/>
-                <TextBox Grid.Row="0" 
-                         Grid.Column="1" 
-                         Margin="{StaticResource RightBottomMargin}" 
-                         Text="{Binding Weight}"/>
-                <Label Grid.Row="1" 
-                       Grid.Column="0" 
-                       VerticalAlignment="Center" 
-                       Content="{StaticResource HealthDataArmSizeString}"/>
-                <TextBox Grid.Row="1" 
-                         Grid.Column="1" 
-                         Margin="{StaticResource RightBottomMargin}" 
-                         Text="{Binding ArmSize}"/>
-                <Label Grid.Row="2" 
-                       Grid.Column="0" 
-                       VerticalAlignment="Center" 
-                       Content="{StaticResource HealthDataWaistSizeString}"/>
-                <TextBox Grid.Row="2" 
-                         Grid.Column="1" 
-                         Margin="{StaticResource RightBottomMargin}" 
-                         Text="{Binding WaistSize}"/>
-                <Label Grid.Row="3" 
-                       Grid.Column="0" 
-                       VerticalAlignment="Center" 
-                       Content="{StaticResource HealthDataHipSizeString}"/>
-                <TextBox Grid.Row="3" 
-                         Grid.Column="1" 
-                         Margin="{StaticResource RightBottomMargin}" 
-                         Text="{Binding HipSize}"/>
-                <Label Grid.Row="4" 
-                       Grid.Column="0" 
-                       VerticalAlignment="Center" 
-                       Content="{StaticResource HealthDataThighSizeString}"/>
-                <TextBox Grid.Row="4" 
-                         Grid.Column="1"  
-                         Margin="{StaticResource RightBottomMargin}" 
-                         Text="{Binding ThighSize}"/>
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       VerticalAlignment="Center"
+                       Content="{StaticResource HealthDataWeightString}" />
+                <TextBox Grid.Row="0"
+                         Grid.Column="1"
+                         Margin="{StaticResource RightBottomMargin}"
+                         Text="{Binding Weight}" />
+                <Label Grid.Row="1"
+                       Grid.Column="0"
+                       VerticalAlignment="Center"
+                       Content="{StaticResource HealthDataArmSizeString}" />
+                <TextBox Grid.Row="1"
+                         Grid.Column="1"
+                         Margin="{StaticResource RightBottomMargin}"
+                         Text="{Binding ArmSize}" />
+                <Label Grid.Row="2"
+                       Grid.Column="0"
+                       VerticalAlignment="Center"
+                       Content="{StaticResource HealthDataWaistSizeString}" />
+                <TextBox Grid.Row="2"
+                         Grid.Column="1"
+                         Margin="{StaticResource RightBottomMargin}"
+                         Text="{Binding WaistSize}" />
+                <Label Grid.Row="3"
+                       Grid.Column="0"
+                       VerticalAlignment="Center"
+                       Content="{StaticResource HealthDataHipSizeString}" />
+                <TextBox Grid.Row="3"
+                         Grid.Column="1"
+                         Margin="{StaticResource RightBottomMargin}"
+                         Text="{Binding HipSize}" />
+                <Label Grid.Row="4"
+                       Grid.Column="0"
+                       VerticalAlignment="Center"
+                       Content="{StaticResource HealthDataThighSizeString}" />
+                <TextBox Grid.Row="4"
+                         Grid.Column="1"
+                         Margin="{StaticResource RightBottomMargin}"
+                         Text="{Binding ThighSize}" />
             </Grid>
-            <Button DockPanel.Dock="Bottom" 
-                    VerticalAlignment="Bottom" 
-                    HorizontalAlignment="Right" 
-                    Content="{StaticResource SaveButtonString}"/>
+            <Button DockPanel.Dock="Bottom"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Right"
+                    Content="{StaticResource SaveButtonString}" />
         </DockPanel>
     </ScrollViewer>
 </UserControl>

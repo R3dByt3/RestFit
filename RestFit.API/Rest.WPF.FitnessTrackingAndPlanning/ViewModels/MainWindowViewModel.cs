@@ -1,6 +1,6 @@
-﻿namespace FitnessTrackingAndPlanning.ViewModels
+﻿namespace Rest.WPF.FitnessTrackingAndPlanning.ViewModels
 {
-    public class MainWindowViewModel : ViewModelBase
+    public sealed class MainWindowViewModel : ViewModelBase
     {
         #region Properties
 
@@ -13,7 +13,6 @@
             {
                 _currentPage = value;
                 OnPropertyChanged(nameof(CurrentPage));
-
             }
         }
         
@@ -26,7 +25,9 @@
         {
             CurrentPage = new LoginViewModel();
             if (CurrentPage is LoginViewModel loginViewModel)
+            {
                 loginViewModel.ChangeView += OnChangeView;
+            }
         }
 
         private void OnChangeView()

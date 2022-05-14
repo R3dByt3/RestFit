@@ -1,8 +1,9 @@
-﻿namespace FitnessTrackingAndPlanning.ViewModels
+﻿namespace Rest.WPF.FitnessTrackingAndPlanning.ViewModels
 {
-    public class NavigationViewModel : ViewModelBase
+    public sealed class NavigationViewModel : ViewModelBase
     {
         #region Properties
+
         private ViewModelBase _trainingPage;
 
         public ViewModelBase TrainingPage
@@ -50,6 +51,7 @@
                 OnPropertyChanged(nameof(HistoryPage));
             }
         }
+
         #endregion
 
         public NavigationViewModel()
@@ -59,6 +61,5 @@
             _healthDataPage = new HealthDataViewModel();
             _historyPage = new HistoryViewModel();
         }
-
     }
 }

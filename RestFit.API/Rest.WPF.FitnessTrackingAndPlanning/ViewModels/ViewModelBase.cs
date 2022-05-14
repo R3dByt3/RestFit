@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace FitnessTrackingAndPlanning.ViewModels
+namespace Rest.WPF.FitnessTrackingAndPlanning.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged
     {

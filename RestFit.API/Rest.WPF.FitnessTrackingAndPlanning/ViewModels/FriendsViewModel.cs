@@ -1,6 +1,4 @@
-﻿using System.Windows.Input;
-
-namespace FitnessTrackingAndPlanning.ViewModels
+﻿namespace Rest.WPF.FitnessTrackingAndPlanning.ViewModels
 {
     public sealed class FriendsViewModel : ViewModelBase
     {
@@ -51,6 +49,5 @@ namespace FitnessTrackingAndPlanning.ViewModels
                 OnPropertyChanged(nameof(MotivationString));
             }
         }
-
     }
 }

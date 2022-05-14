@@ -1,15 +1,16 @@
-﻿using Rest.WPF.FitnessTrackingAndPlanning;
-using RestFit.Client;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
+using FitnessTrackingAndPlanning;
+using RestFit.Client;
 
-namespace FitnessTrackingAndPlanning.ViewModels
+namespace Rest.WPF.FitnessTrackingAndPlanning.ViewModels
 {
     public sealed class LoginViewModel : ViewModelBase
     {
         public delegate void Notify();
 
         #region Commands
+
         private ICommand _loginCommand;
 
         public ICommand LoginCommand
@@ -21,9 +22,11 @@ namespace FitnessTrackingAndPlanning.ViewModels
                 OnPropertyChanged(nameof(LoginCommand));
             }
         }
+
         #endregion
 
         #region Properties
+
         private string _userName = string.Empty;
 
         public string UserName
@@ -59,6 +62,7 @@ namespace FitnessTrackingAndPlanning.ViewModels
                 OnPropertyChanged(nameof(LoginFailed));
             }
         }
+
         #endregion
 
         public event Notify? ChangeView;
@@ -73,7 +77,7 @@ namespace FitnessTrackingAndPlanning.ViewModels
             Kernel.ClientHub = new ClientHub(UserName, Password);
             try
             {
-                var myUser = await Kernel.ClientHub.V1.UserClient.GetMyUser().ConfigureAwait(false);
+                await Kernel.ClientHub.V1.UserClient.GetMyUser().ConfigureAwait(false);
                 ChangeView?.Invoke();
             }
             catch

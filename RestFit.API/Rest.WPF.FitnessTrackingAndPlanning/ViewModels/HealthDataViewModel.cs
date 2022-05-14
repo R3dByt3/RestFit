@@ -1,10 +1,12 @@
 ﻿using System.Windows.Input;
+using FitnessTrackingAndPlanning;
 
-namespace FitnessTrackingAndPlanning.ViewModels
+namespace Rest.WPF.FitnessTrackingAndPlanning.ViewModels
 {
     public sealed class HealthDataViewModel : ViewModelBase
     {
         #region Commands
+
         private ICommand _saveHealthDataCommand;
 
         public ICommand SaveHealthDataCommand
@@ -16,9 +18,11 @@ namespace FitnessTrackingAndPlanning.ViewModels
                 OnPropertyChanged(nameof(SaveHealthDataCommand));
             }
         }
+
         #endregion
 
         #region Properties
+
         private double _weight;
 
         public double Weight
@@ -78,11 +82,12 @@ namespace FitnessTrackingAndPlanning.ViewModels
                 OnPropertyChanged(nameof(ThighSize));
             }
         }
+
         #endregion
 
         public HealthDataViewModel()
         {
-            _saveHealthDataCommand = new RelayCommand(p => SaveHealthData());
+            _saveHealthDataCommand = new RelayCommand(_ => SaveHealthData());
             Weight = 100;
             ArmSize = 80;
             WaistSize = 90;
@@ -90,7 +95,7 @@ namespace FitnessTrackingAndPlanning.ViewModels
             ThighSize = 50;
         }
 
-        public void SaveHealthData()
+        private void SaveHealthData()
         {
             //TODO: Implementieren (inkl. Checken ob neue Werte!)
         }
