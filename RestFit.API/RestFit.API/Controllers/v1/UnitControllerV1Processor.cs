@@ -1,5 +1,6 @@
 ﻿using RestFit.API.Controllers.v1.Mappers;
 using RestFit.Client.Abstract.Model;
+using RestFit.DataAccess.Abstract;
 using RestFit.DataAccess.Abstract.KnownSearches;
 using RestFit.Logic.Abstract;
 using System.Security.Claims;
@@ -19,10 +20,12 @@ namespace RestFit.API.Controllers.v1
 
         private string GetCurrentUserId() => _httpContextAccessor.HttpContext!.User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
 
-        public async Task CreateUnitAsync(UnitDto unitDto)
+        public async Task<Unit> CreateUnitAsync(UnitDto unitDto)
         {
             unitDto = unitDto with { UserId = GetCurrentUserId() };
-            await _processorHub.InsertProcessor.CreateUnitAsync(UnitDtoMapper.Instance.Convert(unitDto));
+            var unit = UnitDtoMapper.Instance.Convert(unitDto);
+            await _processorHub.InsertProcessor.CreateUnitAsync(unit);
+            return unit;
         }
 
         public async Task<IEnumerable<UnitDto>> GetUnitsAsync(UnitSearchDto? searchDto = null)
