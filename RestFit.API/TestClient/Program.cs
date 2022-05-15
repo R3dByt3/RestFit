@@ -8,7 +8,7 @@ IClientHub clientHub = new RestFit.Client.ClientHub("marvin", "5baa61e4c9b93f3f0
 await clientHub.V1.UnitClient.AddUnitAsync(new UnitDto
 {
     Type = "SitUps",
-    Repitions = 1,
+    Repetitions = 1,
     UserId = "62700f1dbd25f22e1e8cab2a",
     Comment = "Some comment1",
     Sets = 10,
@@ -18,7 +18,7 @@ await clientHub.V1.UnitClient.AddUnitAsync(new UnitDto
 await clientHub.V1.UnitClient.AddUnitAsync(new UnitDto
 {
     Type = "Squads",
-    Repitions = 2,
+    Repetitions = 2,
     UserId = "62700f1dbd25f22e1e8cab2a",
     Comment = "Some comment2",
     Sets = 5,
@@ -28,7 +28,7 @@ await clientHub.V1.UnitClient.AddUnitAsync(new UnitDto
 await clientHub.V1.UnitClient.AddUnitAsync(new UnitDto
 {
     Type = "PushUps",
-    Repitions = 3,
+    Repetitions = 3,
     UserId = "62700f1dbd25f22e1e8cab2a",
     Comment = "Some comment3",
     Sets = 9,

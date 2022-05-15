@@ -15,7 +15,7 @@
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            //_timer = new Timer(async _ => await ExecuteSafe().ConfigureAwait(false), cancellationToken, TimeSpan.Zero, TimeSpan.FromSeconds(5));
+            _timer = new Timer(async _ => await ExecuteSafe().ConfigureAwait(false), cancellationToken, TimeSpan.Zero, TimeSpan.FromSeconds(5));
 
             return Task.CompletedTask;
         }
@@ -35,10 +35,10 @@
         private async Task Execute()
         {
             var item = await _processor.FetchNextAsync().ConfigureAwait(false);
+            
             while (item != null)
             {
-
-
+                await _processor.ProcessAsync(item).ConfigureAwait(false);
                 item = await _processor.FetchNextAsync().ConfigureAwait(false);
             }
         }

@@ -15,4 +15,6 @@ namespace RestFit.DataAccess.KnownFilters
 
         public static FilterDefinition<Friend> GetByFriendId(string? friendId) => Filter.Eq(x => x.FriendId, friendId);
     }
+
+    //ToDo: DELETE
 }

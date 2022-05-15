@@ -23,8 +23,8 @@ namespace RestFit.DataAccess
                 throw new InsufficientDataException($"{nameof(unit.UserId)} must be filled");
             if (string.IsNullOrWhiteSpace(unit.Type))
                 throw new InsufficientDataException($"{nameof(unit.Type)} must be filled");
-            if (unit.Repitions == 0)
-                throw new InsufficientDataException($"{nameof(unit.Repitions)} must be filled");
+            if (unit.Repetitions == 0)
+                throw new InsufficientDataException($"{nameof(unit.Repetitions)} must be filled");
             if (unit.Weight <= 0)
                 throw new InsufficientDataException($"{nameof(unit.Weight)} must be filled");
             if (unit.Sets == 0)
@@ -32,21 +32,17 @@ namespace RestFit.DataAccess
             await _unitAccess.InsertDocumentAsync(unit).ConfigureAwait(false);
         }
 
-        public async Task<UnitGroup?> GetUnitGroupAsync(UnitSearch search)
+        public async Task<UserGroupedUnit?> GetUnitGroupAsync(UnitSearch search)
         {
-            if (string.IsNullOrWhiteSpace(search.UserId))
-                throw new InsufficientDataException($"{nameof(search.UserId)} must be filled");
+            if (string.IsNullOrWhiteSpace(search.NotProcessedBy))
+                throw new InsufficientDataException($"{nameof(search.NotProcessedBy)} must be filled");
 
             var filter = BuildFilter(search);
             var hasUnits = await _unitAccess.ExistsAsync(filter);
 
             if (!hasUnits) return null;
 
-            return new UnitGroup
-            {
-                UserId = search.UserId,
-                //RepitionsCount = _unitAccess.
-            };
+            return await _unitAccess.GroupAsync(UnitFilters.GetUnitGroups(search.NotProcessedBy));
         }
 
         public async Task<ICollection<Unit>> GetUnitsAsync(UnitSearch? search = null)

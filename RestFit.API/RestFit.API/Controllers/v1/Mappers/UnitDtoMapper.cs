@@ -13,7 +13,7 @@ namespace RestFit.API.Controllers.v1.Mappers
             {
                 Id = element.Id,
                 Comment = element.Comment,
-                Repitions = element.Repitions,
+                Repetitions = element.Repetitions,
                 Type = element.Type,
                 UserId = element.UserId,
                 Sets = element.Sets,
@@ -27,7 +27,7 @@ namespace RestFit.API.Controllers.v1.Mappers
             {
                 Id = element.Id,
                 Comment = element.Comment,
-                Repitions = element.Repitions,
+                Repetitions = element.Repetitions,
                 Type = element.Type,
                 UserId = element.UserId,
                 Sets = element.Sets,

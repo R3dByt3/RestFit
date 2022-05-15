@@ -49,4 +49,6 @@ namespace RestFit.DataAccess
             return search == null ? filter : search.ToKeyValuePairs().Aggregate(filter, AddFilter);
         }
     }
+
+    //ToDo: DELETE
 }

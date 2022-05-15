@@ -21,8 +21,8 @@ namespace RestFit.DataAccess.ClassMaps
             cm.MapField(c => c.Sets)
                 .SetElementName("sets");
 
-            cm.MapField(c => c.Repitions)
-                .SetElementName("repitions");
+            cm.MapField(c => c.Repetitions)
+                .SetElementName("repetitions");
 
             cm.MapField(c => c.Weight)
                 .SetElementName("weight");

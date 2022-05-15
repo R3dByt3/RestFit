@@ -9,5 +9,7 @@ namespace RestFit.DataAccess.Abstract
         public Task<long> CountDocumentsAsync(FilterDefinition<TDocument>? filterDefinition = null);
         public Task UpdateAsync(FilterDefinition<TDocument>? filterDefinition = null, UpdateDefinition<TDocument>? updateDefinition = null);
         public Task<bool> ExistsAsync(FilterDefinition<TDocument>? filterDefinition = null);
+        public Task<T?> GroupAsync<T>(PipelineDefinition<TDocument, T> pipelineDefinition);
+        Task<TDocument?> RetrieveDocumentAsync(FilterDefinition<TDocument>? filterDefinition = null);
     }
 }

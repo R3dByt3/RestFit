@@ -14,11 +14,6 @@ namespace RestFit.DataAccess
             _userAccess = userAccess;
         }
 
-        public async Task<ICollection<User>> GetUsersAsync()
-        {
-            return await _userAccess.RetrieveDocumentsAsync().ConfigureAwait(false);
-        }
-
         public async Task CreateUserAsync(User user)
         {
             await _userAccess.InsertDocumentAsync(user).ConfigureAwait(false);

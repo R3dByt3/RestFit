@@ -4,6 +4,7 @@ namespace RestFit.API.HostedServices
 {
     public interface IFriendHostedServiceProcessor
     {
-        public Task<UnitGroup?> FetchNextAsync();
+        public Task<UserGroupedUnit?> FetchNextAsync();
+        public Task ProcessAsync(UserGroupedUnit unitGroup);
     }
 }

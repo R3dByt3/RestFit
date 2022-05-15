@@ -6,6 +6,6 @@ namespace RestFit.DataAccess.Abstract
     {
         public Task CreateUnitAsync(Unit unit);
         public Task<ICollection<Unit>> GetUnitsAsync(UnitSearch? search = null);
-        public Task<UnitGroup?> GetUnitGroupAsync(UnitSearch search);
+        public Task<UserGroupedUnit?> GetUnitGroupAsync(UnitSearch search);
     }
 }

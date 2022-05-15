@@ -9,6 +9,6 @@ namespace RestFit.Logic.Abstract
         public Task<Unit?> GetUnitAsync(UnitSearch? search = null);
         public Task<User?> GetUserAsync(UserSearch search);
         public Task<Friend?> GetFriendAsync(FriendSearch search);
-        public Task<UnitGroup?> GetUnitGroupAsync(UnitSearch search);
+        public Task<UserGroupedUnit?> GetUnitGroupAsync(UnitSearch search);
     }
 }

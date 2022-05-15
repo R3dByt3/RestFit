@@ -13,7 +13,7 @@ namespace RestFit.API.HostedServices
             _processorHub = processorHub;
         }
 
-        public async Task<UnitGroup?> FetchNextAsync()
+        public async Task<UserGroupedUnit?> FetchNextAsync()
         {
             var search = new UnitSearch
             {
@@ -22,26 +22,9 @@ namespace RestFit.API.HostedServices
             return await _processorHub.SearchProcessor.GetUnitGroupAsync(search).ConfigureAwait(false);
         }
 
-        public async Task ProcessAsync(Unit unit)
+        public async Task ProcessAsync(UserGroupedUnit unitGroup)
         {
-            var search = new FriendSearch
-            {
-                FriendId = unit.UserId
-            };
-            
-            var friend = await _processorHub.SearchProcessor.GetFriendAsync(search).ConfigureAwait(false);
-
-            if (friend == null)
-            {
-                friend = new Friend
-                {
-                    
-                };
-            }
-            else
-            {
-
-            }
+            var search = new UnitGroupSearch();
         }
     }
 }

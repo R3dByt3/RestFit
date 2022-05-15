@@ -8,6 +8,8 @@ namespace RestFit.DataAccess
 {
     public abstract class BaseAccess<TDocument> : IDocumentAccess<TDocument> where TDocument : class
     {
+        private static CountOptions CountSingle = new CountOptions { Limit = 1 };
+
         private readonly IMongoClient _client;
         private readonly IMongoDatabase _database;
         protected IMongoCollection<TDocument> Collection { get; }
@@ -82,6 +84,19 @@ namespace RestFit.DataAccess
             }
         }
 
+        public async Task<TDocument?> RetrieveDocumentAsync(FilterDefinition<TDocument>? filterDefinition = null)
+        {
+            try
+            {
+                var documents = await Collection.FindAsync(filterDefinition ?? new BsonDocument()).ConfigureAwait(false);
+                return await documents.FirstOrDefaultAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new DataAccessMongoDbException("Insert failed. See inner exception for more details", ex);
+            }
+        }
+
         public async Task<long> CountDocumentsAsync(FilterDefinition<TDocument>? filterDefinition = null)
         {
             try
@@ -110,7 +125,7 @@ namespace RestFit.DataAccess
         {
             try
             {
-                return await Collection.CountDocumentsAsync(filterDefinition, new CountOptions { Limit = 1 }).ConfigureAwait(false) == 1;
+                return await Collection.CountDocumentsAsync(filterDefinition, CountSingle).ConfigureAwait(false) == 1;
             }
             catch (Exception ex)
             {
@@ -118,11 +133,13 @@ namespace RestFit.DataAccess
             }
         }
 
-        public async Task<long> SumAsync(FilterDefinition<TDocument>? filterDefinition = null)
+        public async Task<T?> GroupAsync<T>(PipelineDefinition<TDocument, T> pipelineDefinition)
         {
             try
             {
-                return 0;// await Collection.AggregateAsync().ConfigureAwait(false);
+                using var cursor = await Collection.AggregateAsync(pipelineDefinition).ConfigureAwait(false);
+
+                return await cursor.FirstOrDefaultAsync();
             }
             catch (Exception ex)
             {

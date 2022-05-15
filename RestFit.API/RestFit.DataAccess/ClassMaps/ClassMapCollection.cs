@@ -6,6 +6,7 @@
         {
             UnitClassMap.Init();
             UserClassMap.Init();
+            UserGroupedUnitClassMap.Init();
         }
     }
 }
