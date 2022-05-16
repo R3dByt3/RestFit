@@ -25,7 +25,8 @@ namespace RestFit.DataAccess.KnownFilters
                 RepetitionsSum = x.Sum(v => v.Repetitions),
                 SetsSum = x.Sum(v => v.Sets),
                 WeightsSum = x.Sum(v => v.Weight),
-                DocumentCount = x.Count()
+                DocumentCount = x.Count(),
+                DocumentIds = x.Select(v => v.Id),
             })
         };
     }

@@ -10,5 +10,6 @@
         public double Weight { get; set; } = 0;
         public string Comment { get; set; } = string.Empty;
         public string[] ProcessedFor { get; set; } = Array.Empty<string>();
+        public DateTime DateUtc { get; set; } = DateTime.MinValue;
     }
 }

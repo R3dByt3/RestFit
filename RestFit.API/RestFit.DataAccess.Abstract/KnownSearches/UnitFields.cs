@@ -5,6 +5,7 @@
         Id,
         UserId,
         Type,
-        NotProcessedBy
+        NotProcessedBy,
+        Ids
     }
 }

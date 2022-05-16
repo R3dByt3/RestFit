@@ -2,6 +2,10 @@
 {
     public enum UserGroupedUnitFields
     {
-        UserId
+        UserId,
+        SetsSum,
+        RepetitionsSum,
+        WeightsSum,
+        DocumentCount
     }
 }

@@ -3,6 +3,7 @@ using RestFit.DataAccess.Abstract;
 using RestFit.DataAccess.Abstract.Exceptions;
 using RestFit.DataAccess.KnownFilters;
 using RestFit.DataAccess.Abstract.KnownSearches;
+using RestFit.DataAccess.KnownUpdates;
 
 namespace RestFit.DataAccess
 {
@@ -32,7 +33,7 @@ namespace RestFit.DataAccess
             await _unitAccess.InsertDocumentAsync(unit).ConfigureAwait(false);
         }
 
-        public async Task<UserGroupedUnit?> GetUnitGroupAsync(UnitSearch search)
+        public async Task<UserGroupedUnit?> AggregateUserGroupedUnitAsync(UnitSearch search)
         {
             if (string.IsNullOrWhiteSpace(search.NotProcessedBy))
                 throw new InsufficientDataException($"{nameof(search.NotProcessedBy)} must be filled");
@@ -51,6 +52,19 @@ namespace RestFit.DataAccess
             return await _unitAccess.RetrieveDocumentsAsync(filter).ConfigureAwait(false);
         }
 
+        public async Task SetProcessedByForUnitsAsync(UserGroupedUnit userGroupedUnit, string processorName)
+        {
+            var filterSearch = new UnitSearch
+            {
+                Ids = userGroupedUnit.DocumentIds
+            };
+            var filter = BuildFilter(filterSearch);
+
+            var update = UnitUpdates.SetProcessedByForUnits(processorName);
+
+            await _unitAccess.UpdateAsync(filter, update).ConfigureAwait(false);
+        }
+
         private static FilterDefinition<Unit> BuildFilter(UnitSearch? search = null)
         {
             FilterDefinition<Unit> AddFilter(FilterDefinition<Unit> empty, KeyValuePair<UnitFields, string[]> pair)
@@ -61,6 +75,7 @@ namespace RestFit.DataAccess
                     UnitFields.UserId => empty & UnitFilters.GetByUserId(search.UserId),
                     UnitFields.Type => empty & UnitFilters.GetByType(search.Type),
                     UnitFields.NotProcessedBy => empty & UnitFilters.GetIfNotProcessedBy(search.NotProcessedBy),
+                    UnitFields.Ids => empty & UnitFilters.GetIfNotProcessedBy(search.NotProcessedBy),
                     _ => empty
                 };
             }

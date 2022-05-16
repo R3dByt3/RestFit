@@ -3,16 +3,17 @@ using RestFit.DataAccess.Abstract;
 using RestFit.DataAccess.Abstract.Exceptions;
 using RestFit.DataAccess.Abstract.KnownSearches;
 using RestFit.DataAccess.KnownFilters;
+using RestFit.DataAccess.KnownUpdates;
 
 namespace RestFit.DataAccess
 {
     public class UserGroupedUnitRepository : IUserGroupedUnitRepository
     {
-        private readonly IUserGroupedUnitAccess _access;
+        private readonly IUserGroupedUnitAccess _userGroupedUnitAccess;
 
-        public UserGroupedUnitRepository(IUserGroupedUnitAccess access)
+        public UserGroupedUnitRepository(IUserGroupedUnitAccess userGroupedUnitAccess)
         {
-            _access = access;
+            _userGroupedUnitAccess = userGroupedUnitAccess;
         }
 
         public async Task CreateUserGroupedUnitAsync(UserGroupedUnit userGroupedUnit)
@@ -20,14 +21,27 @@ namespace RestFit.DataAccess
             if (string.IsNullOrWhiteSpace(userGroupedUnit.UserId))
                 throw new InsufficientDataException($"{nameof(userGroupedUnit.UserId)} must be filled");
 
-            await _access.InsertDocumentAsync(userGroupedUnit).ConfigureAwait(false);
+            await _userGroupedUnitAccess.InsertDocumentAsync(userGroupedUnit).ConfigureAwait(false);
         }
 
         public async Task<UserGroupedUnit?> GetUserGroupedUnitAsync(UserGroupedUnitSearch search)
         {
             var filter = BuildFilter(search);
 
-            return await _access.RetrieveDocumentAsync(filter).ConfigureAwait(false);
+            return await _userGroupedUnitAccess.RetrieveDocumentAsync(filter).ConfigureAwait(false);
+        }
+
+        public async Task UpdateUserGroupedUnitAggregationsAsync(UserGroupedUnit userGroupedUnit)
+        {
+            var filterSearch = new UserGroupedUnitSearch
+            {
+                UserId = userGroupedUnit.UserId
+            };
+            var filter = BuildFilter(filterSearch);
+
+            var update = UserGroupedUnitUpdates.UpdateAggregations(userGroupedUnit.RepetitionsSum, userGroupedUnit.DocumentCount, userGroupedUnit.SetsSum, userGroupedUnit.WeightsSum);
+
+            await _userGroupedUnitAccess.UpdateAsync(filter, update).ConfigureAwait(false);
         }
 
         private static FilterDefinition<UserGroupedUnit> BuildFilter(UserGroupedUnitSearch? search = null)

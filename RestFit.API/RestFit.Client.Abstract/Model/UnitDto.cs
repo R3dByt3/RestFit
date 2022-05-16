@@ -9,5 +9,6 @@
         public long Repetitions { get; set; } = 0;
         public double Weight { get; set; } = 0;
         public string Comment { get; set; } = string.Empty;
+        public DateTime DateUtc { get; set; } = DateTime.MinValue;
     }
 }

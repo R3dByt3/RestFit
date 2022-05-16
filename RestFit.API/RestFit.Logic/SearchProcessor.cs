@@ -48,11 +48,19 @@ namespace RestFit.Logic
             return result.FirstOrDefault();
         }
 
-        public async Task<UserGroupedUnit?> GetUnitGroupAsync(UnitSearch search)
+        public async Task<UserGroupedUnit?> AggregateUserGroupedUnitAsync(UnitSearch search)
         {
             _logger.LogInformation("Searching unit group");
-            var result = await _repositoryHub.UnitRepository.GetUnitGroupAsync(search).ConfigureAwait(false);
+            var result = await _repositoryHub.UnitRepository.AggregateUserGroupedUnitAsync(search).ConfigureAwait(false);
             _logger.LogInformation("Successfully searched unit group");
+            return result;
+        }
+
+        public async Task<UserGroupedUnit?> GetUserGroupedUnitAsync(UserGroupedUnitSearch search)
+        {
+            _logger.LogInformation("Searching user grouped unit");
+            var result = await _repositoryHub.UserGroupedUnitRepository.GetUserGroupedUnitAsync(search).ConfigureAwait(false);
+            _logger.LogInformation("Successfully searched user grouped unit");
             return result;
         }
     }

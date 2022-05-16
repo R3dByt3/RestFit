@@ -28,5 +28,12 @@ namespace RestFit.Logic
             await _repositoryHub.UserRepository.CreateUserAsync(user).ConfigureAwait(false);
             _logger.LogInformation("Successfully created user");
         }
+
+        public async Task CreateUserGroupedUnitAsync(UserGroupedUnit userGroupedUnit)
+        {
+            _logger.LogInformation("Create user grouped unit");
+            await _repositoryHub.UserGroupedUnitRepository.CreateUserGroupedUnitAsync(userGroupedUnit).ConfigureAwait(false);
+            _logger.LogInformation("Successfully created user grouped unit");
+        }
     }
 }

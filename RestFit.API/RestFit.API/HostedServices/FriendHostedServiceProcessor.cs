@@ -19,12 +19,27 @@ namespace RestFit.API.HostedServices
             {
                 NotProcessedBy = nameof(FriendHostedServiceProcessor)
             };
-            return await _processorHub.SearchProcessor.GetUnitGroupAsync(search).ConfigureAwait(false);
+            return await _processorHub.SearchProcessor.AggregateUserGroupedUnitAsync(search).ConfigureAwait(false);
         }
 
         public async Task ProcessAsync(UserGroupedUnit unitGroup)
         {
-            var search = new UnitGroupSearch();
+            var search = new UserGroupedUnitSearch
+            {
+                UserId = unitGroup.UserId
+            };
+            
+            var unit = await _processorHub.SearchProcessor.GetUserGroupedUnitAsync(search).ConfigureAwait(false);
+
+            if (unit == null)
+            {
+                await _processorHub.InsertProcessor.CreateUserGroupedUnitAsync(unitGroup).ConfigureAwait(false);
+            }
+            else
+            {
+                await _processorHub.UpdateProcessor.UpdateUserGroupedUnitAggregations(unitGroup).ConfigureAwait(false);
+                await _processorHub.UpdateProcessor.SetProcessedByForUnitsAsync(unitGroup, nameof(FriendHostedServiceProcessor)).ConfigureAwait(false);
+            }
         }
     }
 }

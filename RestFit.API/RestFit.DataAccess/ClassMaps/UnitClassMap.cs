@@ -32,6 +32,9 @@ namespace RestFit.DataAccess.ClassMaps
 
             cm.MapField(c => c.ProcessedFor)
                 .SetElementName("processed_for");
+
+            cm.MapField(c => c.DateUtc)
+                .SetElementName("date_utc");
         });
     }
 }

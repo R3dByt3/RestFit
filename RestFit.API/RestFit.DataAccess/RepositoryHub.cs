@@ -7,12 +7,14 @@ namespace RestFit.DataAccess
         public IUnitRepository UnitRepository { get; }
         public IUserRepository UserRepository { get; }
         public IFriendRepository FriendRepository { get; }
+        public IUserGroupedUnitRepository UserGroupedUnitRepository { get; }
 
-        public RepositoryHub(IUserRepository userRepository, IUnitRepository unitRepository, IFriendRepository friendRepository)
+        public RepositoryHub(IUserRepository userRepository, IUnitRepository unitRepository, IFriendRepository friendRepository, IUserGroupedUnitRepository userGroupedUnitRepository)
         {
             UnitRepository = unitRepository;
             UserRepository = userRepository;
             FriendRepository = friendRepository;
+            UserGroupedUnitRepository = userGroupedUnitRepository;
         }
     }
 }

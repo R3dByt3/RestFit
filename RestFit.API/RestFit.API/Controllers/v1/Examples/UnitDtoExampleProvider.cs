@@ -15,7 +15,8 @@ namespace RestFit.API.Controllers.v1.Examples
                 UserId = Guid.NewGuid().ToString(),
                 Comment = "Some comment",
                 Sets = Random.Shared.NextInt64(),
-                Weight = Random.Shared.NextDouble()
+                Weight = Random.Shared.NextDouble(),
+                DateUtc = DateTime.UtcNow
             };
         }
     }

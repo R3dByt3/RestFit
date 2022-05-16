@@ -8,5 +8,6 @@
         public long RepetitionsSum { get; set; } = 0;
         public double WeightsSum { get; set; } = 0;
         public long DocumentCount { get; set; } = 0;
+        public IEnumerable<string> DocumentIds { get; set; } = Array.Empty<string>();
     }
 }

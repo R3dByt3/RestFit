@@ -17,7 +17,8 @@ namespace RestFit.API.Controllers.v1.Mappers
                 Type = element.Type,
                 UserId = element.UserId,
                 Sets = element.Sets,
-                Weight = element.Weight
+                Weight = element.Weight,
+                DateUtc = element.DateUtc
             };
         }
 
@@ -31,7 +32,8 @@ namespace RestFit.API.Controllers.v1.Mappers
                 Type = element.Type,
                 UserId = element.UserId,
                 Sets = element.Sets,
-                Weight = element.Weight
+                Weight = element.Weight,
+                DateUtc = element.DateUtc
             };
         }
     }
