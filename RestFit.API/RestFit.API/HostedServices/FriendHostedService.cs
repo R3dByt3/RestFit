@@ -3,7 +3,7 @@
     public class FriendHostedService : IHostedService, IDisposable
     {
         private readonly IFriendHostedServiceProcessor _processor;
-        private readonly ILogger _logger;
+        private readonly ILogger<FriendHostedService> _logger;
         private Timer _timer = null!;
         private bool disposedValue;
 
@@ -15,7 +15,9 @@
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            _timer = new Timer(async _ => await ExecuteSafe().ConfigureAwait(false), cancellationToken, TimeSpan.Zero, TimeSpan.FromSeconds(5));
+            _logger.LogInformation($"{nameof(FriendHostedService)} starting");
+            _timer = new Timer(async _ => await ExecuteSafe().ConfigureAwait(false), cancellationToken, TimeSpan.FromSeconds(15), TimeSpan.FromSeconds(30));
+            _logger.LogInformation($"{nameof(FriendHostedService)} started");
 
             return Task.CompletedTask;
         }
@@ -28,12 +30,13 @@
             }
             catch (Exception ex)
             {
-
+                _logger.LogError(ex, $"{nameof(FriendHostedService)}.{nameof(Execute)} failed");
             }
         }
 
         private async Task Execute()
         {
+            _logger.LogInformation($"{nameof(FriendHostedService)} executing");
             var item = await _processor.FetchNextAsync().ConfigureAwait(false);
             
             while (item != null)
@@ -41,11 +44,14 @@
                 await _processor.ProcessAsync(item).ConfigureAwait(false);
                 item = await _processor.FetchNextAsync().ConfigureAwait(false);
             }
+            _logger.LogInformation($"{nameof(FriendHostedService)} executed");
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
+            _logger.LogInformation($"{nameof(FriendHostedService)} stopping");
             _timer.Change(0, Timeout.Infinite);
+            _logger.LogInformation($"{nameof(FriendHostedService)} stopped");
             return Task.CompletedTask;
         }
 
