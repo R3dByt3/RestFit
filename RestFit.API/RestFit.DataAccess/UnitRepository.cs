@@ -60,7 +60,7 @@ namespace RestFit.DataAccess
             };
             var filter = BuildFilter(filterSearch);
 
-            var update = UnitUpdates.SetProcessedByForUnits(processorName);
+            var update = UnitUpdates.AddProcessedByForUnits(processorName);
 
             await _unitAccess.UpdateAsync(filter, update).ConfigureAwait(false);
         }

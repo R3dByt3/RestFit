@@ -8,38 +8,41 @@ using RestFit.API.Controllers.v1.Examples;
 using RestFit.Client.Abstract.Model;
 using RestFit.DataAccess.Abstract.KnownSearches;
 using RestFit.API.Attributes;
+using RestFit.API.Exceptions;
 
 namespace RestFit.API.Controllers.v1
 {
     [Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class UnitController : ControllerWithExceptionHandling
+    public class FriendController : ControllerWithExceptionHandling
     {
-        private readonly IUnitControllerV1Processor _processor;
+        private readonly IFriendControllerV1Processor _processor;
 
-        public UnitController(IUnitControllerV1Processor processor, ILoggerFactory loggerFactory) : base(loggerFactory.CreateLogger<UnitController>())
+        public FriendController(IFriendControllerV1Processor processor, ILoggerFactory loggerFactory) : base(loggerFactory.CreateLogger<FriendController>())
         {
             _processor = processor;
         }
 
         [HttpPost]
+        [Route("request")]
         [Consumes("application/json")]
-        [SwaggerResponse((int)HttpStatusCode.Created, "Objekt gespeichert")]
-        [SwaggerResponseExample((int)HttpStatusCode.Created, typeof(UnitDtoExampleProvider))]
-        [SwaggerResponse((int)HttpStatusCode.BadRequest, "Wenn das Objekt unvollständig ist", typeof(ErrorDataDto))]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Request gespeichert")]
+        //[SwaggerResponseExample((int)HttpStatusCode.Created, typeof(UnitDtoExampleProvider))] //ToDo: Was auch immer machen
+        [SwaggerResponse((int)HttpStatusCode.BadRequest, "Wenn der Name nicht gefunden werden kann", typeof(ErrorDataDto))]
         [SwaggerResponseExample((int)HttpStatusCode.BadRequest, typeof(ErrorDataDtoExampleProvider))]
         [SwaggerResponse((int)HttpStatusCode.GatewayTimeout, "Wenn es ein Problem mit der Datenbank gibt", typeof(ErrorDataDto))]
         [SwaggerResponseExample((int)HttpStatusCode.GatewayTimeout, typeof(ErrorDataDtoExampleProvider))]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, "Wenn ein unerwarteter Fehler auftritt", typeof(ErrorDataDto))]
         [SwaggerResponseExample((int)HttpStatusCode.InternalServerError, typeof(ErrorDataDtoExampleProvider))]
-        [SwaggerRequestExample(typeof(UnitDto), typeof(UnitDtosExampleProvider))]
-        public async Task<IActionResult> AddUnitAsync([FromBody, SwaggerParameter(Description = "Body", Required = true)] UnitDto unitDto) => await ExecuteSafeAsync(async () =>
+        //[SwaggerRequestExample(typeof(string), typeof(UnitDtosExampleProvider))] //ToDo: Was auch immer machen
+        public async Task<IActionResult> CreateFriendRequestAsync([FromQuery] string username) => await ExecuteSafeAsync(async () =>
         {
-            var unit = await _processor.CreateUnitAsync(unitDto).ConfigureAwait(false);
-            return CreatedAtAction(nameof(GetUnitsAsync), new { Id = unit.Id }, unit);
+            await _processor.CreateFriendRequestAsync(username).ConfigureAwait(false);
+            return Ok();
         });
 
+        /*
         [HttpGet]
         [Produces("application/json")]
         [MethodQueryParameter(nameof(UnitSearchDto.Id), "Suche anhand von Id")]
@@ -55,6 +58,7 @@ namespace RestFit.API.Controllers.v1
         {
             return Ok(await _processor.GetUnitsAsync(search));
         });
+        */
 
         protected override async Task<IActionResult> HandleExceptionAsync(Exception ex)
         {
@@ -64,6 +68,7 @@ namespace RestFit.API.Controllers.v1
             {
                 InsufficientDataException ide => UnprocessableEntity(GenerateErrorDataFromException(ide)),
                 DataAccessMongoDbException me => DataAccessMongoDbException(me),
+                UserNotFoundException unfe => BadRequest(GenerateErrorDataFromException(unfe)),
                 _ => DefaultErrorResponse(ex)
             };
         }

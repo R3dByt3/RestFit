@@ -2,6 +2,7 @@
 using RestFit.DataAccess.Abstract;
 using RestFit.DataAccess.Abstract.KnownSearches;
 using RestFit.DataAccess.KnownFilters;
+using RestFit.DataAccess.KnownUpdates;
 
 namespace RestFit.DataAccess
 {
@@ -22,6 +23,25 @@ namespace RestFit.DataAccess
         public async Task<ICollection<User>> GetUsersAsync(UserSearch? search = null)
         {
             return await _userAccess.RetrieveDocumentsAsync(BuildFilter(search)).ConfigureAwait(false);
+        }
+
+        public async Task CreateFriendRequestAsync(User user, User requestingUser)
+        {
+            var userSearch = new UserSearch
+            {
+                Id = user.Id
+            };
+            var userFilter = BuildFilter(userSearch);
+
+            await _userAccess.UpdateAsync(userFilter, UserUpdates.AddPendingInFriendRequestUserIds(requestingUser.Id)).ConfigureAwait(false);
+
+            userSearch = new UserSearch
+            {
+                Id = requestingUser.Id
+            };
+            userFilter = BuildFilter(userSearch);
+
+            await _userAccess.UpdateAsync(userFilter, UserUpdates.AddPendingOutFriendRequestUserIds(user.Id)).ConfigureAwait(false);
         }
 
         private static FilterDefinition<User> BuildFilter(UserSearch? search = null)

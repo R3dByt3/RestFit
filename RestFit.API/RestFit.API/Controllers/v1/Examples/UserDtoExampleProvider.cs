@@ -14,12 +14,42 @@ namespace RestFit.API.Controllers.v1.Examples
                     Id = Guid.NewGuid().ToString(),
                     Username = "User1",
                     Password = Guid.NewGuid().ToString(),
+                    FriendUserIds = new string[]
+                    {
+                        Guid.NewGuid().ToString(),
+                        Guid.NewGuid().ToString()
+                    },
+                    PendingInFriendRequestUserIds = new string[]
+                    {
+                        Guid.NewGuid().ToString(),
+                        Guid.NewGuid().ToString()
+                    },
+                    PendingOutFriendRequestUserIds = new string[]
+                    {
+                        Guid.NewGuid().ToString(),
+                        Guid.NewGuid().ToString()
+                    }
                 },
                 new User
                 {
                     Id = Guid.NewGuid().ToString(),
                     Username = "User2",
                     Password = Guid.NewGuid().ToString(),
+                    FriendUserIds = new string[]
+                    {
+                        Guid.NewGuid().ToString(),
+                        Guid.NewGuid().ToString()
+                    },
+                    PendingInFriendRequestUserIds = new string[]
+                    {
+                        Guid.NewGuid().ToString(),
+                        Guid.NewGuid().ToString()
+                    },
+                    PendingOutFriendRequestUserIds = new string[]
+                    {
+                        Guid.NewGuid().ToString(),
+                        Guid.NewGuid().ToString()
+                    }
                 }
             };
         }

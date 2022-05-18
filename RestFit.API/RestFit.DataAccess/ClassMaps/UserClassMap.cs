@@ -17,6 +17,15 @@ namespace RestFit.DataAccess.ClassMaps
 
             cm.MapField(c => c.Password)
                 .SetElementName("password");
+
+            cm.MapField(c => c.PendingInFriendRequestUserIds)
+                .SetElementName("pending_in_friend_request_user_ids");
+
+            cm.MapField(c => c.PendingOutFriendRequestUserIds)
+                .SetElementName("pending_out_friend_request_user_ids");
+
+            cm.MapField(c => c.FriendUserIds)
+                .SetElementName("friend_user_ids");
         });
     }
 }

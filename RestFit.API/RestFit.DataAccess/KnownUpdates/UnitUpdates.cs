@@ -7,7 +7,7 @@ namespace RestFit.DataAccess.KnownUpdates
     {
         public static readonly UpdateDefinitionBuilder<Unit> Update = Builders<Unit>.Update;
 
-        public static UpdateDefinition<Unit> SetProcessedByForUnits(string processorName) => Update
+        public static UpdateDefinition<Unit> AddProcessedByForUnits(string processorName) => Update
             .AddToSet(x => x.ProcessedFor, processorName);
     }
 }
