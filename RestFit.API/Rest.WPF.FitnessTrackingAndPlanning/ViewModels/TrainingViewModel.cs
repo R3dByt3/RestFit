@@ -77,6 +77,7 @@ namespace Rest.WPF.FitnessTrackingAndPlanning.ViewModels
 
                 try
                 {
+                    exercise.DateUtc = DateTime.Today;
                     await Kernel.ClientHub?.V1.UnitClient.AddUnitAsync(exercise)!;
                 }
                 catch

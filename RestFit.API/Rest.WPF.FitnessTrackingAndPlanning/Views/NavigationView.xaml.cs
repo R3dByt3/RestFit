@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace FitnessTrackingAndPlanning.Views
+namespace Rest.WPF.FitnessTrackingAndPlanning.Views
 {
     /// <summary>
     /// Interaktionslogik für NavigationView.xaml
