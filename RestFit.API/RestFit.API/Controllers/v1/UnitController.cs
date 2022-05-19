@@ -38,7 +38,7 @@ namespace RestFit.API.Controllers.v1
         {
             var unit = await _processor.CreateUnitAsync(unitDto).ConfigureAwait(false);
             return CreatedAtAction(nameof(GetUnitsAsync), new { Id = unit.Id }, unit);
-        });
+        }).ConfigureAwait(false);
 
         [HttpGet]
         [Produces("application/json")]
@@ -53,8 +53,8 @@ namespace RestFit.API.Controllers.v1
         [SwaggerResponseExample((int)HttpStatusCode.InternalServerError, typeof(ErrorDataDtoExampleProvider))]
         public async Task<IActionResult> GetUnitsAsync([FromQuery, SwaggerIgnoreParameter] UnitSearchDto search) => await ExecuteSafeAsync(async () =>
         {
-            return Ok(await _processor.GetUnitsAsync(search));
-        });
+            return Ok(await _processor.GetUnitsAsync(search).ConfigureAwait(false));
+        }).ConfigureAwait(false);
 
         protected override async Task<IActionResult> HandleExceptionAsync(Exception ex)
         {

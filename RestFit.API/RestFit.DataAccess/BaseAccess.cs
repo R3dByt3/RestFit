@@ -8,7 +8,7 @@ namespace RestFit.DataAccess
 {
     public abstract class BaseAccess<TDocument> : IDocumentAccess<TDocument> where TDocument : class
     {
-        private static CountOptions CountSingle = new CountOptions { Limit = 1 };
+        private static readonly CountOptions CountSingle = new() { Limit = 1 };
 
         private readonly IMongoClient _client;
         private readonly IMongoDatabase _database;
@@ -89,7 +89,7 @@ namespace RestFit.DataAccess
             try
             {
                 var documents = await Collection.FindAsync(filterDefinition ?? new BsonDocument()).ConfigureAwait(false);
-                return await documents.FirstOrDefaultAsync();
+                return await documents.FirstOrDefaultAsync().ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -139,7 +139,7 @@ namespace RestFit.DataAccess
             {
                 using var cursor = await Collection.AggregateAsync(pipelineDefinition).ConfigureAwait(false);
 
-                return await cursor.FirstOrDefaultAsync();
+                return await cursor.FirstOrDefaultAsync().ConfigureAwait(false);
             }
             catch (Exception ex)
             {

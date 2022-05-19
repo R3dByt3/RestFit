@@ -39,11 +39,11 @@ namespace RestFit.DataAccess
                 throw new InsufficientDataException($"{nameof(search.NotProcessedBy)} must be filled");
 
             var filter = BuildFilter(search);
-            var hasUnits = await _unitAccess.ExistsAsync(filter);
+            var hasUnits = await _unitAccess.ExistsAsync(filter).ConfigureAwait(false);
 
             if (!hasUnits) return null;
 
-            return await _unitAccess.GroupAsync(UnitFilters.GetUnitGroups(search.NotProcessedBy));
+            return await _unitAccess.GroupAsync(UnitFilters.GetUnitGroups(search.NotProcessedBy)).ConfigureAwait(false);
         }
 
         public async Task<ICollection<Unit>> GetUnitsAsync(UnitSearch? search = null)

@@ -26,7 +26,7 @@ namespace RestFit.API.Controllers.v1
         {
             await _processor.CreateUserAsync(user).ConfigureAwait(false);
             return Ok();
-        });
+        }).ConfigureAwait(false);
 
         [HttpGet]
         [Produces("application/json")]
@@ -37,7 +37,7 @@ namespace RestFit.API.Controllers.v1
         public async Task<IActionResult> GetMyUser() => await ExecuteSafeAsync(async () =>
         {
             return Ok(await _processor.GetMyUserAsync().ConfigureAwait(false));
-        });
+        }).ConfigureAwait(false);
 
         protected override async Task<IActionResult> HandleExceptionAsync(Exception ex)
         {

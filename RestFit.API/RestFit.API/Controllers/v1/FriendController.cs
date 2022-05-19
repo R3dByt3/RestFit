@@ -40,7 +40,7 @@ namespace RestFit.API.Controllers.v1
         {
             await _processor.CreateFriendRequestAsync(username).ConfigureAwait(false);
             return Ok();
-        });
+        }).ConfigureAwait(false);
 
         /*
         [HttpGet]
@@ -57,7 +57,7 @@ namespace RestFit.API.Controllers.v1
         public async Task<IActionResult> GetUnitsAsync([FromQuery, SwaggerIgnoreParameter] UnitSearchDto search) => await ExecuteSafeAsync(async () =>
         {
             return Ok(await _processor.GetUnitsAsync(search));
-        });
+        }).ConfigureAwait(false);
         */
 
         protected override async Task<IActionResult> HandleExceptionAsync(Exception ex)

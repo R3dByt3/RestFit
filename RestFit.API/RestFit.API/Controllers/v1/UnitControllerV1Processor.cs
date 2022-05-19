@@ -24,7 +24,7 @@ namespace RestFit.API.Controllers.v1
         {
             unitDto = unitDto with { UserId = GetCurrentUserId() };
             var unit = UnitDtoMapper.Instance.Convert(unitDto);
-            await _processorHub.InsertProcessor.CreateUnitAsync(unit);
+            await _processorHub.InsertProcessor.CreateUnitAsync(unit).ConfigureAwait(false);
             return unit;
         }
 
