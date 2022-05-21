@@ -23,7 +23,7 @@ namespace RestFit.DataAccess
             EnsureViews();
         }
 
-        protected void CreateIndex(bool unique, bool sparse, Expression < Func<TDocument, object>> action)
+        protected void CreateIndex(bool unique, bool sparse, Expression <Func<TDocument, object>> action)
         {
             var indexOptions = new CreateIndexOptions
             {
