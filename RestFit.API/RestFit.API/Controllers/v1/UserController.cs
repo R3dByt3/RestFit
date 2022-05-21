@@ -31,7 +31,7 @@ namespace RestFit.API.Controllers.v1
         [HttpGet]
         [Produces("application/json")]
         [SwaggerResponse((int)HttpStatusCode.OK, "Der authentifizierte Benutzer", typeof(UnitDto))]
-        [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(UserDtoExampleProvider))]
+        [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(UsersDtoExampleProvider))]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, "Wenn ein unerwarteter Fehler auftritt", typeof(ErrorDataDto))]
         [SwaggerResponseExample((int)HttpStatusCode.InternalServerError, typeof(ErrorDataDtoExampleProvider))]
         public async Task<IActionResult> GetMyUser() => await ExecuteSafeAsync(async () =>

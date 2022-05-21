@@ -1,4 +1,5 @@
 ﻿using RestFit.API.Exceptions;
+using RestFit.Client.Abstract.Model;
 using RestFit.DataAccess.Abstract.KnownSearches;
 using RestFit.Logic.Abstract;
 using System.Security.Claims;
@@ -42,6 +43,11 @@ namespace RestFit.API.Controllers.v1
                 throw new UserNotFoundException($"Current user could not be found; Id: [{userId}]");
 
             await _processorHub.InsertProcessor.CreateFriendRequestAsync(user, requestingUser).ConfigureAwait(false);
+        }
+
+        public Task<FriendDto> AcceptFriendRequest(string userId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

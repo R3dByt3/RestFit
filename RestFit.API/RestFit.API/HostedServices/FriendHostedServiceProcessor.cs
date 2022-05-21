@@ -38,8 +38,9 @@ namespace RestFit.API.HostedServices
             else
             {
                 await _processorHub.UpdateProcessor.UpdateUserGroupedUnitAggregations(unitGroup).ConfigureAwait(false);
-                await _processorHub.UpdateProcessor.SetProcessedByForUnitsAsync(unitGroup, nameof(FriendHostedServiceProcessor)).ConfigureAwait(false);
             }
+
+            await _processorHub.UpdateProcessor.SetProcessedByForUnitsAsync(unitGroup, nameof(FriendHostedServiceProcessor)).ConfigureAwait(false);
         }
     }
 }

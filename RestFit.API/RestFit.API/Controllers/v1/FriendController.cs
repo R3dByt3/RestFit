@@ -26,39 +26,33 @@ namespace RestFit.API.Controllers.v1
 
         [HttpPost]
         [Route("request")]
-        [Consumes("application/json")]
         [SwaggerResponse((int)HttpStatusCode.OK, "Request gespeichert")]
-        //[SwaggerResponseExample((int)HttpStatusCode.Created, typeof(UnitDtoExampleProvider))] //ToDo: Was auch immer machen
         [SwaggerResponse((int)HttpStatusCode.BadRequest, "Wenn der Name nicht gefunden werden kann", typeof(ErrorDataDto))]
         [SwaggerResponseExample((int)HttpStatusCode.BadRequest, typeof(ErrorDataDtoExampleProvider))]
         [SwaggerResponse((int)HttpStatusCode.GatewayTimeout, "Wenn es ein Problem mit der Datenbank gibt", typeof(ErrorDataDto))]
         [SwaggerResponseExample((int)HttpStatusCode.GatewayTimeout, typeof(ErrorDataDtoExampleProvider))]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, "Wenn ein unerwarteter Fehler auftritt", typeof(ErrorDataDto))]
         [SwaggerResponseExample((int)HttpStatusCode.InternalServerError, typeof(ErrorDataDtoExampleProvider))]
-        //[SwaggerRequestExample(typeof(string), typeof(UnitDtosExampleProvider))] //ToDo: Was auch immer machen
-        public async Task<IActionResult> CreateFriendRequestAsync([FromQuery] string username) => await ExecuteSafeAsync(async () =>
+        public async Task<IActionResult> CreateFriendRequestAsync([FromQuery, SwaggerParameter(Description = "Username", Required = true)] string username) => await ExecuteSafeAsync(async () =>
         {
             await _processor.CreateFriendRequestAsync(username).ConfigureAwait(false);
             return Ok();
         }).ConfigureAwait(false);
 
-        /*
-        [HttpGet]
-        [Produces("application/json")]
-        [MethodQueryParameter(nameof(UnitSearchDto.Id), "Suche anhand von Id")]
-        [MethodQueryParameter(nameof(UnitSearchDto.Type), "Suche anhand von Type")]
-        [MethodQueryParameter(nameof(UnitSearchDto.UserId), "Suche anhand von UserId")]
-        [SwaggerResponse((int)HttpStatusCode.OK, "Alle Unit Objekte", typeof(List<UnitDto>))]
-        [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(UnitDtosExampleProvider))]
+        [HttpPost]
+        [Route("accept")]
+        [SwaggerResponse((int)HttpStatusCode.Created, "Request gespeichert")]
+        [SwaggerResponseExample((int)HttpStatusCode.Created, typeof(FriendDtoExampleProvider))]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest, "Wenn der Name nicht gefunden werden kann", typeof(ErrorDataDto))]
+        [SwaggerResponseExample((int)HttpStatusCode.BadRequest, typeof(ErrorDataDtoExampleProvider))]
         [SwaggerResponse((int)HttpStatusCode.GatewayTimeout, "Wenn es ein Problem mit der Datenbank gibt", typeof(ErrorDataDto))]
         [SwaggerResponseExample((int)HttpStatusCode.GatewayTimeout, typeof(ErrorDataDtoExampleProvider))]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, "Wenn ein unerwarteter Fehler auftritt", typeof(ErrorDataDto))]
         [SwaggerResponseExample((int)HttpStatusCode.InternalServerError, typeof(ErrorDataDtoExampleProvider))]
-        public async Task<IActionResult> GetUnitsAsync([FromQuery, SwaggerIgnoreParameter] UnitSearchDto search) => await ExecuteSafeAsync(async () =>
+        public async Task<IActionResult> AcceptFriendRequest([FromQuery, SwaggerParameter(Description = "UserId", Required = true)] string userId) => await ExecuteSafeAsync(async () =>
         {
-            return Ok(await _processor.GetUnitsAsync(search));
+            return Ok(await _processor.AcceptFriendRequest(userId));
         }).ConfigureAwait(false);
-        */
 
         protected override async Task<IActionResult> HandleExceptionAsync(Exception ex)
         {

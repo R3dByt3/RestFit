@@ -20,12 +20,12 @@ namespace RestFit.API.Controllers.v1
 
         private string GetCurrentUserId() => _httpContextAccessor.HttpContext!.User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
 
-        public async Task<Unit> CreateUnitAsync(UnitDto unitDto)
+        public async Task<UnitDto> CreateUnitAsync(UnitDto unitDto)
         {
             unitDto = unitDto with { UserId = GetCurrentUserId() };
             var unit = UnitDtoMapper.Instance.Convert(unitDto);
             await _processorHub.InsertProcessor.CreateUnitAsync(unit).ConfigureAwait(false);
-            return unit;
+            return UnitDtoMapper.Instance.Convert(unit);
         }
 
         public async Task<IEnumerable<UnitDto>> GetUnitsAsync(UnitSearchDto? searchDto = null)
