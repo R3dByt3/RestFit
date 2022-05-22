@@ -14,6 +14,7 @@ namespace RestFit.API.Extensions
             return services.AddSingleton<IUserService, UserService>()
                 .AddSingleton<IUserControllerV1Processor, UserControllerV1Processor>()
                 .AddSingleton<IUnitControllerV1Processor, UnitControllerV1Processor>()
+                .AddSingleton<IFriendControllerV1Processor, FriendControllerV1Processor>()
                 .AddSingleton<IFriendHostedServiceProcessor, FriendHostedServiceProcessor>()
                 .AddHostedService<FriendHostedService>()
                 .AddClient()

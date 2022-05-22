@@ -1,4 +1,4 @@
-﻿using RestFit.DataAccess.Abstract.KnownSearches;
+﻿using RestFit.Client.Abstract.KnownSearches;
 using RestSharp;
 
 namespace RestFit.Client.Extensions

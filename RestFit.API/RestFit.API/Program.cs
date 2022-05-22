@@ -53,6 +53,21 @@ namespace RestFitAPI
                         Url = new Uri("https://example.com/license")
                     }*/
                 });
+                options.AddSecurityDefinition("basicAuth", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "basic",
+                });
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "basicAuth" }
+                        },
+                        new string[]{}
+                    }
+                });
                 options.ExampleFilters();
                 options.SchemaFilter<SwaggerExcludeFilter>();
                 options.OperationFilter<SwaggerQueryParameterAttributeFilter>();

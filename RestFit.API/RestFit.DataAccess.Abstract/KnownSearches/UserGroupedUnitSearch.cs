@@ -2,6 +2,12 @@
 {
     public class UserGroupedUnitSearch : SearchBase<UserGroupedUnitFields>
     {
+        public string[] UserIds
+        {
+            get => GetAll(UserGroupedUnitFields.UserIds);
+            set => SetAll(UserGroupedUnitFields.UserIds, value);
+        }
+
         public string? UserId
         {
             get => GetFirst(UserGroupedUnitFields.UserId);

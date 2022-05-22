@@ -1,23 +1,23 @@
-﻿namespace RestFit.DataAccess.Abstract.KnownSearches
+﻿namespace RestFit.Client.Abstract.KnownSearches
 {
-    public class UnitSearchDto : SearchBaseDto<UnitFieldsDto>
+    public class UnitSearchDto : SearchBaseDto<UnitDtoFields>
     {
-        public string? Id 
+        public string? Id
         {
-            get => GetFirst(UnitFieldsDto.Id);
-            set => SetSingle(UnitFieldsDto.Id, value);
+            get => GetFirst(UnitDtoFields.Id);
+            set => SetSingle(UnitDtoFields.Id, value);
         }
 
         public string? UserId
         {
-            get => GetFirst(UnitFieldsDto.UserId);
-            set => SetSingle(UnitFieldsDto.UserId, value);
+            get => GetFirst(UnitDtoFields.UserId);
+            set => SetSingle(UnitDtoFields.UserId, value);
         }
 
         public string? Type
         {
-            get => GetFirst(UnitFieldsDto.Type);
-            set => SetSingle(UnitFieldsDto.Type, value);
+            get => GetFirst(UnitDtoFields.Type);
+            set => SetSingle(UnitDtoFields.Type, value);
         }
     }
 }

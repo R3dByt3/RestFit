@@ -1,4 +1,5 @@
-﻿using RestFit.DataAccess.Abstract.KnownSearches;
+﻿using RestFit.Client.Abstract.KnownSearches;
+using RestFit.DataAccess.Abstract.KnownSearches;
 
 namespace RestFit.API.Controllers.v1.Mappers
 {

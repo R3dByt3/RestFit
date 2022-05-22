@@ -1,4 +1,4 @@
-﻿namespace RestFit.DataAccess.Abstract.KnownSearches
+﻿namespace RestFit.Client.Abstract.KnownSearches
 {
     public abstract class SearchBaseDto<TKey> : Dictionary<TKey, string[]> where TKey : Enum
     {
@@ -16,6 +16,20 @@
         {
             if (!ContainsKey(id)) return null;
             return this[id].First();
+        }
+
+        protected string[] GetAll(TKey id)
+        {
+            if (!ContainsKey(id)) return Array.Empty<string>();
+            return this[id].ToArray();
+        }
+
+        protected void SetAll(TKey id, string[] values)
+        {
+            if (values.Length == 0)
+                return;
+
+            this[id] = values.ToArray();
         }
     }
 }

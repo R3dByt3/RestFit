@@ -3,6 +3,7 @@
     public enum UserGroupedUnitFields
     {
         UserId,
+        UserIds,
         SetsSum,
         RepetitionsSum,
         WeightsSum,

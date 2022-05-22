@@ -40,14 +40,6 @@ namespace RestFit.Logic
             return result.FirstOrDefault();
         }
 
-        public async Task<Friend?> GetFriendAsync(FriendSearch search)
-        {
-            _logger.LogInformation("Searching friend");
-            var result = await _repositoryHub.FriendRepository.GetFriendsAsync(search).ConfigureAwait(false);
-            _logger.LogInformation("Successfully searched friend");
-            return result.FirstOrDefault();
-        }
-
         public async Task<UserGroupedUnit?> AggregateUserGroupedUnitAsync(UnitSearch search)
         {
             _logger.LogInformation("Searching unit group");
@@ -61,6 +53,14 @@ namespace RestFit.Logic
             _logger.LogInformation("Searching user grouped unit");
             var result = await _repositoryHub.UserGroupedUnitRepository.GetUserGroupedUnitAsync(search).ConfigureAwait(false);
             _logger.LogInformation("Successfully searched user grouped unit");
+            return result;
+        }
+
+        public async Task<ICollection<UserGroupedUnit>> GetUserGroupedUnitsAsync(UserGroupedUnitSearch search)
+        {
+            _logger.LogInformation("Searching user grouped units");
+            var result = await _repositoryHub.UserGroupedUnitRepository.GetUserGroupedUnitsAsync(search).ConfigureAwait(false);
+            _logger.LogInformation("Successfully searched user grouped units");
             return result;
         }
     }

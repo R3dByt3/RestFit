@@ -83,6 +83,15 @@ namespace RestFit.Client
             return data!;
         }
 
+        protected async Task ExecutePostAsync(string? path)
+        {
+            var request = new RestRequest(path, Method.Post);
+
+            var response = await _client.ExecutePostAsync(request).ConfigureAwait(false);
+
+            ThrowOnInvalidResponse(response);
+        }
+
         protected async Task ExecutePostAsync<T>(string? path, T data) where T : class
         {
             var request = new RestRequest(path, Method.Post);

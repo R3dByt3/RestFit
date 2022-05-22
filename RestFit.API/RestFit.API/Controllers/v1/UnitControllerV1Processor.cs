@@ -1,7 +1,7 @@
 ﻿using RestFit.API.Controllers.v1.Mappers;
+using RestFit.Client.Abstract.KnownSearches;
 using RestFit.Client.Abstract.Model;
 using RestFit.DataAccess.Abstract;
-using RestFit.DataAccess.Abstract.KnownSearches;
 using RestFit.Logic.Abstract;
 using System.Security.Claims;
 

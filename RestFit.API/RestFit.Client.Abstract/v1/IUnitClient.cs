@@ -1,5 +1,5 @@
-﻿using RestFit.Client.Abstract.Model;
-using RestFit.DataAccess.Abstract.KnownSearches;
+﻿using RestFit.Client.Abstract.KnownSearches;
+using RestFit.Client.Abstract.Model;
 
 namespace RestFit.Client.Abstract.v1
 {

@@ -55,7 +55,7 @@
             this[id] = value.ToArray();
         }
 
-        protected IEnumerable<string> GetAll(TKey id)
+        protected string[] GetAll(TKey id)
         {
             return this[id].ToArray();
         }

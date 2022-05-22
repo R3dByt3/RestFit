@@ -44,6 +44,13 @@ namespace RestFit.DataAccess
             await _userGroupedUnitAccess.UpdateAsync(filter, update).ConfigureAwait(false);
         }
 
+        public async Task<ICollection<UserGroupedUnit>> GetUserGroupedUnitsAsync(UserGroupedUnitSearch search)
+        {
+            var filter = BuildFilter(search);
+
+            return await _userGroupedUnitAccess.RetrieveDocumentsAsync(filter).ConfigureAwait(false);
+        }
+
         private static FilterDefinition<UserGroupedUnit> BuildFilter(UserGroupedUnitSearch? search = null)
         {
             FilterDefinition<UserGroupedUnit> AddFilter(FilterDefinition<UserGroupedUnit> empty, KeyValuePair<UserGroupedUnitFields, string[]> pair)
@@ -51,6 +58,7 @@ namespace RestFit.DataAccess
                 return pair.Key switch
                 {
                     UserGroupedUnitFields.UserId => empty & UserGroupedUnitFilters.GetByUserId(search.UserId),
+                    UserGroupedUnitFields.UserIds => empty & UserGroupedUnitFilters.GetByUserIds(search.UserIds),
                     _ => empty
                 };
             }

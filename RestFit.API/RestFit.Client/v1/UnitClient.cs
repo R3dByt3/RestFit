@@ -1,7 +1,7 @@
-﻿using RestFit.Client.Abstract.Model;
+﻿using RestFit.Client.Abstract.KnownSearches;
+using RestFit.Client.Abstract.Model;
 using RestFit.Client.Abstract.v1;
 using RestFit.Client.Extensions;
-using RestFit.DataAccess.Abstract.KnownSearches;
 
 namespace RestFit.Client.v1
 {

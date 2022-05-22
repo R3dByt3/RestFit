@@ -5,6 +5,8 @@ namespace RestFit.API.Controllers.v1.Mappers
 {
     public class FriendDtoMapper : DtoMapperBase<FriendDto, Friend>
     {
+        public static readonly FriendDtoMapper Instance = new();
+
         protected override FriendDto ConvertData(Friend element)
         {
             return new FriendDto

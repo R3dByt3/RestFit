@@ -6,8 +6,8 @@ using Swashbuckle.AspNetCore.Filters;
 using System.Net;
 using RestFit.API.Controllers.v1.Examples;
 using RestFit.Client.Abstract.Model;
-using RestFit.DataAccess.Abstract.KnownSearches;
 using RestFit.API.Attributes;
+using RestFit.Client.Abstract.KnownSearches;
 
 namespace RestFit.API.Controllers.v1
 {
@@ -29,6 +29,7 @@ namespace RestFit.API.Controllers.v1
         [SwaggerResponseExample((int)HttpStatusCode.Created, typeof(UnitDtoExampleProvider))]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, "Wenn das Objekt unvollständig ist", typeof(ErrorDataDto))]
         [SwaggerResponseExample((int)HttpStatusCode.BadRequest, typeof(ErrorDataDtoExampleProvider))]
+        [SwaggerResponse((int)HttpStatusCode.Unauthorized, "Nicht authorisiert")]
         [SwaggerResponse((int)HttpStatusCode.GatewayTimeout, "Wenn es ein Problem mit der Datenbank gibt", typeof(ErrorDataDto))]
         [SwaggerResponseExample((int)HttpStatusCode.GatewayTimeout, typeof(ErrorDataDtoExampleProvider))]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, "Wenn ein unerwarteter Fehler auftritt", typeof(ErrorDataDto))]
@@ -47,6 +48,7 @@ namespace RestFit.API.Controllers.v1
         [MethodQueryParameter(nameof(UnitSearchDto.UserId), "Suche anhand von UserId")]
         [SwaggerResponse((int)HttpStatusCode.OK, "Alle Unit Objekte", typeof(List<UnitDto>))]
         [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(UnitDtosExampleProvider))]
+        [SwaggerResponse((int)HttpStatusCode.Unauthorized, "Nicht authorisiert")]
         [SwaggerResponse((int)HttpStatusCode.GatewayTimeout, "Wenn es ein Problem mit der Datenbank gibt", typeof(ErrorDataDto))]
         [SwaggerResponseExample((int)HttpStatusCode.GatewayTimeout, typeof(ErrorDataDtoExampleProvider))]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, "Wenn ein unerwarteter Fehler auftritt", typeof(ErrorDataDto))]
