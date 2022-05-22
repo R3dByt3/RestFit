@@ -25,7 +25,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestFit.DataAccess.Extensio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestFit.Logic.Extensions", "RestFit.Logic.Extensions\RestFit.Logic.Extensions.csproj", "{CFB85718-F2F7-421D-B5FD-E07D9992A57B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rest.WPF.FitnessTrackingAndPlanning", "Rest.WPF.FitnessTrackingAndPlanning\Rest.WPF.FitnessTrackingAndPlanning.csproj", "{B71C3F6F-287B-4FED-89B5-866C50BF2906}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rest.WPF.FitnessTrackingAndPlanning", "Rest.WPF.FitnessTrackingAndPlanning\Rest.WPF.FitnessTrackingAndPlanning.csproj", "{B71C3F6F-287B-4FED-89B5-866C50BF2906}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestFit.API.Tests", "RestFit.API.Tests\RestFit.API.Tests.csproj", "{A4BAD7AE-2F0B-4120-8AAE-263D32E0D80D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestFit.Client.Tests", "RestFit.Client.Tests\RestFit.Client.Tests.csproj", "{D5531461-A0CA-41AA-BD06-0D27F7996B6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestFit.DataAccess.Tests", "RestFit.DataAccess.Tests\RestFit.DataAccess.Tests.csproj", "{57309300-293A-40F7-96B2-DD6F8BF3CFA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestFit.Logic.Tests", "RestFit.Logic.Tests\RestFit.Logic.Tests.csproj", "{75F3736E-0B16-405F-9A1A-AF0CB71282EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +89,22 @@ Global
 		{B71C3F6F-287B-4FED-89B5-866C50BF2906}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B71C3F6F-287B-4FED-89B5-866C50BF2906}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B71C3F6F-287B-4FED-89B5-866C50BF2906}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4BAD7AE-2F0B-4120-8AAE-263D32E0D80D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4BAD7AE-2F0B-4120-8AAE-263D32E0D80D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4BAD7AE-2F0B-4120-8AAE-263D32E0D80D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4BAD7AE-2F0B-4120-8AAE-263D32E0D80D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5531461-A0CA-41AA-BD06-0D27F7996B6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5531461-A0CA-41AA-BD06-0D27F7996B6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5531461-A0CA-41AA-BD06-0D27F7996B6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5531461-A0CA-41AA-BD06-0D27F7996B6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57309300-293A-40F7-96B2-DD6F8BF3CFA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57309300-293A-40F7-96B2-DD6F8BF3CFA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57309300-293A-40F7-96B2-DD6F8BF3CFA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57309300-293A-40F7-96B2-DD6F8BF3CFA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75F3736E-0B16-405F-9A1A-AF0CB71282EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75F3736E-0B16-405F-9A1A-AF0CB71282EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75F3736E-0B16-405F-9A1A-AF0CB71282EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75F3736E-0B16-405F-9A1A-AF0CB71282EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

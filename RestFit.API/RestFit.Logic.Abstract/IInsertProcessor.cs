@@ -9,5 +9,6 @@ namespace RestFit.Logic.Abstract
         public Task CreateUserGroupedUnitAsync(UserGroupedUnit userGroupedUnit);
         public Task CreateFriendRequestAsync(User user, User requestingUser);
         public Task CreateFriendsAsync(User user, User requestingUser);
+        public Task CreateHealthUnitAsync(HealthUnit healthUnit);
     }
 }

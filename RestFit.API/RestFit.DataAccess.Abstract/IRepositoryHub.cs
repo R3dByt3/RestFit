@@ -5,5 +5,6 @@
         public IUnitRepository UnitRepository { get; }
         public IUserRepository UserRepository { get; }
         public IUserGroupedUnitRepository UserGroupedUnitRepository { get; }
+        public IHealthUnitRepository HealthUnitRepository { get; }
     }
 }

@@ -11,5 +11,6 @@ namespace RestFit.Logic.Abstract
         public Task<UserGroupedUnit?> AggregateUserGroupedUnitAsync(UnitSearch search);
         public Task<UserGroupedUnit?> GetUserGroupedUnitAsync(UserGroupedUnitSearch search);
         public Task<ICollection<UserGroupedUnit>> GetUserGroupedUnitsAsync(UserGroupedUnitSearch search);
+        public Task<ICollection<HealthUnit>> GetHealthUnitsAsync(HealthUnitSearch search);
     }
 }

@@ -2,9 +2,9 @@
 
 namespace RestFit.DataAccess
 {
-    public class UnitAccess : BaseAccess<Unit>, IUnitAccess
+    public class HealthUnitAccess : BaseAccess<HealthUnit>, IHealthUnitAccess
     {
-        public UnitAccess() : base("Unit")
+        public HealthUnitAccess() : base("HealthUnit")
         {
         }
 

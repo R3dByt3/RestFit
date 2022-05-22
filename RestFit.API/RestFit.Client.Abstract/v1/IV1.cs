@@ -4,5 +4,7 @@
     {
         IUnitClient UnitClient { get; }
         IUserClient UserClient { get; }
+        IFriendClient FriendClient { get; }
+        IHealthUnitClient HealthUnitClient { get; }
     }
 }

@@ -49,5 +49,12 @@ namespace RestFit.Logic
             await _repositoryHub.UserRepository.CreateFriendsAsync(user, requestingUser).ConfigureAwait(false);
             _logger.LogInformation("Successfully createded friends for users");
         }
+
+        public async Task CreateHealthUnitAsync(HealthUnit healthUnit)
+        {
+            _logger.LogInformation("Create health unit");
+            await _repositoryHub.HealthUnitRepository.CreateHealthUnitAsync(healthUnit).ConfigureAwait(false);
+            _logger.LogInformation("Successfully created health unit");
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace RestFit.DataAccess.Abstract.KnownSearches
+﻿using System.Globalization;
+
+namespace RestFit.DataAccess.Abstract.KnownSearches
 {
     public abstract class SearchBase<TKey> : Dictionary<TKey, string[]> where TKey : Enum
     {
@@ -58,6 +60,20 @@
         protected string[] GetAll(TKey id)
         {
             return this[id].ToArray();
+        }
+
+        protected void SetSingle(TKey id, DateTime? value)
+        {
+            if (value == null || value == null)
+                return;
+
+            this[id] = new string[] { value?.ToString("O", CultureInfo.InvariantCulture)! };
+        }
+
+        protected DateTime? GetFirstDate(TKey id)
+        {
+            if (!ContainsKey(id)) return null;
+            return DateTime.ParseExact(this[id].First(), "O", CultureInfo.InvariantCulture);
         }
     }
 }

@@ -63,5 +63,13 @@ namespace RestFit.Logic
             _logger.LogInformation("Successfully searched user grouped units");
             return result;
         }
+
+        public async Task<ICollection<HealthUnit>> GetHealthUnitsAsync(HealthUnitSearch search)
+        {
+            _logger.LogInformation("Searching health units");
+            var result = await _repositoryHub.HealthUnitRepository.GetHealthUnitsAsync(search).ConfigureAwait(false);
+            _logger.LogInformation("Successfully searched health units");
+            return result;
+        }
     }
 }
