@@ -28,5 +28,19 @@ namespace RestFit.Logic
             await _repositoryHub.UserGroupedUnitRepository.UpdateUserGroupedUnitAggregationsAsync(userGroupedUnit).ConfigureAwait(false);
             _logger.LogInformation("Updated user grouped unit aggregations");
         }
+
+        public async Task CreateFriendRequestAsync(User user, User requestingUser)
+        {
+            _logger.LogInformation("Create friend requests for users");
+            await _repositoryHub.UserRepository.CreateFriendRequestAsync(user, requestingUser).ConfigureAwait(false);
+            _logger.LogInformation("Successfully createded friend requests for users");
+        }
+
+        public async Task CreateFriendsAsync(User user, User requestingUser)
+        {
+            _logger.LogInformation("Create friends for users");
+            await _repositoryHub.UserRepository.CreateFriendsAsync(user, requestingUser).ConfigureAwait(false);
+            _logger.LogInformation("Successfully createded friends for users");
+        }
     }
 }

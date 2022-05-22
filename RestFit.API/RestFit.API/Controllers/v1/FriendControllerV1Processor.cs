@@ -43,7 +43,7 @@ namespace RestFit.API.Controllers.v1
             if (requestingUser == null)
                 throw new UserNotFoundException($"Current user could not be found; Id: [{userId}]");
 
-            await _processorHub.InsertProcessor.CreateFriendRequestAsync(user, requestingUser).ConfigureAwait(false);
+            await _processorHub.UpdateProcessor.CreateFriendRequestAsync(user, requestingUser).ConfigureAwait(false);
         }
 
         public async Task AcceptFriendRequestAsync(string userId)
@@ -63,14 +63,13 @@ namespace RestFit.API.Controllers.v1
             {
                 Id = currentUserId
             };
-
             var requestingUser = await _processorHub.SearchProcessor.GetUserAsync(search).ConfigureAwait(false);
 
             if (requestingUser == null)
                 throw new UserNotFoundException($"Current user could not be found; Id: [{currentUserId}]");
 
             await _processorHub.DeleteProcessor.DeleteFriendRequestAsync(user, requestingUser).ConfigureAwait(false);
-            await _processorHub.InsertProcessor.CreateFriendsAsync(user, requestingUser).ConfigureAwait(false);
+            await _processorHub.UpdateProcessor.CreateFriendsAsync(user, requestingUser).ConfigureAwait(false);
         }
 
         public async Task<List<FriendDto>> GetFriendsAsync(FriendSearchDto searchDto)
@@ -112,7 +111,7 @@ namespace RestFit.API.Controllers.v1
                     FriendId = userGroupedUnit.UserId,
                     AverageRepitions = userGroupedUnit.RepetitionsSum / userGroupedUnit.DocumentCount,
                     AverageSets = userGroupedUnit.SetsSum / userGroupedUnit.DocumentCount,
-                    AverageWeight = userGroupedUnit.WeightsSum / userGroupedUnit.WeightsSum,
+                    AverageWeight = userGroupedUnit.WeightsSum / userGroupedUnit.DocumentCount,
                     Name = friendName
                 });
             }

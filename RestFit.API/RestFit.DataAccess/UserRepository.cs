@@ -52,7 +52,7 @@ namespace RestFit.DataAccess
             };
             var userFilter = BuildFilter(userSearch);
 
-            await _userAccess.UpdateAsync(userFilter, UserUpdates.RemovePendingInFriendRequestUserId(requestingUser.Id)).ConfigureAwait(false);
+            await _userAccess.UpdateAsync(userFilter, UserUpdates.RemovePendingOutFriendRequestUserId(requestingUser.Id)).ConfigureAwait(false);
 
             userSearch = new UserSearch
             {
@@ -60,7 +60,7 @@ namespace RestFit.DataAccess
             };
             userFilter = BuildFilter(userSearch);
 
-            await _userAccess.UpdateAsync(userFilter, UserUpdates.RemovePendingOutFriendRequestUserId(user.Id)).ConfigureAwait(false);
+            await _userAccess.UpdateAsync(userFilter, UserUpdates.RemovePendingInFriendRequestUserId(user.Id)).ConfigureAwait(false);
         }
 
         public async Task CreateFriendsAsync(User user, User requestingUser)
