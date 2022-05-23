@@ -71,7 +71,7 @@ namespace RestFit.Client.Abstract.KnownSearches
         protected DateTime? GetFirstDate(TKey id)
         {
             if (!ContainsKey(id)) return null;
-            return DateTime.ParseExact(this[id].First(), "O", CultureInfo.InvariantCulture);
+            return DateTime.ParseExact(this[id].First(), "O", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
         }
     }
 }

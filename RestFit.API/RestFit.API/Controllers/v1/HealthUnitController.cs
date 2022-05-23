@@ -44,7 +44,7 @@ namespace RestFit.API.Controllers.v1
         [HttpGet]
         [Produces("application/json")]
         [MethodQueryParameter(nameof(HealthUnitSearchDto.UserId), "Suche anhand von UserId")]
-        [MethodQueryParameter(nameof(HealthUnitSearchDto.Date), "Suche anhand von Date")]
+        [MethodQueryParameter(nameof(HealthUnitSearchDto.DateUtc), "Suche anhand von Date")]
         [SwaggerResponse((int)HttpStatusCode.OK, "Alle HealthUnit Objekte", typeof(List<HealthUnitDto>))]
         [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(HealthUnitDtosExampleProvider))]
         [SwaggerResponse((int)HttpStatusCode.Unauthorized, "Nicht authorisiert")]

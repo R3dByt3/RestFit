@@ -12,7 +12,7 @@ namespace RestFit.API.Controllers.v1.Mappers
             return new HealthUnitSearchDto
             {
                 UserId = element.UserId,
-                Date = element.Date
+                DateUtc = element.DateUtc
             };
         }
 
@@ -21,7 +21,7 @@ namespace RestFit.API.Controllers.v1.Mappers
             return new HealthUnitSearch
             {
                 UserId = element.UserId,
-                Date = element.Date
+                DateUtc = element.DateUtc
             };
         }
     }

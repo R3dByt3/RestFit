@@ -8,7 +8,7 @@
             set => SetSingle(HealthUnitDtoFields.UserId, value);
         }
 
-        public DateTime? Date
+        public DateTime? DateUtc
         {
             get => GetFirstDate(HealthUnitDtoFields.DateUtc);
             set => SetSingle(HealthUnitDtoFields.DateUtc, value);
