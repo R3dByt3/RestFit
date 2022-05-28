@@ -1,15 +1,14 @@
 ﻿using System.Windows.Controls;
 
-namespace Rest.WPF.FitnessTrackingAndPlanning.Views
+namespace Rest.WPF.FitnessTrackingAndPlanning.Views;
+
+/// <summary>
+///     Interaktionslogik für HealthDataView.xaml
+/// </summary>
+public partial class HealthDataView : UserControl
 {
-    /// <summary>
-    /// Interaktionslogik für HealthDataView.xaml
-    /// </summary>
-    public partial class HealthDataView : UserControl
+    public HealthDataView()
     {
-        public HealthDataView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

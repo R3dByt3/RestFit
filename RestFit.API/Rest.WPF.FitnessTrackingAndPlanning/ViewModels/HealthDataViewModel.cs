@@ -1,103 +1,93 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using FitnessTrackingAndPlanning;
+using RestFit.Client.Abstract.KnownSearches;
+using RestFit.Client.Abstract.Model;
 
-namespace Rest.WPF.FitnessTrackingAndPlanning.ViewModels
+namespace Rest.WPF.FitnessTrackingAndPlanning.ViewModels;
+
+public sealed class HealthDataViewModel : ViewModelBase
 {
-    public sealed class HealthDataViewModel : ViewModelBase
+    #region Commands
+
+    private ICommand _saveHealthDataCommand;
+
+    public ICommand SaveHealthDataCommand
     {
-        #region Commands
-
-        private ICommand _saveHealthDataCommand;
-
-        public ICommand SaveHealthDataCommand
+        get => _saveHealthDataCommand;
+        set
         {
-            get => _saveHealthDataCommand;
-            set
-            {
-                _saveHealthDataCommand = value;
-                OnPropertyChanged(nameof(SaveHealthDataCommand));
-            }
+            _saveHealthDataCommand = value;
+            OnPropertyChanged(nameof(SaveHealthDataCommand));
         }
+    }
 
-        #endregion
+    #endregion
 
-        #region Properties
+    #region Properties
 
-        private double _weight;
+    private HealthUnitDto _healthDataDto;
 
-        public double Weight
+    public HealthUnitDto HealthDataDto
+    {
+        get => _healthDataDto;
+        set
         {
-            get => _weight;
-            set
-            {
-                _weight = value;
-                OnPropertyChanged(nameof(Weight));
-            }
+            _healthDataDto = value;
+            OnPropertyChanged(nameof(HealthDataDto));
         }
+    }
 
-        private double _armSize;
+    private bool _savingEnabled;
 
-        public double ArmSize
+    public bool SavingEnabled
+    {
+        get => _savingEnabled;
+        set
         {
-            get => _armSize;
-            set
-            {
-                _armSize = value;
-                OnPropertyChanged(nameof(ArmSize));
-            }
+            _savingEnabled = value;
+            OnPropertyChanged(nameof(SavingEnabled));
         }
+    }
 
-        private double _waistSize;
+    #endregion
 
-        public double WaistSize
+    public HealthDataViewModel()
+    {
+        _healthDataDto = new HealthUnitDto();
+        SavingEnabled = true;
+
+        IsSavingHealthDataEnabled().ConfigureAwait(true);
+
+        _saveHealthDataCommand = new RelayCommand(async _ => await SaveHealthData());
+    }
+
+    private async Task IsSavingHealthDataEnabled()
+    {
+        IList<HealthUnitDto> todaysHealthData =
+            await Kernel.ClientHub?.V1.HealthUnitClient.GetHealthUnitsAsync(new HealthUnitSearchDto
+                { DateUtc = DateTime.Today })!;
+
+        if (todaysHealthData.Count != 0)
         {
-            get => _waistSize;
-            set
-            {
-                _waistSize = value;
-                OnPropertyChanged(nameof(WaistSize));
-            }
+            SavingEnabled = false;
         }
+    }
 
-        private double _hipSize;
+    private async Task SaveHealthData()
+    {
+        HealthDataDto.DateUtc = DateTime.Today;
 
-        public double HipSize
+        try
         {
-            get => _hipSize;
-            set
-            {
-                _hipSize = value;
-                OnPropertyChanged(nameof(HipSize));
-            }
+            await Kernel.ClientHub?.V1.HealthUnitClient.AddHealthUnitAsync(HealthDataDto)!;
+            SavingEnabled = false;
         }
-
-        private double _thighSize;
-
-        public double ThighSize
+        catch (Exception e)
         {
-            get => _thighSize;
-            set
-            {
-                _thighSize = value;
-                OnPropertyChanged(nameof(ThighSize));
-            }
-        }
-
-        #endregion
-
-        public HealthDataViewModel()
-        {
-            _saveHealthDataCommand = new RelayCommand(_ => SaveHealthData());
-            Weight = 100;
-            ArmSize = 80;
-            WaistSize = 90;
-            HipSize = 30;
-            ThighSize = 50;
-        }
-
-        private void SaveHealthData()
-        {
-            //TODO: Implementieren (inkl. Checken ob neue Werte!)
+            Console.WriteLine("Fehler beim Speichern von der Gesundheitsdaten: " + e.Message);
         }
     }
 }

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels1="clr-namespace:Rest.WPF.FitnessTrackingAndPlanning.ViewModels"
+             xmlns:adorners="http://gu.se/Adorners"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance viewModels1:TrainingViewModel}">
@@ -40,7 +41,8 @@
                                             Text="{Binding Type, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                             Margin="{StaticResource RightMargin}"
                                             Height="25"
-                                            VerticalAlignment="Center" />
+                                            VerticalAlignment="Center"
+                                            adorners:Watermark.Text="{StaticResource TrainingExerciseNameWatermarkString}" />
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
@@ -119,7 +121,8 @@
                                         <TextBox
                                             Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                             Height="25"
-                                            VerticalAlignment="Center" />
+                                            VerticalAlignment="Center"
+                                            adorners:Watermark.Text="{StaticResource TrainingExerciseCommentWatermarkString}" />
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>

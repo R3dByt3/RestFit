@@ -1,15 +1,14 @@
 ﻿using System.Windows.Controls;
 
-namespace Rest.WPF.FitnessTrackingAndPlanning.Views
+namespace Rest.WPF.FitnessTrackingAndPlanning.Views;
+
+/// <summary>
+///     Interaktionslogik für NavigationView.xaml
+/// </summary>
+public sealed partial class NavigationView : UserControl
 {
-    /// <summary>
-    /// Interaktionslogik für NavigationView.xaml
-    /// </summary>
-    public partial class NavigationView : UserControl
+    public NavigationView()
     {
-        public NavigationView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

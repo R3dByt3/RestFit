@@ -1,65 +1,64 @@
-﻿namespace Rest.WPF.FitnessTrackingAndPlanning.ViewModels
+﻿namespace Rest.WPF.FitnessTrackingAndPlanning.ViewModels;
+
+public sealed class NavigationViewModel : ViewModelBase
 {
-    public sealed class NavigationViewModel : ViewModelBase
+    #region Properties
+
+    private ViewModelBase _trainingPage;
+
+    public ViewModelBase TrainingPage
     {
-        #region Properties
-
-        private ViewModelBase _trainingPage;
-
-        public ViewModelBase TrainingPage
+        get => _trainingPage;
+        set
         {
-            get => _trainingPage;
-            set
-            {
-                _trainingPage = value;
-                OnPropertyChanged(nameof(TrainingPage));
-            }
+            _trainingPage = value;
+            OnPropertyChanged(nameof(TrainingPage));
         }
+    }
 
-        private ViewModelBase _friendsPage;
+    private ViewModelBase _friendsPage;
 
-        public ViewModelBase FriendsPage
+    public ViewModelBase FriendsPage
+    {
+        get => _friendsPage;
+        set
         {
-            get => _friendsPage;
-            set
-            {
-                _friendsPage = value;
-                OnPropertyChanged(nameof(FriendsPage));
-            }
+            _friendsPage = value;
+            OnPropertyChanged(nameof(FriendsPage));
         }
+    }
 
-        private ViewModelBase _healthDataPage;
+    private ViewModelBase _healthDataPage;
 
-        public ViewModelBase HealthDataPage
+    public ViewModelBase HealthDataPage
+    {
+        get => _healthDataPage;
+        set
         {
-            get => _healthDataPage;
-            set
-            {
-                _healthDataPage = value;
-                OnPropertyChanged(nameof(HealthDataPage));
-            }
+            _healthDataPage = value;
+            OnPropertyChanged(nameof(HealthDataPage));
         }
+    }
 
-        private ViewModelBase _historyPage;
+    private ViewModelBase _historyPage;
 
-        public ViewModelBase HistoryPage
+    public ViewModelBase HistoryPage
+    {
+        get => _historyPage;
+        set
         {
-            get => _historyPage;
-            set
-            {
-                _historyPage = value;
-                OnPropertyChanged(nameof(HistoryPage));
-            }
+            _historyPage = value;
+            OnPropertyChanged(nameof(HistoryPage));
         }
+    }
 
-        #endregion
+    #endregion
 
-        public NavigationViewModel()
-        {
-            _trainingPage = new TrainingViewModel();
-            _friendsPage = new FriendsViewModel();
-            _healthDataPage = new HealthDataViewModel();
-            _historyPage = new HistoryViewModel();
-        }
+    public NavigationViewModel()
+    {
+        _trainingPage = new TrainingViewModel();
+        _friendsPage = new FriendsViewModel();
+        _healthDataPage = new HealthDataViewModel();
+        _historyPage = new HistoryViewModel();
     }
 }

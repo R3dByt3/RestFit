@@ -1,78 +1,82 @@
 ﻿using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using FitnessTrackingAndPlanning;
 using RestFit.Client;
 
-namespace Rest.WPF.FitnessTrackingAndPlanning.ViewModels
+namespace Rest.WPF.FitnessTrackingAndPlanning.ViewModels;
+
+public sealed class LoginViewModel : ViewModelBase
 {
-    public sealed class LoginViewModel : ViewModelBase
+    public delegate void Notify();
+
+    #region Commands
+
+    private ICommand _loginCommand;
+
+    public ICommand LoginCommand
     {
-        public delegate void Notify();
-
-        #region Commands
-
-        private ICommand _loginCommand;
-
-        public ICommand LoginCommand
+        get => _loginCommand;
+        set
         {
-            get => _loginCommand;
-            set
-            {
-                _loginCommand = value;
-                OnPropertyChanged(nameof(LoginCommand));
-            }
+            _loginCommand = value;
+            OnPropertyChanged(nameof(LoginCommand));
         }
+    }
 
-        #endregion
+    #endregion
 
-        #region Properties
+    #region Properties
 
-        private string _userName = string.Empty;
+    private string _userName = string.Empty;
 
-        public string UserName
+    public string UserName
+    {
+        get => _userName;
+        set
         {
-            get => _userName;
-            set
-            {
-                _userName = value;
-                OnPropertyChanged(nameof(UserName));
-            }
+            _userName = value;
+            OnPropertyChanged(nameof(UserName));
         }
+    }
 
-        private string _password = string.Empty;
+    private string _password = string.Empty;
 
-        public string Password
+    public string Password
+    {
+        get => _password;
+        set
         {
-            get => _password;
-            set
-            {
-                _password = value;
-                OnPropertyChanged(nameof(Password));
-            }
+            _password = value;
+            OnPropertyChanged(nameof(Password));
         }
+    }
 
-        private bool _loginFailed;
+    private Visibility _loginFailedMessageVisibility;
 
-        public bool LoginFailed
+    public Visibility LoginFailedMessageVisibility
+    {
+        get => _loginFailedMessageVisibility;
+        set
         {
-            get => _loginFailed;
-            set
-            {
-                _loginFailed = value;
-                OnPropertyChanged(nameof(LoginFailed));
-            }
+            _loginFailedMessageVisibility = value;
+            OnPropertyChanged(nameof(LoginFailedMessageVisibility));
         }
+    }
 
-        #endregion
+    #endregion
 
-        public event Notify? ChangeView;
+    public event Notify? ChangeView;
 
-        public LoginViewModel()
-        {
-            _loginCommand = new RelayCommand(async _ => await Login());
-        }
+    public LoginViewModel()
+    {
+        _loginFailedMessageVisibility = Visibility.Hidden;
+        _loginCommand = new RelayCommand(async _ => await Login());
+    }
 
-        private async Task Login()
+    private async Task Login()
+    {
+        if (UserName != string.Empty && Password != string.Empty)
         {
             Kernel.ClientHub = new ClientHub(UserName, Password);
             try
@@ -82,11 +86,12 @@ namespace Rest.WPF.FitnessTrackingAndPlanning.ViewModels
             }
             catch
             {
-                LoginFailed = true;
+                LoginFailedMessageVisibility = Visibility.Visible;
             }
-            
-            //ToDo: Immer über Kernel.ClientHub.V1.<DataType>Client.Get / Create arbeiten (noch nicht alles da)
-            //ToDo: Bei async immer hinter den Aufruf ConfigureAwait(false) bei Logik und true bei GUI (glaube ich)
+        }
+        else
+        {
+            LoginFailedMessageVisibility = Visibility.Visible;
         }
     }
 }

@@ -19,6 +19,8 @@
     <sys:String x:Key="TrainingRepsHeaderString">Wiederholungen</sys:String>
     <sys:String x:Key="TrainingWeightHeaderString">Gewicht</sys:String>
     <sys:String x:Key="TrainingCommentHeaderString">Bemerkung</sys:String>
+    <sys:String x:Key="TrainingExerciseNameWatermarkString">Name der Übung</sys:String>
+    <sys:String x:Key="TrainingExerciseCommentWatermarkString">Bemerkung zur Übung</sys:String>
 
     <!--HealthData Page-->
     <sys:String x:Key="HealthDataWeightString">Gewicht:</sys:String>
@@ -26,6 +28,7 @@
     <sys:String x:Key="HealthDataWaistSizeString">Taillenumfang:</sys:String>
     <sys:String x:Key="HealthDataHipSizeString">Hüftumfang:</sys:String>
     <sys:String x:Key="HealthDataThighSizeString">Oberschenkelumfang:</sys:String>
+    <sys:String x:Key="HealthDataAlreadySavedString">Heute wurden schon Gesundheitsdaten gespeichert.</sys:String>
     
     <!--Friends Page-->
     <sys:String x:Key="FriendsAverageString">Durchschnitt:</sys:String>

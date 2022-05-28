@@ -1,15 +1,14 @@
 ﻿using System.Windows.Controls;
 
-namespace Rest.WPF.FitnessTrackingAndPlanning.Views
+namespace Rest.WPF.FitnessTrackingAndPlanning.Views;
+
+/// <summary>
+///     Interaktionslogik für TrainingView.xaml
+/// </summary>
+public sealed partial class TrainingView : UserControl
 {
-    /// <summary>
-    /// Interaktionslogik für TrainingView.xaml
-    /// </summary>
-    public partial class TrainingView : UserControl
+    public TrainingView()
     {
-        public TrainingView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

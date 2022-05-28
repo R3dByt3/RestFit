@@ -39,7 +39,16 @@ public sealed partial class HistoryView : UserControl
 
     private async Task GetExercisesFromHistory()
     {
-        IList<UnitDto> allExercises = await Kernel.ClientHub?.V1.UnitClient.GetUnitsAsync()!;
+        IList<UnitDto> allExercises = new List<UnitDto>();
+        try
+        {
+            allExercises = await Kernel.ClientHub?.V1.UnitClient.GetUnitsAsync()!;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
 
         foreach (Tuple<string, List<UnitDto>> exercise in SortAndOrderExercises(allExercises))
         {

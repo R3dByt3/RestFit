@@ -18,13 +18,14 @@
     </UserControl.Resources>
 
     <ScrollViewer>
-        <DockPanel Background="DimGray">
-            <Grid DockPanel.Dock="Top" Margin="{StaticResource NavigationPageMargin}">
+        <DockPanel Background="DimGray" Margin="{StaticResource NavigationPageMargin}">
+            <Grid DockPanel.Dock="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200" />
                     <ColumnDefinition Width="300" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
                     <RowDefinition Height="40" />
                     <RowDefinition Height="40" />
                     <RowDefinition Height="40" />
@@ -38,7 +39,7 @@
                 <TextBox Grid.Row="0"
                          Grid.Column="1"
                          Margin="{StaticResource RightBottomMargin}"
-                         Text="{Binding Weight}" />
+                         Text="{Binding HealthDataDto.Weight}" />
                 <Label Grid.Row="1"
                        Grid.Column="0"
                        VerticalAlignment="Center"
@@ -46,7 +47,7 @@
                 <TextBox Grid.Row="1"
                          Grid.Column="1"
                          Margin="{StaticResource RightBottomMargin}"
-                         Text="{Binding ArmSize}" />
+                         Text="{Binding HealthDataDto.ArmSize}" />
                 <Label Grid.Row="2"
                        Grid.Column="0"
                        VerticalAlignment="Center"
@@ -54,7 +55,7 @@
                 <TextBox Grid.Row="2"
                          Grid.Column="1"
                          Margin="{StaticResource RightBottomMargin}"
-                         Text="{Binding WaistSize}" />
+                         Text="{Binding HealthDataDto.WaistSize}" />
                 <Label Grid.Row="3"
                        Grid.Column="0"
                        VerticalAlignment="Center"
@@ -62,7 +63,7 @@
                 <TextBox Grid.Row="3"
                          Grid.Column="1"
                          Margin="{StaticResource RightBottomMargin}"
-                         Text="{Binding HipSize}" />
+                         Text="{Binding HealthDataDto.HipSize}" />
                 <Label Grid.Row="4"
                        Grid.Column="0"
                        VerticalAlignment="Center"
@@ -70,12 +71,29 @@
                 <TextBox Grid.Row="4"
                          Grid.Column="1"
                          Margin="{StaticResource RightBottomMargin}"
-                         Text="{Binding ThighSize}" />
+                         Text="{Binding HealthDataDto.ThightSize}" />
             </Grid>
-            <Button DockPanel.Dock="Bottom"
+
+            <StackPanel DockPanel.Dock="Bottom"
+                        VerticalAlignment="Bottom">
+                <StackPanel Background="DeepPink"
+                            Height="30"
+                            Margin="{StaticResource BottomMargin}"
+                            Visibility="{Binding SavingEnabled, Converter={StaticResource InvertedBooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}">
+                    <Label
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        Content="{StaticResource HealthDataAlreadySavedString}" />
+                </StackPanel>
+                <Button
                     VerticalAlignment="Bottom"
                     HorizontalAlignment="Right"
-                    Content="{StaticResource SaveButtonString}" />
+                    Content="{StaticResource SaveButtonString}"
+                    IsEnabled="{Binding SavingEnabled, UpdateSourceTrigger=PropertyChanged}"
+                    Command="{Binding SaveHealthDataCommand}" />
+            </StackPanel>
         </DockPanel>
     </ScrollViewer>
 </UserControl>

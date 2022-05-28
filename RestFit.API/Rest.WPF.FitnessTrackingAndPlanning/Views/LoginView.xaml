@@ -27,17 +27,25 @@
                    HorizontalAlignment="Center" />
             <TextBox Text="{Binding UserName}"
                      Margin="{StaticResource HalfBottomMargin}"
-                     Height="20" />
+                     Height="20">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding LoginCommand}" />
+                </TextBox.InputBindings>
+            </TextBox>
             <Label Content="{StaticResource LoginPasswordString}"
                    Margin="{StaticResource HalfBottomMargin}"
                    HorizontalAlignment="Center" />
             <components:BindablePasswordBox Margin="{StaticResource HalfBottomMargin}"
                                             Password="{Binding Password, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                            Height="20" />
+                                            Height="20">
+                <components:BindablePasswordBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding LoginCommand}" />
+                </components:BindablePasswordBox.InputBindings>
+            </components:BindablePasswordBox>
             <TextBlock Text="{StaticResource LoginWrongUserCredentialsString}"
                        Style="{StaticResource WrongUserCredentialsLabelStyle}"
                        Margin="{StaticResource HalfBottomMargin}"
-                       Visibility="{Binding LoginFailed, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
+                       Visibility="{Binding LoginFailedMessageVisibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                        HorizontalAlignment="Center"
                        TextWrapping="Wrap"
                        TextAlignment="Center" />
