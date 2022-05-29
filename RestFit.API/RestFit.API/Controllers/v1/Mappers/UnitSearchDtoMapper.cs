@@ -13,7 +13,8 @@ namespace RestFit.API.Controllers.v1.Mappers
             {
                 Id = element.Id,
                 UserId = element.UserId,
-                Type = element.Type
+                Type = element.Type,
+                DateUtc = element.DateUtc
             };
         }
 
@@ -23,7 +24,8 @@ namespace RestFit.API.Controllers.v1.Mappers
             {
                 Id = element.Id,
                 UserId = element.UserId,
-                Type = element.Type
+                Type = element.Type,
+                DateUtc = element.DateUtc
             };
         }
     }

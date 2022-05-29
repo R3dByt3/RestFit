@@ -6,6 +6,7 @@
         UserId,
         Type,
         NotProcessedBy,
-        Ids
+        Ids,
+        DateUtc
     }
 }

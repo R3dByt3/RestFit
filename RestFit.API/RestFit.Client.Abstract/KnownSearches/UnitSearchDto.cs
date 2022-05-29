@@ -19,5 +19,11 @@
             get => GetFirst(UnitDtoFields.Type);
             set => SetSingle(UnitDtoFields.Type, value);
         }
+
+        public DateTime? DateUtc
+        {
+            get => GetFirstDate(UnitDtoFields.DateUtc);
+            set => SetSingle(UnitDtoFields.DateUtc, value);
+        }
     }
 }

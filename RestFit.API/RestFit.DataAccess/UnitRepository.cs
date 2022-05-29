@@ -76,6 +76,7 @@ namespace RestFit.DataAccess
                     UnitFields.Type => empty & UnitFilters.GetByType(search.Type),
                     UnitFields.NotProcessedBy => empty & UnitFilters.GetIfNotProcessedBy(search.NotProcessedBy),
                     UnitFields.Ids => empty & UnitFilters.GetIfNotProcessedBy(search.NotProcessedBy),
+                    UnitFields.DateUtc => empty & UnitFilters.GetByDateUtc(search.DateUtc),
                     _ => empty
                 };
             }

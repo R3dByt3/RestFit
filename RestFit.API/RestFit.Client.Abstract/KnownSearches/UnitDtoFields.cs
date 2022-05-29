@@ -4,6 +4,7 @@
     {
         Id,
         UserId,
-        Type
+        Type,
+        DateUtc
     }
 }
