@@ -2,7 +2,7 @@
 {
     public class FriendSearchDto : SearchBaseDto<FriendDtoFields>
     {
-        public string[] Ids
+        public string[]? Ids
         {
             get => GetAll(FriendDtoFields.Ids);
             set => SetAll(FriendDtoFields.Ids, value);

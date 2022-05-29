@@ -2,7 +2,7 @@
 {
     public class UserGroupedUnitSearch : SearchBase<UserGroupedUnitFields>
     {
-        public string[] UserIds
+        public string[]? UserIds
         {
             get => GetAll(UserGroupedUnitFields.UserIds);
             set => SetAll(UserGroupedUnitFields.UserIds, value);

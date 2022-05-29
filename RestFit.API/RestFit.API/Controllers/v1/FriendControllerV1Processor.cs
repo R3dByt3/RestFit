@@ -86,7 +86,7 @@ namespace RestFit.API.Controllers.v1
             if (requestingUser == null)
                 throw new UserNotFoundException($"Current user could not be found; Id: [{currentUserId}]");
 
-            if (searchDto.Ids.Any(x => !requestingUser.FriendUserIds.Contains(x)))
+            if (searchDto.Ids?.Any(x => !requestingUser.FriendUserIds.Contains(x)) ?? false)
                 throw new FriendsNotFoundException($"At least one requested friend is not a friend of the current user; Id: [{currentUserId}]");
 
             var userGroupedUnitSearch = new UserGroupedUnitSearch
