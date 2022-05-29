@@ -34,9 +34,9 @@ namespace RestFit.DataAccess.Abstract.KnownSearches
 #pragma warning restore CS8601 // Possible null reference assignment.
         }
 
-        protected string GetFirst(TKey id)
+        protected string? GetFirst(TKey id)
         {
-            if (!ContainsKey(id)) return string.Empty;
+            if (!ContainsKey(id)) return null;
             return this[id].First();
         }
 

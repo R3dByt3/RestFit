@@ -15,6 +15,7 @@ namespace RestFit.DataAccess.KnownFilters
         public static FilterDefinition<Unit> GetByType(string? type) => Filter.Eq(x => x.Type, type);
         public static FilterDefinition<Unit> GetByDateUtc(DateTime? dateUtc) => Filter.Eq(x => x.DateUtc, dateUtc);
         public static FilterDefinition<Unit> GetIfNotProcessedBy(string? type) => Filter.Not(Filter.AnyEq(x => x.ProcessedFor, type));
+        public static FilterDefinition<Unit> GetByIds(string[]? ids) => Filter.In(x => x.Id, ids);
 
         public static PipelineDefinition<Unit, UserGroupedUnit> GetUnitGroups(string processorName) => new IPipelineStageDefinition[]
         {
