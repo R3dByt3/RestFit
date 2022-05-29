@@ -50,13 +50,15 @@ namespace RestFit.Client.Abstract.KnownSearches
             return Convert.ToDouble(this[id].First());
         }
 
-        protected void SetAll(TKey id, IEnumerable<string> value)
+        protected void SetAll(TKey id, string[]? value)
         {
+            if (value == null) return;
             this[id] = value.ToArray();
         }
 
-        protected string[] GetAll(TKey id)
+        protected string[]? GetAll(TKey id)
         {
+            if (!ContainsKey(id)) return null;
             return this[id].ToArray();
         }
 

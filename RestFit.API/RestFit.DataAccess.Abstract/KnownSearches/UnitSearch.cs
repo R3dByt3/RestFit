@@ -26,7 +26,7 @@
             set => SetSingle(UnitFields.NotProcessedBy, value);
         }
 
-        public IEnumerable<string> Ids
+        public string[]? Ids
         {
             get => GetAll(UnitFields.Ids);
             set => SetAll(UnitFields.Ids, value);

@@ -56,7 +56,7 @@ namespace RestFit.DataAccess
         {
             var filterSearch = new UnitSearch
             {
-                Ids = userGroupedUnit.DocumentIds
+                Ids = userGroupedUnit.DocumentIds.ToArray(),
             };
             var filter = BuildFilter(filterSearch);
 
