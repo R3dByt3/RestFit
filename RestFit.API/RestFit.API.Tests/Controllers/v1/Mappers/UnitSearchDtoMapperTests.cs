@@ -11,49 +11,63 @@ namespace RestFit.API.Tests.Controllers.v1.Mappers
         private static readonly DateTime Now = DateTime.UtcNow;
 
         private UnitSearchDtoMapper _mapper = null!;
-        private UnitSearch _unitSearch = null!;
-        private UnitSearchDto _unitSearchDto = null!;
 
         [OneTimeSetUp]
         public void Setup()
         {
             _mapper = new();
-            _unitSearch = new UnitSearch
-            {
-                Id = "abcdfeg",
-                UserId = "hijklmno",
-                Type = "12345",
-                NotProcessedBy = "x",
-                Ids = new[]
+        }
+
+        private static IEnumerable<TestCaseData> GetExamples()
+        {
+            yield return new TestCaseData(
+                new UnitSearch
                 {
-                    "y",
-                    "z"
+                    Id = "abcdfeg",
+                    UserId = "hijklmno",
+                    Type = "12345",
+                    NotProcessedBy = "x",
+                    Ids = new[]
+                    {
+                        "y",
+                        "z"
+                    }
+                },
+                new UnitSearchDto
+                {
+                    Id = "abcdfeg",
+                    UserId = "hijklmno",
+                    Type = "12345"
                 }
-            };
-            _unitSearchDto = new UnitSearchDto
-            {
-                Id = "abcdfeg",
-                UserId = "hijklmno",
-                Type = "12345"
-            };
+                ).SetArgDisplayNames("Filled objects");
+            yield return new TestCaseData(
+                new UnitSearch(),
+                new UnitSearchDto()
+                ).SetArgDisplayNames("Empty objects");
         }
 
         [Test]
-        public void ConvertDto_ShouldReturnExpected()
+        [TestCaseSource(nameof(GetExamples))]
+        public void ConvertDto_ShouldReturnExpected(UnitSearch unitSearch, UnitSearchDto unitSearchDto)
         {
-            _mapper.Convert(_unitSearchDto).Should().BeEquivalentTo(_unitSearch, opt => opt
+            _mapper.Convert(unitSearchDto).Should().BeEquivalentTo(unitSearch, opt => opt
             .ExcludingMissingMembers()
             .Using<Dictionary<UnitFields, string[]>>(_ => { })
-                .WhenTypeIs<Dictionary<UnitFields, string[]>>());
+                .WhenTypeIs<Dictionary<UnitFields, string[]>>()
+            .Using<string[]>(ctx => ctx.Subject.Should().NotBeSameAs(ctx.Expectation).And.BeEquivalentTo(ctx.Expectation))
+                .WhenTypeIs<string[]>());
         }
 
         [Test]
-        public void Convert_ShouldReturnExpectedDto()
+        [TestCaseSource(nameof(GetExamples))]
+        public void Convert_ShouldReturnExpectedDto(UnitSearch unitSearch, UnitSearchDto unitSearchDto)
         {
-            _mapper.Convert(_unitSearch).Should().BeEquivalentTo(_unitSearchDto, opt => opt
+            _mapper.Convert(unitSearch).Should().BeEquivalentTo(unitSearchDto, opt => opt
             .ExcludingMissingMembers()
             .Using<Dictionary<UnitFields, string[]>>(_ => { })
-                .WhenTypeIs<Dictionary<UnitFields, string[]>>());
+                .WhenTypeIs<Dictionary<UnitFields, string[]>>()
+            .Using<string[]>(ctx => ctx.Subject.Should().NotBeSameAs(ctx.Expectation).And.BeEquivalentTo(ctx.Expectation))
+                .WhenTypeIs<string[]>());
         }
     }
 }

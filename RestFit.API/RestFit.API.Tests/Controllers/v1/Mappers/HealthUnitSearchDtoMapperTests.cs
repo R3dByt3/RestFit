@@ -11,38 +11,48 @@ namespace RestFit.API.Tests.Controllers.v1.Mappers
         private static readonly DateTime Now = DateTime.UtcNow;
 
         private HealthUnitSearchDtoMapper _mapper = null!;
-        private HealthUnitSearch _healthUnitSearch = null!;
-        private HealthUnitSearchDto _healthUnitSearchDto = null!;
 
         [OneTimeSetUp]
         public void Setup()
         {
             _mapper = new();
-            _healthUnitSearch = new HealthUnitSearch
-            {
-                DateUtc = Now,
-                UserId = "hijklmno",
-            };
-            _healthUnitSearchDto = new HealthUnitSearchDto
-            {
-                DateUtc = Now,
-                UserId = "hijklmno",
-            };
+        }
+
+        private static IEnumerable<TestCaseData> GetExamples()
+        {
+            yield return new TestCaseData(
+                new HealthUnitSearch
+                {
+                    DateUtc = Now,
+                    UserId = "hijklmno",
+                }, 
+                new HealthUnitSearchDto
+                {
+                    DateUtc = Now,
+                    UserId = "hijklmno",
+                }
+                ).SetArgDisplayNames("Filled objects");
+            yield return new TestCaseData(
+                new HealthUnitSearch(),
+                new HealthUnitSearchDto()
+                ).SetArgDisplayNames("Empty objects");
         }
 
         [Test]
-        public void ConvertDto_ShouldReturnExpected()
+        [TestCaseSource(nameof(GetExamples))]
+        public void ConvertDto_ShouldReturnExpected(HealthUnitSearch healthUnitSearch, HealthUnitSearchDto healthUnitSearchDto)
         {
-            _mapper.Convert(_healthUnitSearchDto).Should().BeEquivalentTo(_healthUnitSearch, opt => opt
+            _mapper.Convert(healthUnitSearchDto).Should().BeEquivalentTo(healthUnitSearch, opt => opt
             .ExcludingMissingMembers()
             .Using<Dictionary<HealthUnitFields, string[]>>(_ => { })
                 .WhenTypeIs<Dictionary<HealthUnitFields, string[]>>());
         }
 
         [Test]
-        public void Convert_ShouldReturnExpectedDto()
+        [TestCaseSource(nameof(GetExamples))]
+        public void Convert_ShouldReturnExpectedDto(HealthUnitSearch healthUnitSearch, HealthUnitSearchDto healthUnitSearchDto)
         {
-            _mapper.Convert(_healthUnitSearch).Should().BeEquivalentTo(_healthUnitSearchDto, opt => opt
+            _mapper.Convert(healthUnitSearch).Should().BeEquivalentTo(healthUnitSearchDto, opt => opt
             .ExcludingMissingMembers()
             .Using<Dictionary<HealthUnitFields, string[]>>(_ => { })
                 .WhenTypeIs<Dictionary<HealthUnitFields, string[]>>());

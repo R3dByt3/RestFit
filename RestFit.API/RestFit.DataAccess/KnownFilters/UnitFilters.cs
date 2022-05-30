@@ -20,7 +20,7 @@ namespace RestFit.DataAccess.KnownFilters
         public static PipelineDefinition<Unit, UserGroupedUnit> GetUnitGroups(string processorName) => new IPipelineStageDefinition[]
         {
             PipelineStageDefinitionBuilder.Match(GetIfNotProcessedBy(processorName)),
-            PipelineStageDefinitionBuilder.Group<Unit, string, UserGroupedUnit>(x => x.UserId, x => 
+            PipelineStageDefinitionBuilder.Group<Unit, (string, string), UserGroupedUnit>(x => new (x.UserId, x.Type), x => 
             new UserGroupedUnit
             {
                 UserId = x.First().UserId,
@@ -29,6 +29,7 @@ namespace RestFit.DataAccess.KnownFilters
                 WeightsSum = x.Sum(v => v.Weight),
                 DocumentCount = x.Count(),
                 DocumentIds = x.Select(v => v.Id),
+                Type = x.First().Type
             })
         };
     }

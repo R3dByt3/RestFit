@@ -11,55 +11,59 @@ namespace RestFit.API.Tests.Controllers.v1.Mappers
         private static readonly DateTime Now = DateTime.UtcNow;
 
         private UnitDtoMapper _mapper = null!;
-        private Unit _unit = null!;
-        private UnitDto _unitDto = null!;
 
         [OneTimeSetUp]
         public void Setup()
         {
             _mapper = new();
-            _unit = new Unit
-            {
-                DateUtc = Now,
-                Id = "abcdfeg",
-                UserId = "hijklmno",
-                Weight = 5.6,
-                Comment = "pqrstuvw",
-                ProcessedFor = new[]
+        }
+
+        private static IEnumerable<TestCaseData> GetExamples()
+        {
+            yield return new TestCaseData(
+                new Unit
                 {
-                    "x",
-                    "y",
-                    "z"
-                },
-                Repetitions = 12,
-                Sets = 24,
-                Type = "12345"
-            };
-            _unitDto = new UnitDto
-            {
-                DateUtc = Now,
-                Id = "abcdfeg",
-                UserId = "hijklmno",
-                Weight = 5.6,
-                Comment = "pqrstuvw",
-                Repetitions = 12,
-                Sets = 24,
-                Type = "12345"
-            };
+                    DateUtc = Now,
+                    Id = "abcdfeg",
+                    UserId = "hijklmno",
+                    Weight = 5.6,
+                    Comment = "pqrstuvw",
+                    ProcessedFor = new[]
+                    {
+                        "x",
+                        "y",
+                        "z"
+                    },
+                    Repetitions = 12,
+                    Sets = 24,
+                    Type = "12345"
+                }, new UnitDto
+                {
+                    DateUtc = Now,
+                    Id = "abcdfeg",
+                    UserId = "hijklmno",
+                    Weight = 5.6,
+                    Comment = "pqrstuvw",
+                    Repetitions = 12,
+                    Sets = 24,
+                    Type = "12345"
+                }).SetArgDisplayNames("Filled objects");
         }
 
         [Test]
-        public void ConvertDto_ShouldReturnExpected()
+        [TestCaseSource(nameof(GetExamples))]
+        public void ConvertDto_ShouldReturnExpected(Unit unit, UnitDto unitDto)
         {
-            _mapper.Convert(_unitDto).Should().BeEquivalentTo(_unit, opt => opt
+            _mapper.Convert(unitDto).Should().BeEquivalentTo(unit, opt => opt
                 .ExcludingMissingMembers()
                 .Excluding(ctx => ctx.ProcessedFor));
         }
 
         [Test]
-        public void Convert_ShouldReturnExpectedDto()
+        [TestCaseSource(nameof(GetExamples))]
+        public void Convert_ShouldReturnExpectedDto(Unit unit, UnitDto unitDto)
         {
-            _mapper.Convert(_unit).Should().BeEquivalentTo(_unitDto, opt => opt
+            _mapper.Convert(unit).Should().BeEquivalentTo(unitDto, opt => opt
                 .ExcludingMissingMembers());
         }
     }

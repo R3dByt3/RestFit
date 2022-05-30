@@ -11,73 +11,83 @@ namespace RestFit.API.Tests.Controllers.v1.Mappers
         private static readonly DateTime Now = DateTime.UtcNow;
 
         private UserDtoMapper _mapper = null!;
-        private User _user = null!;
-        private UserDto _userDto = null!;
 
         [OneTimeSetUp]
         public void Setup()
         {
             _mapper = new();
-            _user = new User
-            {
-                Id = "abcdfeg",
-                FriendUserIds = new[]
+        }
+
+        private static IEnumerable<TestCaseData> GetExamples()
+        {
+            yield return new TestCaseData(
+                new User
                 {
-                    "x",
-                    "y",
-                    "z"
+                    Id = "abcdfeg",
+                    FriendUserIds = new[]
+                    {
+                        "x",
+                        "y",
+                        "z"
+                    },
+                    Password = "secure",
+                    PendingInFriendRequestUserIds = new[]
+                    {
+                        "a",
+                        "b",
+                        "c"
+                    },
+                    PendingOutFriendRequestUserIds = new[]
+                    {
+                        "e",
+                        "f",
+                        "g"
+                    },
+                    Username = "username"
                 },
-                Password = "secure",
-                PendingInFriendRequestUserIds = new[]
+                new UserDto
                 {
-                    "a",
-                    "b",
-                    "c"
-                },
-                PendingOutFriendRequestUserIds = new[]
-                {
-                    "e",
-                    "f",
-                    "g"
-                },
-                Username = "username"
-            };
-            _userDto = new UserDto
-            {
-                Id = "abcdfeg",
-                FriendUserIds = new[]
-                {
-                    "x",
-                    "y",
-                    "z"
-                },
-                Password = "secure",
-                PendingInFriendRequestUserIds = new[]
-                {
-                    "a",
-                    "b",
-                    "c"
-                },
-                PendingOutFriendRequestUserIds = new[]
-                {
-                    "e",
-                    "f",
-                    "g"
-                },
-                Username = "username"
-            };
+                    Id = "abcdfeg",
+                    FriendUserIds = new[]
+                    {
+                        "x",
+                        "y",
+                        "z"
+                    },
+                        Password = "secure",
+                        PendingInFriendRequestUserIds = new[]
+                    {
+                        "a",
+                        "b",
+                        "c"
+                    },
+                        PendingOutFriendRequestUserIds = new[]
+                    {
+                        "e",
+                        "f",
+                        "g"
+                    },
+                        Username = "username"
+                    }
+                ).SetArgDisplayNames("Filled objects");
         }
 
         [Test]
-        public void ConvertDto_ShouldReturnExpected()
+        [TestCaseSource(nameof(GetExamples))]
+        public void ConvertDto_ShouldReturnExpected(User user, UserDto userDto)
         {
-            _mapper.Convert(_userDto).Should().BeEquivalentTo(_user);
+            _mapper.Convert(userDto).Should().BeEquivalentTo(user, opt => opt
+            .Using<string[]>(ctx => ctx.Subject.Should().NotBeSameAs(ctx.Expectation).And.BeEquivalentTo(ctx.Expectation))
+                .WhenTypeIs<string[]>());
         }
 
         [Test]
-        public void Convert_ShouldReturnExpectedDto()
+        [TestCaseSource(nameof(GetExamples))]
+        public void Convert_ShouldReturnExpectedDto(User user, UserDto userDto)
         {
-            _mapper.Convert(_user).Should().BeEquivalentTo(_userDto);
+            _mapper.Convert(user).Should().BeEquivalentTo(userDto, opt => opt
+            .Using<string[]>(ctx => ctx.Subject.Should().NotBeSameAs(ctx.Expectation).And.BeEquivalentTo(ctx.Expectation))
+                .WhenTypeIs<string[]>());
         }
     }
 }

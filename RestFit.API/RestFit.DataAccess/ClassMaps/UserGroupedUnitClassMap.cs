@@ -26,6 +26,9 @@ namespace RestFit.DataAccess.ClassMaps
 
             cm.MapField(c => c.DocumentCount)
                 .SetElementName("document_count");
+
+            cm.MapField(c => c.Type)
+                .SetElementName("type");
         });
     }
 }

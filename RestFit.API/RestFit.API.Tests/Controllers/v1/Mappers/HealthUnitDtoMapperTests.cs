@@ -11,47 +11,52 @@ namespace RestFit.API.Tests.Controllers.v1.Mappers
         private static readonly DateTime Now = DateTime.UtcNow;
 
         private HealthUnitDtoMapper _mapper = null!;
-        private HealthUnit _healthUnit = null!;
-        private HealthUnitDto _healthUnitDto = null!;
 
         [OneTimeSetUp]
         public void Setup()
         {
             _mapper = new();
-            _healthUnit = new HealthUnit
-            {
-                ArmSize = 1.2,
-                DateUtc = Now,
-                HipSize = 2.3,
-                Id = "abcdfeg",
-                ThightSize = 3.4,
-                UserId = "hijklmno",
-                WaistSize = 4.5,
-                Weight = 5.6
-            };
-            _healthUnitDto = new HealthUnitDto
-            {
-                ArmSize = 1.2,
-                DateUtc = Now,
-                HipSize = 2.3,
-                Id = "abcdfeg",
-                ThightSize = 3.4,
-                UserId = "hijklmno",
-                WaistSize = 4.5,
-                Weight = 5.6
-            };
+        }
+
+        private static IEnumerable<TestCaseData> GetExamples()
+        {
+            yield return new TestCaseData(
+                new HealthUnit
+                {
+                    ArmSize = 1.2,
+                    DateUtc = Now,
+                    HipSize = 2.3,
+                    Id = "abcdfeg",
+                    ThightSize = 3.4,
+                    UserId = "hijklmno",
+                    WaistSize = 4.5,
+                    Weight = 5.6
+                }, new HealthUnitDto
+                {
+                    ArmSize = 1.2,
+                    DateUtc = Now,
+                    HipSize = 2.3,
+                    Id = "abcdfeg",
+                    ThightSize = 3.4,
+                    UserId = "hijklmno",
+                    WaistSize = 4.5,
+                    Weight = 5.6
+                }
+                ).SetArgDisplayNames("Filled objects");
         }
 
         [Test]
-        public void ConvertDto_ShouldReturnExpected()
+        [TestCaseSource(nameof(GetExamples))]
+        public void ConvertDto_ShouldReturnExpected(HealthUnit healthUnit, HealthUnitDto healthUnitDto)
         {
-            _mapper.Convert(_healthUnitDto).Should().BeEquivalentTo(_healthUnit);
+            _mapper.Convert(healthUnitDto).Should().BeEquivalentTo(healthUnit);
         }
 
         [Test]
-        public void Convert_ShouldReturnExpectedDto()
+        [TestCaseSource(nameof(GetExamples))]
+        public void Convert_ShouldReturnExpectedDto(HealthUnit healthUnit, HealthUnitDto healthUnitDto)
         {
-            _mapper.Convert(_healthUnit).Should().BeEquivalentTo(_healthUnitDto);
+            _mapper.Convert(healthUnit).Should().BeEquivalentTo(healthUnitDto);
         }
     }
 }

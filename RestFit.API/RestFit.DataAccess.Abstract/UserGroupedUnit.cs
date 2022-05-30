@@ -9,5 +9,6 @@
         public double WeightsSum { get; set; } = 0;
         public long DocumentCount { get; set; } = 0;
         public IEnumerable<string> DocumentIds { get; set; } = Array.Empty<string>();
+        public string Type { get; set; } = string.Empty;
     }
 }
