@@ -37,5 +37,11 @@
             get => GetFirstInt64(UserGroupedUnitFields.DocumentCount);
             set => SetSingle(UserGroupedUnitFields.DocumentCount, value);
         }
+
+        public string? Type
+        {
+            get => GetFirst(UserGroupedUnitFields.Type);
+            set => SetSingle(UserGroupedUnitFields.Type, value);
+        }
     }
 }

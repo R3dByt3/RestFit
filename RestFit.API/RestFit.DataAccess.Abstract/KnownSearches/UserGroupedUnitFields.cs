@@ -7,6 +7,7 @@
         SetsSum,
         RepetitionsSum,
         WeightsSum,
-        DocumentCount
+        DocumentCount,
+        Type
     }
 }

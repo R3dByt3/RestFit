@@ -10,7 +10,7 @@ namespace RestFit.DataAccess
 
         protected override void EnsureIndices()
         {
-            CreateIndex(true, true, x => x.UserId);
+            CreateIndex(false, true, x => x.UserId);
         }
 
         protected override void EnsureViews()

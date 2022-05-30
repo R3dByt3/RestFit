@@ -26,7 +26,8 @@ namespace RestFit.API.HostedServices
         {
             var search = new UserGroupedUnitSearch
             {
-                UserId = unitGroup.UserId
+                UserId = unitGroup.UserId,
+                Type = unitGroup.Type
             };
             
             var unit = await _processorHub.SearchProcessor.GetUserGroupedUnitAsync(search).ConfigureAwait(false);

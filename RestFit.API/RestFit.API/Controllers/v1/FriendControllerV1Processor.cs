@@ -98,9 +98,9 @@ namespace RestFit.API.Controllers.v1
 
             var friends = new List<FriendDto>();
 
-            foreach(var userGroupedUnit in userGroupedUnits)
+            foreach(var userGroupedUnit in userGroupedUnits.ToLookup(x => x.UserId))
             {
-                var friendName = (await _processorHub.SearchProcessor.GetUserAsync(new UserSearch { Id = userGroupedUnit.UserId }).ConfigureAwait(false))?.Username ?? string.Empty;
+                var friendName = (await _processorHub.SearchProcessor.GetUserAsync(new UserSearch { Id = userGroupedUnit.Key }).ConfigureAwait(false))?.Username ?? string.Empty;
 
                 if (friendName == string.Empty)
                     continue;
@@ -108,10 +108,14 @@ namespace RestFit.API.Controllers.v1
                 friends.Add(new FriendDto
                 {
                     UserId = currentUserId,
-                    FriendId = userGroupedUnit.UserId,
-                    AverageRepitions = userGroupedUnit.RepetitionsSum / userGroupedUnit.DocumentCount,
-                    AverageSets = userGroupedUnit.SetsSum / userGroupedUnit.DocumentCount,
-                    AverageWeight = userGroupedUnit.WeightsSum / userGroupedUnit.DocumentCount,
+                    FriendId = userGroupedUnit.Key,
+                    UnitAggregationDtos = userGroupedUnit.Select(x => new UnitAggregationDto
+                    {
+                        AverageRepitions = x.RepetitionsSum / x.DocumentCount,
+                        AverageSets = x.SetsSum / x.DocumentCount,
+                        AverageWeight = x.WeightsSum / x.DocumentCount,
+                        Type = x.Type
+                    }).ToArray(),
                     Name = friendName
                 });
             }

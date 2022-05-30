@@ -35,7 +35,8 @@ namespace RestFit.DataAccess
         {
             var filterSearch = new UserGroupedUnitSearch
             {
-                UserId = userGroupedUnit.UserId
+                UserId = userGroupedUnit.UserId,
+                Type = userGroupedUnit.Type
             };
             var filter = BuildFilter(filterSearch);
 
@@ -59,6 +60,7 @@ namespace RestFit.DataAccess
                 {
                     UserGroupedUnitFields.UserId => empty & UserGroupedUnitFilters.GetByUserId(search.UserId),
                     UserGroupedUnitFields.UserIds => empty & UserGroupedUnitFilters.GetByUserIds(search.UserIds),
+                    UserGroupedUnitFields.Type => empty & UserGroupedUnitFilters.GetByType(search.Type),
                     _ => empty
                 };
             }

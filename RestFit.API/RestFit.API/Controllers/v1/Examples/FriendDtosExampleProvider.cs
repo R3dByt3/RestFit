@@ -12,18 +12,46 @@ namespace RestFit.API.Controllers.v1.Examples
                 new FriendDto
                 {
                     Name = "Jürgen",
-                    AverageRepitions = 20,
-                    AverageSets = 10,
-                    AverageWeight = 90,
+                    UnitAggregationDtos = new[]
+                    {
+                        new UnitAggregationDto
+                        {
+                            AverageRepitions = 20,
+                            AverageSets = 10,
+                            AverageWeight = 90,
+                            Type = "SitUps"
+                        },
+                        new UnitAggregationDto
+                        {
+                            AverageRepitions = 15,
+                            AverageSets = 12,
+                            AverageWeight = 80,
+                            Type = "PushUps"
+                        }
+                    },
                     UserId = Guid.NewGuid().ToString(),
                     FriendId = Guid.NewGuid().ToString()
                 },
                 new FriendDto
                 {
                     Name = "Karolin",
-                    AverageRepitions = 15,
-                    AverageSets = 12,
-                    AverageWeight = 80,
+                    UnitAggregationDtos = new[]
+                    {
+                        new UnitAggregationDto
+                        {
+                            AverageRepitions = 15,
+                            AverageSets = 12,
+                            AverageWeight = 80,
+                            Type = "PushUps"
+                        },
+                        new UnitAggregationDto
+                        {
+                            AverageRepitions = 20,
+                            AverageSets = 10,
+                            AverageWeight = 90,
+                            Type = "SitUps"
+                        }
+                    },
                     UserId = Guid.NewGuid().ToString(),
                     FriendId = Guid.NewGuid().ToString()
                 }
