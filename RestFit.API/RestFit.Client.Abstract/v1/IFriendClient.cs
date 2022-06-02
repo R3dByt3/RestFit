@@ -7,6 +7,7 @@ namespace RestFit.Client.Abstract.v1
     {
         public Task AcceptFriendRequestAsync(string userId);
         public Task CreateFriendRequestAsync(string username);
+        public Task DeclineFriendRequestAsync(string userId);
         public Task<List<FriendDto>> GetFriendsAsync(FriendSearchDto? search = null);
     }
 }

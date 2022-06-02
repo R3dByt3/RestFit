@@ -1,5 +1,6 @@
 ﻿using RestFit.Client.Abstract.KnownSearches;
 using RestFit.DataAccess.Abstract.KnownSearches;
+using RestFit.DataAccess.Extensions;
 
 namespace RestFit.API.Controllers.v1.Mappers
 {
@@ -14,7 +15,7 @@ namespace RestFit.API.Controllers.v1.Mappers
                 Id = element.Id,
                 UserId = element.UserId,
                 Type = element.Type,
-                DateUtc = element.DateUtc
+                DateUtc = element.DateUtc.TruncateDateTimeUtc()
             };
         }
 
@@ -25,7 +26,7 @@ namespace RestFit.API.Controllers.v1.Mappers
                 Id = element.Id,
                 UserId = element.UserId,
                 Type = element.Type,
-                DateUtc = element.DateUtc
+                DateUtc = element.DateUtc.TruncateDateTimeUtc()
             };
         }
     }

@@ -26,8 +26,8 @@ namespace RestFit.DataAccess
                 throw new InsufficientDataException($"{nameof(unit.Type)} must be filled");
             if (unit.Repetitions == 0)
                 throw new InsufficientDataException($"{nameof(unit.Repetitions)} must be filled");
-            if (unit.Weight <= 0)
-                throw new InsufficientDataException($"{nameof(unit.Weight)} must be filled");
+            if (unit.Weight < 0)
+                throw new InsufficientDataException($"{nameof(unit.Weight)} must be bigger than zero");
             if (unit.Sets == 0)
                 throw new InsufficientDataException($"{nameof(unit.Sets)} must be filled");
             await _unitAccess.InsertDocumentAsync(unit).ConfigureAwait(false);

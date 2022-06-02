@@ -56,6 +56,22 @@ namespace RestFit.API.Controllers.v1
             return Ok();
         }).ConfigureAwait(false);
 
+        [HttpPost]
+        [Route("decline/{userId}")]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Request gespeichert")]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest, "Wenn der Name nicht gefunden werden kann", typeof(ErrorDataDto))]
+        [SwaggerResponseExample((int)HttpStatusCode.BadRequest, typeof(ErrorDataDtoExampleProvider))]
+        [SwaggerResponse((int)HttpStatusCode.Unauthorized, "Nicht authorisiert")]
+        [SwaggerResponse((int)HttpStatusCode.GatewayTimeout, "Wenn es ein Problem mit der Datenbank gibt", typeof(ErrorDataDto))]
+        [SwaggerResponseExample((int)HttpStatusCode.GatewayTimeout, typeof(ErrorDataDtoExampleProvider))]
+        [SwaggerResponse((int)HttpStatusCode.InternalServerError, "Wenn ein unerwarteter Fehler auftritt", typeof(ErrorDataDto))]
+        [SwaggerResponseExample((int)HttpStatusCode.InternalServerError, typeof(ErrorDataDtoExampleProvider))]
+        public async Task<IActionResult> DeclineFriendRequestAsync(string userId) => await ExecuteSafeAsync(async () =>
+        {
+            await _processor.DeclineFriendRequestAsync(userId);
+            return Ok();
+        }).ConfigureAwait(false);
+
         [HttpGet]
         [Produces("application/json")]
         [MethodQueryParameter(nameof(FriendSearchDto.Ids), "Suche anhand von Ids")]

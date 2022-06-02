@@ -1,5 +1,6 @@
 ﻿using RestFit.Client.Abstract.KnownSearches;
 using RestFit.DataAccess.Abstract.KnownSearches;
+using RestFit.DataAccess.Extensions;
 
 namespace RestFit.API.Controllers.v1.Mappers
 {
@@ -12,7 +13,7 @@ namespace RestFit.API.Controllers.v1.Mappers
             return new HealthUnitSearchDto
             {
                 UserId = element.UserId,
-                DateUtc = element.DateUtc
+                DateUtc = element.DateUtc.TruncateDateTimeUtc()
             };
         }
 
@@ -21,7 +22,7 @@ namespace RestFit.API.Controllers.v1.Mappers
             return new HealthUnitSearch
             {
                 UserId = element.UserId,
-                DateUtc = element.DateUtc
+                DateUtc = element.DateUtc.TruncateDateTimeUtc()
             };
         }
     }

@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using RestFit.API.Controllers.v1.Mappers;
+using RestFit.API.Extensions;
 using RestFit.Client.Abstract.KnownSearches;
 using RestFit.DataAccess.Abstract.KnownSearches;
 
@@ -8,7 +9,7 @@ namespace RestFit.API.Tests.Controllers.v1.Mappers
     [TestFixture]
     public class HealthUnitSearchDtoMapperTests
     {
-        private static readonly DateTime Now = DateTime.UtcNow;
+        private static readonly DateTime Now = DateTime.UtcNow.TruncateDateTimeUtc();
 
         private HealthUnitSearchDtoMapper _mapper = null!;
 

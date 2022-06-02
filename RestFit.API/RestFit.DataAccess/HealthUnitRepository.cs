@@ -48,6 +48,7 @@ namespace RestFit.DataAccess
                 return pair.Key switch
                 {
                     HealthUnitFields.UserId => empty & HealthUnitFilters.GetByUserId(search.UserId),
+                    HealthUnitFields.DateUtc => empty & HealthUnitFilters.GetByDateUtc(search.DateUtc),
                     _ => empty
                 };
             }

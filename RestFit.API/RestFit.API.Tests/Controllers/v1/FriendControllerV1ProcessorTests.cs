@@ -149,7 +149,7 @@ namespace RestFit.API.Tests.Controllers.v1
             { 
                 new UserGroupedUnit 
                 { 
-                    UserId = "xxx",
+                    UserId = "1",
                     DocumentCount = 2,
                     RepetitionsSum = 4,
                     SetsSum = 6,
@@ -158,7 +158,7 @@ namespace RestFit.API.Tests.Controllers.v1
                 },
                 new UserGroupedUnit
                 {
-                    UserId = "xxx",
+                    UserId = "1",
                     DocumentCount = 2,
                     RepetitionsSum = 4,
                     SetsSum = 6,
@@ -167,7 +167,7 @@ namespace RestFit.API.Tests.Controllers.v1
                 },
                 new UserGroupedUnit
                 {
-                    UserId = "yyy",
+                    UserId = "2",
                     DocumentCount = 3,
                     RepetitionsSum = 6,
                     SetsSum = 9,
@@ -182,7 +182,7 @@ namespace RestFit.API.Tests.Controllers.v1
             {
                 new FriendDto
                 {
-                    FriendId = "xxx",
+                    FriendId = "1",
                     Name = "User1",
                     UserId = "Test",
                     UnitAggregationDtos = new List<UnitAggregationDto>
@@ -205,7 +205,7 @@ namespace RestFit.API.Tests.Controllers.v1
                 },
                 new FriendDto
                 {
-                    FriendId = "yyy",
+                    FriendId = "2",
                     Name = "User2",
                     UserId = "Test",
                     UnitAggregationDtos = new List<UnitAggregationDto>

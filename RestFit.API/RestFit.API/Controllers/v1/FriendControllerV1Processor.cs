@@ -72,6 +72,31 @@ namespace RestFit.API.Controllers.v1
             await _processorHub.UpdateProcessor.CreateFriendsAsync(user, requestingUser).ConfigureAwait(false);
         }
 
+        public async Task DeclineFriendRequestAsync(string userId)
+        {
+            var search = new UserSearch
+            {
+                Id = userId
+            };
+            var user = await _processorHub.SearchProcessor.GetUserAsync(search).ConfigureAwait(false);
+
+            if (user == null)
+                throw new UserNotFoundException($"User with userId [{userId}] could not be found");
+
+            var currentUserId = GetCurrentUserId();
+
+            search = new UserSearch
+            {
+                Id = currentUserId
+            };
+            var requestingUser = await _processorHub.SearchProcessor.GetUserAsync(search).ConfigureAwait(false);
+
+            if (requestingUser == null)
+                throw new UserNotFoundException($"Current user could not be found; Id: [{currentUserId}]");
+
+            await _processorHub.DeleteProcessor.DeleteFriendRequestAsync(user, requestingUser).ConfigureAwait(false);
+        }
+
         public async Task<List<FriendDto>> GetFriendsAsync(FriendSearchDto searchDto)
         {
             var currentUserId = GetCurrentUserId();
@@ -98,7 +123,7 @@ namespace RestFit.API.Controllers.v1
 
             var friends = new List<FriendDto>();
 
-            foreach(var userGroupedUnit in userGroupedUnits.ToLookup(x => x.UserId))
+            foreach (var userGroupedUnit in userGroupedUnits.ToLookup(x => x.UserId))
             {
                 var friendName = (await _processorHub.SearchProcessor.GetUserAsync(new UserSearch { Id = userGroupedUnit.Key }).ConfigureAwait(false))?.Username ?? string.Empty;
 
@@ -117,6 +142,19 @@ namespace RestFit.API.Controllers.v1
                         Type = x.Type
                     }).ToArray(),
                     Name = friendName
+                });
+            }
+
+            foreach(var missingUserId in searchDto.Ids?.Except(friends.Select(x => x.FriendId)) ?? Array.Empty<string>())
+            {
+                var friendName = (await _processorHub.SearchProcessor.GetUserAsync(new UserSearch { Id = missingUserId }).ConfigureAwait(false))?.Username ?? string.Empty;
+
+                friends.Add(new FriendDto
+                {
+                    UserId = currentUserId,
+                    FriendId = missingUserId,
+                    Name = friendName,
+                    UnitAggregationDtos = Array.Empty<UnitAggregationDto>()
                 });
             }
 

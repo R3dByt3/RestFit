@@ -23,6 +23,11 @@ namespace RestFit.Client.v1
             await ExecutePostAsync($"accept/{userId}").ConfigureAwait(false);
         }
 
+        public async Task DeclineFriendRequestAsync(string userId)
+        {
+            await ExecutePostAsync($"decline/{userId}").ConfigureAwait(false);
+        }
+
         public async Task<List<FriendDto>> GetFriendsAsync(FriendSearchDto? search = null)
         {
             return await ExecuteGetAsync<List<FriendDto>>(null, search.GetParameters()).ConfigureAwait(false);

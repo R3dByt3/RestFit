@@ -1,4 +1,5 @@
-﻿using RestFit.Client.Abstract.Model;
+﻿using RestFit.API.Extensions;
+using RestFit.Client.Abstract.Model;
 using RestFit.DataAccess.Abstract;
 
 namespace RestFit.API.Controllers.v1.Mappers
@@ -18,7 +19,7 @@ namespace RestFit.API.Controllers.v1.Mappers
                 UserId = element.UserId,
                 Sets = element.Sets,
                 Weight = element.Weight,
-                DateUtc = element.DateUtc
+                DateUtc = element.DateUtc.TruncateDateTimeUtc()
             };
         }
 
@@ -33,7 +34,7 @@ namespace RestFit.API.Controllers.v1.Mappers
                 UserId = element.UserId,
                 Sets = element.Sets,
                 Weight = element.Weight,
-                DateUtc = element.DateUtc
+                DateUtc = element.DateUtc.TruncateDateTimeUtc()
             };
         }
     }

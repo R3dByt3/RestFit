@@ -1,5 +1,6 @@
 ﻿using MongoDB.Driver;
 using RestFit.DataAccess.Abstract;
+using RestFit.DataAccess.Extensions;
 
 namespace RestFit.DataAccess.KnownFilters
 {
@@ -13,7 +14,7 @@ namespace RestFit.DataAccess.KnownFilters
         public static FilterDefinition<Unit> GetById(string? id) => Filter.Eq(x => x.Id, id);
         public static FilterDefinition<Unit> GetByUserId(string? userId) => Filter.Eq(x => x.UserId, userId);
         public static FilterDefinition<Unit> GetByType(string? type) => Filter.Eq(x => x.Type, type);
-        public static FilterDefinition<Unit> GetByDateUtc(DateTime? dateUtc) => Filter.Eq(x => x.DateUtc, dateUtc);
+        public static FilterDefinition<Unit> GetByDateUtc(DateTime? dateUtc) => Filter.Eq(x => x.DateUtc, dateUtc.TruncateDateTimeUtc());
         public static FilterDefinition<Unit> GetIfNotProcessedBy(string? type) => Filter.Not(Filter.AnyEq(x => x.ProcessedFor, type));
         public static FilterDefinition<Unit> GetByIds(string[]? ids) => Filter.In(x => x.Id, ids);
 

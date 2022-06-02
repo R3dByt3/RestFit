@@ -6,6 +6,7 @@ using Swashbuckle.AspNetCore.Filters;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
 using RestFit.API.Controllers.v1.Examples;
+using RestFit.API.Exceptions;
 
 namespace RestFit.API.Controllers.v1
 {
@@ -48,6 +49,7 @@ namespace RestFit.API.Controllers.v1
             {
                 InsufficientDataException ide => UnprocessableEntity(GenerateErrorDataFromException(ide)),
                 DataAccessMongoDbException me => DataAccessMongoDbException(me),
+                UserNotFoundException unfe => BadRequest(GenerateErrorDataFromException(unfe)),
                 _ => DefaultErrorResponse(ex)
             };
         }
