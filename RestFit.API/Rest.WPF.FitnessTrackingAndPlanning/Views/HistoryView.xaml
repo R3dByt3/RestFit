@@ -19,36 +19,54 @@
     </UserControl.Resources>
 
     <ScrollViewer>
-        <Grid Background="DimGray">
+        <Grid Background="DimGray" Margin="{StaticResource NavigationPageMargin}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="200" />
                 <RowDefinition Height="200" />
                 <RowDefinition Height="200" />
+                <RowDefinition Height="200" />
             </Grid.RowDefinitions>
-            <lvc:CartesianChart Series="{Binding SeriesCollectionExercisesSets}" LegendLocation="Right" Grid.Row="0">
+            <lvc:CartesianChart Series="{Binding SeriesCollectionHealthData}" LegendLocation="Right" Grid.Row="0"
+                                Foreground="White" FontSize="14">
                 <lvc:CartesianChart.AxisY>
-                    <lvc:Axis Title="{StaticResource TrainingSetsHeaderString}" MinValue="0"></lvc:Axis>
+                    <lvc:Axis Title="{StaticResource TrainingSetsHeaderString}" MinValue="0" Foreground="White"
+                              FontSize="14" />
                 </lvc:CartesianChart.AxisY>
                 <lvc:CartesianChart.AxisX>
-                    <lvc:Axis Title="Datum" Labels="{Binding Labels}"></lvc:Axis>
+                    <lvc:Axis Title="Datum" Labels="{Binding HealthDataLabels}" Foreground="White" FontSize="14" />
                 </lvc:CartesianChart.AxisX>
             </lvc:CartesianChart>
 
-            <lvc:CartesianChart Series="{Binding SeriesCollectionExercisesReps}" LegendLocation="Right" Grid.Row="1">
+            <lvc:CartesianChart Series="{Binding SeriesCollectionExercisesSets}" LegendLocation="Right" Grid.Row="1"
+                                Foreground="White" FontSize="14">
                 <lvc:CartesianChart.AxisY>
-                    <lvc:Axis Title="{StaticResource TrainingRepsHeaderString}" MinValue="0"></lvc:Axis>
+                    <lvc:Axis Title="{StaticResource TrainingSetsHeaderString}" MinValue="0" Foreground="White"
+                              FontSize="14" />
                 </lvc:CartesianChart.AxisY>
                 <lvc:CartesianChart.AxisX>
-                    <lvc:Axis Title="Datum" Labels="{Binding Labels}"></lvc:Axis>
+                    <lvc:Axis Title="Datum" Labels="{Binding ExerciseLabels}" Foreground="White" FontSize="14" />
                 </lvc:CartesianChart.AxisX>
             </lvc:CartesianChart>
 
-            <lvc:CartesianChart Series="{Binding SeriesCollectionExercisesWeight}" LegendLocation="Right" Grid.Row="2">
+            <lvc:CartesianChart Series="{Binding SeriesCollectionExercisesReps}" LegendLocation="Right" Grid.Row="2"
+                                Foreground="White" FontSize="14">
                 <lvc:CartesianChart.AxisY>
-                    <lvc:Axis Title="{StaticResource TrainingWeightHeaderString}" MinValue="0"></lvc:Axis>
+                    <lvc:Axis Title="{StaticResource TrainingRepsHeaderString}" MinValue="0" Foreground="White"
+                              FontSize="14" />
                 </lvc:CartesianChart.AxisY>
                 <lvc:CartesianChart.AxisX>
-                    <lvc:Axis Title="Datum" Labels="{Binding Labels}"></lvc:Axis>
+                    <lvc:Axis Title="Datum" Labels="{Binding ExerciseLabels}" Foreground="White" FontSize="14" />
+                </lvc:CartesianChart.AxisX>
+            </lvc:CartesianChart>
+
+            <lvc:CartesianChart Series="{Binding SeriesCollectionExercisesWeight}" LegendLocation="Right" Grid.Row="3"
+                                Foreground="White" FontSize="14">
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="{StaticResource TrainingWeightHeaderString}" MinValue="0" Foreground="White"
+                              FontSize="14" />
+                </lvc:CartesianChart.AxisY>
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Datum" Labels="{Binding ExerciseLabels}" Foreground="White" FontSize="14" />
                 </lvc:CartesianChart.AxisX>
             </lvc:CartesianChart>
         </Grid>
