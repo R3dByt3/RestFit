@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using FitnessTrackingAndPlanning;
+using RestFit.Client.Abstract.KnownSearches;
 using RestFit.Client.Abstract.Model;
 
 namespace Rest.WPF.FitnessTrackingAndPlanning.ViewModels;
@@ -53,9 +57,12 @@ public sealed class TrainingViewModel : ViewModelBase
 
     #endregion
 
+    private readonly List<UnitDto> _exercisesFailedToSave;
+
     public TrainingViewModel()
     {
         _exercises = new ObservableCollection<UnitDto> { new() };
+        _exercisesFailedToSave = new List<UnitDto>();
 
         _saveTrainingsDataCommand = new RelayCommand(async _ => await SaveTrainingsData());
         _addExerciseCommand = new RelayCommand(_ => AddExercise());
@@ -70,8 +77,14 @@ public sealed class TrainingViewModel : ViewModelBase
     {
         foreach (UnitDto exercise in _exercises)
         {
-            if (exercise == new UnitDto() || exercise.Type == string.Empty || exercise.Sets == 0 || exercise.Repetitions == 0)
+            if (exercise == new UnitDto() ||
+                exercise.Type == string.Empty ||
+                exercise.Sets <= 0 ||
+                exercise.Repetitions <= 0 ||
+                exercise.Weight < 0 ||
+                await CheckIfExerciseAlreadyExistsForToday(exercise).ConfigureAwait(false))
             {
+                _exercisesFailedToSave.Add(exercise);
                 continue;
             }
 
@@ -82,8 +95,30 @@ public sealed class TrainingViewModel : ViewModelBase
             }
             catch (Exception e)
             {
+                _exercisesFailedToSave.Add(exercise);
                 Console.WriteLine("Fehler beim Speichern von " + exercise.Type + ":" + e.Message);
             }
         }
+
+        if (_exercisesFailedToSave.Count != 0)
+        {
+            string exercisesString =
+                _exercisesFailedToSave.Aggregate<UnitDto, string>(null!,
+                    (current, exercise) => current + $"[{exercise.Type}]");
+
+            MessageBox.Show("Es konnten folgende Übungen nicht gespeichert werden: " + exercisesString,
+                "Speichern fehlgeschlagen", MessageBoxButton.OK);
+        }
+    }
+
+    private async Task<bool> CheckIfExerciseAlreadyExistsForToday(UnitDto exercise)
+    {
+        IList<UnitDto> foundExercise = await Kernel.ClientHub?.V1.UnitClient.GetUnitsAsync(new UnitSearchDto
+        {
+            Type = exercise.Type,
+            DateUtc = exercise.DateUtc
+        })!;
+
+        return foundExercise.Count != 0;
     }
 }
