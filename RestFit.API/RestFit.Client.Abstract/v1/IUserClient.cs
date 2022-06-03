@@ -4,6 +4,7 @@ namespace RestFit.Client.Abstract.v1
 {
     public interface IUserClient
     {
-        public Task<UserDto> GetMyUser();
+        public Task<UserDto> GetMyUserAsync();
+        public Task<List<UserDto>> GetUsersAsync();
     }
 }

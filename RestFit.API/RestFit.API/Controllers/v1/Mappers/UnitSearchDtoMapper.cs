@@ -6,7 +6,7 @@ namespace RestFit.API.Controllers.v1.Mappers
 {
     public class UnitSearchDtoMapper : DtoMapperBase<UnitSearchDto, UnitSearch>
     {
-        public readonly static UnitSearchDtoMapper Instance = new();
+        public static readonly UnitSearchDtoMapper Instance = new();
 
         protected override UnitSearchDto ConvertData(UnitSearch element)
         {

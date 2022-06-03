@@ -11,9 +11,14 @@ namespace RestFit.Client.v1
         {
         }
 
-        public async Task<UserDto> GetMyUser()
+        public async Task<UserDto> GetMyUserAsync()
         {
             return await ExecuteGetAsync<UserDto>(null, null).ConfigureAwait(false);
+        }
+
+        public async Task<List<UserDto>> GetUsersAsync()
+        {
+            return await ExecuteGetAsync<List<UserDto>>("users", null).ConfigureAwait(false);
         }
     }
 }

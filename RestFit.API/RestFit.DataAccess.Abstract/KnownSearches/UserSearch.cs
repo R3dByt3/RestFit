@@ -19,5 +19,10 @@
             get => GetFirst(UserFields.Password);
             set => SetSingle(UserFields.Password, value);
         }
+        public string[]? Ids
+        {
+            get => GetAll(UserFields.Ids);
+            set => SetAll(UserFields.Ids, value);
+        }
     }
 }

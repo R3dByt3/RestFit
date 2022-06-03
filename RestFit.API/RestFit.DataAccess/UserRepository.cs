@@ -89,6 +89,7 @@ namespace RestFit.DataAccess
                 return pair.Key switch
                 {
                     UserFields.Id => empty & UserFilters.GetById(search.Id),
+                    UserFields.Ids => empty & UserFilters.GetByIds(search.Ids),
                     UserFields.Username => empty & UserFilters.GetByUsername(search.Username),
                     UserFields.Password => empty & UserFilters.GetByPassword(search.Password),
                     _ => empty

@@ -40,6 +40,14 @@ namespace RestFit.Logic
             return result.FirstOrDefault();
         }
 
+        public async Task<ICollection<User>> GetUsersAsync(UserSearch search)
+        {
+            _logger.LogInformation("Searching users");
+            var result = await _repositoryHub.UserRepository.GetUsersAsync(search).ConfigureAwait(false);
+            _logger.LogInformation("Successfully searched users");
+            return result;
+        }
+
         public async Task<UserGroupedUnit?> AggregateUserGroupedUnitAsync(UnitSearch search)
         {
             _logger.LogInformation("Searching unit group");

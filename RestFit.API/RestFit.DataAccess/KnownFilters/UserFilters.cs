@@ -10,6 +10,7 @@ namespace RestFit.DataAccess.KnownFilters
         public static readonly FilterDefinition<User> Empty = Filter.Empty;
 
         public static FilterDefinition<User> GetById(string? id) => Filter.Eq(x => x.Id, id);
+        public static FilterDefinition<User> GetByIds(string[]? ids) => Filter.In(x => x.Id, ids);
 
         public static FilterDefinition<User> GetByUsername(string? username) => Filter.Eq(x => x.Username, username);
 

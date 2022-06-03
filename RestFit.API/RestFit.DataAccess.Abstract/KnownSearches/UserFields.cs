@@ -4,6 +4,7 @@
     {
         Id,
         Username,
-        Password
+        Password,
+        Ids
     }
 }

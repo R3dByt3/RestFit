@@ -1,5 +1,6 @@
 ﻿using RestFit.API.Controllers.v1.Mappers;
 using RestFit.API.Exceptions;
+using RestFit.Client.Abstract.KnownSearches;
 using RestFit.Client.Abstract.Model;
 using RestFit.DataAccess.Abstract.KnownSearches;
 using RestFit.Logic.Abstract;
@@ -20,14 +21,16 @@ namespace RestFit.API.Controllers.v1
 
         public async Task CreateUserAsync(UserDto user)
         {
-            await _processorHub.InsertProcessor.CreateUserAsync(UserDtoMapper.Instance.Convert(user)).ConfigureAwait(false);
+            await _processorHub.InsertProcessor.CreateUserAsync(UserDtoMapper.Instance.Convert(user))
+                .ConfigureAwait(false);
         }
 
         public async Task<UserDto> GetMyUserAsync()
         {
             var currentUserId = _httpContextAccessor.HttpContext!.User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
 
-            var user = await _processorHub.SearchProcessor.GetUserAsync(new UserSearch { Id = currentUserId }).ConfigureAwait(false);
+            var user = await _processorHub.SearchProcessor.GetUserAsync(new UserSearch { Id = currentUserId })
+                .ConfigureAwait(false);
 
             if (user == null)
                 throw new UserNotFoundException($"Current user could not be found; Id: [{currentUserId}]");
@@ -40,6 +43,31 @@ namespace RestFit.API.Controllers.v1
                 PendingInFriendRequestUserIds = user.PendingInFriendRequestUserIds,
                 PendingOutFriendRequestUserIds = user.PendingOutFriendRequestUserIds
             };
+        }
+
+        public async Task<List<UserDto>> GetUsersAsync(UserSearchDto searchDto)
+        {
+            var currentUserId = _httpContextAccessor.HttpContext!.User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+
+            var requestingUser = await _processorHub.SearchProcessor.GetUserAsync(new UserSearch { Id = currentUserId })
+                .ConfigureAwait(false);
+
+            if (requestingUser == null)
+                throw new UserNotFoundException($"Current user could not be found; Id: [{currentUserId}]");
+
+            if (searchDto.Ids?.Any(x =>
+                    !requestingUser.FriendUserIds.Union(requestingUser.PendingInFriendRequestUserIds)
+                        .Union(requestingUser.PendingOutFriendRequestUserIds).Contains(x)) ?? false)
+                throw new FriendsNotFoundException(
+                    $"At least one requested user is not known to the current user; Id: [{currentUserId}]");
+
+            return (await _processorHub.SearchProcessor.GetUsersAsync(UserSearchDtoMapper.Instance.Convert(searchDto))
+                .ConfigureAwait(false)).Select(x =>
+                new UserDto
+                {
+                    Id = x.Id,
+                    Username = x.Username,
+                }).ToList();
         }
     }
 }

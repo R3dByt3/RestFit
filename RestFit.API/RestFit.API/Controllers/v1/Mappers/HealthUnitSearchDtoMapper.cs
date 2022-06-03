@@ -6,7 +6,7 @@ namespace RestFit.API.Controllers.v1.Mappers
 {
     public class HealthUnitSearchDtoMapper : DtoMapperBase<HealthUnitSearchDto, HealthUnitSearch>
     {
-        public readonly static HealthUnitSearchDtoMapper Instance = new();
+        public static readonly HealthUnitSearchDtoMapper Instance = new();
 
         protected override HealthUnitSearchDto ConvertData(HealthUnitSearch element)
         {

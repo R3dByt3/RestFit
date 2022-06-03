@@ -81,7 +81,7 @@ public sealed class LoginViewModel : ViewModelBase
             Kernel.ClientHub = new ClientHub(UserName, Password);
             try
             {
-                await Kernel.ClientHub.V1.UserClient.GetMyUser().ConfigureAwait(false);
+                await Kernel.ClientHub.V1.UserClient.GetMyUserAsync().ConfigureAwait(false);
                 ChangeView?.Invoke();
             }
             catch
