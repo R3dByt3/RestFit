@@ -1,9 +1,8 @@
 ﻿using RestFit.Client.Abstract;
 
-namespace Rest.WPF.FitnessTrackingAndPlanning
+namespace Rest.WPF.FitnessTrackingAndPlanning;
+
+public static class Kernel
 {
-    public static class Kernel
-    {
-        public static IClientHub? ClientHub { get; set; }
-    }
+    public static IClientHub? ClientHub { get; set; }
 }

@@ -4,22 +4,22 @@
                     xmlns:views="clr-namespace:Rest.WPF.FitnessTrackingAndPlanning.Views">
 
     <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
-        <views:LoginView/>
+        <views:LoginView />
     </DataTemplate>
     <DataTemplate DataType="{x:Type viewModels:NavigationViewModel}">
-        <views:NavigationView/>
+        <views:NavigationView />
     </DataTemplate>
     <DataTemplate DataType="{x:Type viewModels:TrainingViewModel}">
-        <views:TrainingView/>
+        <views:TrainingView />
     </DataTemplate>
     <DataTemplate DataType="{x:Type viewModels:FriendsViewModel}">
-        <views:FriendsView/>
+        <views:FriendsView />
     </DataTemplate>
     <DataTemplate DataType="{x:Type viewModels:HealthDataViewModel}">
-        <views:HealthDataView/>
+        <views:HealthDataView />
     </DataTemplate>
     <DataTemplate DataType="{x:Type viewModels:HistoryViewModel}">
-        <views:HistoryView/>
+        <views:HistoryView />
     </DataTemplate>
 
 </ResourceDictionary>

@@ -1,38 +1,37 @@
-﻿namespace Rest.WPF.FitnessTrackingAndPlanning.ViewModels
+﻿namespace Rest.WPF.FitnessTrackingAndPlanning.ViewModels;
+
+public sealed class MainWindowViewModel : ViewModelBase
 {
-    public sealed class MainWindowViewModel : ViewModelBase
+    #region Properties
+
+    private ViewModelBase? _currentPage;
+
+    public ViewModelBase? CurrentPage
     {
-        #region Properties
-
-        private ViewModelBase? _currentPage;
-
-        public ViewModelBase? CurrentPage
+        get => _currentPage;
+        set
         {
-            get => _currentPage;
-            set
-            {
-                _currentPage = value;
-                OnPropertyChanged(nameof(CurrentPage));
-            }
+            _currentPage = value;
+            OnPropertyChanged(nameof(CurrentPage));
         }
-        
-        #endregion
+    }
 
-        /// <summary>
-        /// Konstruktor für das MainWindowViewModel
-        /// </summary>
-        public MainWindowViewModel()
-        {
-            CurrentPage = new LoginViewModel();
-            if (CurrentPage is LoginViewModel loginViewModel)
-            {
-                loginViewModel.ChangeView += OnChangeView;
-            }
-        }
+    #endregion
 
-        private void OnChangeView()
+    /// <summary>
+    ///     Konstruktor für das MainWindowViewModel
+    /// </summary>
+    public MainWindowViewModel()
+    {
+        CurrentPage = new LoginViewModel();
+        if (CurrentPage is LoginViewModel loginViewModel)
         {
-            CurrentPage = new NavigationViewModel();
+            loginViewModel.ChangeView += OnChangeView;
         }
+    }
+
+    private void OnChangeView()
+    {
+        CurrentPage = new NavigationViewModel();
     }
 }

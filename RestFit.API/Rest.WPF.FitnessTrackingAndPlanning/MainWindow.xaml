@@ -9,13 +9,14 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/MainWindowResources.xaml"/>
+                <ResourceDictionary Source="Resources/MainWindowResources.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
 
     <Grid>
-        <ContentControl Grid.Column="0" Grid.Row="0" Content="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}"/>
+        <ContentControl Grid.Column="0" Grid.Row="0"
+                        Content="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}" />
     </Grid>
 
 </Window>

@@ -120,11 +120,11 @@
                 <Button Content="{StaticResource AddButtonString}"
                         VerticalAlignment="Bottom" DockPanel.Dock="Bottom"
                         Command="{Binding AddFriendCommand}" />
-                <TextBlock Text="{Binding FriendRequestString}" 
-                           Width="200" 
-                           Foreground="LightGray" 
+                <TextBlock Text="{Binding FriendRequestString}"
+                           Width="200"
+                           Foreground="LightGray"
                            TextWrapping="Wrap"
-                           FontSize="14" 
+                           FontSize="14"
                            Margin="0 5 0 5" />
                 <Button Content="{StaticResource AcceptRequestButtonString}"
                         VerticalAlignment="Bottom" DockPanel.Dock="Bottom"

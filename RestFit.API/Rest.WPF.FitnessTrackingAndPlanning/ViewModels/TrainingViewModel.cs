@@ -90,7 +90,7 @@ public sealed class TrainingViewModel : ViewModelBase
 
             try
             {
-                exercise.DateUtc = DateTime.Today;
+                exercise.DateUtc = DateTime.UtcNow;
                 await Kernel.ClientHub?.V1.UnitClient.AddUnitAsync(exercise)!;
             }
             catch (Exception e)
@@ -113,12 +113,20 @@ public sealed class TrainingViewModel : ViewModelBase
 
     private async Task<bool> CheckIfExerciseAlreadyExistsForToday(UnitDto exercise)
     {
-        IList<UnitDto> foundExercise = await Kernel.ClientHub?.V1.UnitClient.GetUnitsAsync(new UnitSearchDto
+        try
         {
-            Type = exercise.Type,
-            DateUtc = exercise.DateUtc
-        })!;
+            IList<UnitDto> foundExercise = await Kernel.ClientHub?.V1.UnitClient.GetUnitsAsync(new UnitSearchDto
+            {
+                Type = exercise.Type,
+                DateUtc = exercise.DateUtc
+            })!;
 
-        return foundExercise.Count != 0;
+            return foundExercise.Count != 0;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Fehler beim kontrollieren von " + exercise.Type + ":" + e.Message);
+            return true;
+        }
     }
 }

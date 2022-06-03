@@ -2,49 +2,49 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:resources="clr-namespace:Rest.WPF.FitnessTrackingAndPlanning.Resources">
 
-    <Thickness x:Key="HalfBottomMargin" Left="0" Top="0" Right="0" Bottom="5"/>
-    <Thickness x:Key="TopMargin" Left="0" Top="10" Right="0" Bottom="0"/>
-    <Thickness x:Key="RightMargin" Left="0" Top="0" Right="10" Bottom="0"/>
-    <Thickness x:Key="BottomMargin" Left="0" Top="0" Right="0" Bottom="10"/>
-    <Thickness x:Key="LeftBottomMargin" Left="10" Top="0" Right="0" Bottom="10"/>
-    <Thickness x:Key="RightBottomMargin" Left="0" Top="0" Right="10" Bottom="10"/>
-    <Thickness x:Key="DoubleLeftRightBottomMargin" Left="20" Top="0" Right="20" Bottom="20"/>
+    <Thickness x:Key="HalfBottomMargin" Left="0" Top="0" Right="0" Bottom="5" />
+    <Thickness x:Key="TopMargin" Left="0" Top="10" Right="0" Bottom="0" />
+    <Thickness x:Key="RightMargin" Left="0" Top="0" Right="10" Bottom="0" />
+    <Thickness x:Key="BottomMargin" Left="0" Top="0" Right="0" Bottom="10" />
+    <Thickness x:Key="LeftBottomMargin" Left="10" Top="0" Right="0" Bottom="10" />
+    <Thickness x:Key="RightBottomMargin" Left="0" Top="0" Right="10" Bottom="10" />
+    <Thickness x:Key="DoubleLeftRightBottomMargin" Left="20" Top="0" Right="20" Bottom="20" />
 
-    <Thickness x:Key="NavigationPageMargin" Left="20" Top="20" Right="40" Bottom="20"/>
+    <Thickness x:Key="NavigationPageMargin" Left="20" Top="20" Right="40" Bottom="20" />
 
-    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-    <resources:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter"/>
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <resources:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter" />
 
     <Style TargetType="{x:Type Label}">
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="14" />
     </Style>
 
     <Style x:Key="WrongUserCredentialsLabelStyle" TargetType="{x:Type TextBlock}">
-        <Setter Property="Foreground" Value="DarkOrange"/>
-        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="DarkOrange" />
+        <Setter Property="FontSize" Value="14" />
     </Style>
 
     <Style x:Key="HintLabelStyle" TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
-        <Setter Property="Foreground" Value="DeepPink"/>
+        <Setter Property="Foreground" Value="DeepPink" />
     </Style>
 
     <Style TargetType="{x:Type Button}">
-        <Setter Property="Height" Value="35"/>
-        <Setter Property="Width" Value="200"/>
-        <Setter Property="Background" Value="DeepPink"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Height" Value="35" />
+        <Setter Property="Width" Value="200" />
+        <Setter Property="Background" Value="DeepPink" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="14" />
     </Style>
 
     <Style TargetType="{x:Type TextBox}">
-        <Setter Property="Height" Value="30"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Height" Value="30" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
 
     <Style TargetType="{x:Type ComboBox}">
-        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontSize" Value="14" />
     </Style>
 
     <Style TargetType="{x:Type TabControl}">
@@ -57,15 +57,15 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TabPanel Grid.Column="0"
-                                          Margin="0 30 4 -1"
-                                          IsItemsHost="True"
-                                          Background="Transparent" />
+                                  Margin="0 30 4 -1"
+                                  IsItemsHost="True"
+                                  Background="Transparent" />
                         <Border Grid.Column="1"
-                                        BorderThickness="1"
-                                        Background="DimGray"
-                                        BorderBrush="DimGray">
+                                BorderThickness="1"
+                                Background="DimGray"
+                                BorderBrush="DimGray">
                             <ContentPresenter Margin="4"
-                                                      ContentSource="SelectedContent" />
+                                              ContentSource="SelectedContent" />
                         </Border>
                     </Grid>
                 </ControlTemplate>
@@ -79,18 +79,18 @@
                 <ControlTemplate TargetType="TabItem">
                     <Grid>
                         <Border x:Name="Border"
-                                        Margin="0 0 -4 0"
-                                        BorderThickness="0 0 0 1" 
-                                        BorderBrush="DimGray" 
-                                        Background="#404040"
-                                        Height="30">
+                                Margin="0 0 -4 0"
+                                BorderThickness="0 0 0 1"
+                                BorderBrush="DimGray"
+                                Background="#404040"
+                                Height="30">
                             <ContentPresenter x:Name="ContentSite"
-                                                      VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"
-                                                      ContentSource="Header"
-                                                      Margin="12 2 12 2"
-                                                      RecognizesAccessKey="True" TextBlock.Foreground="White"
-                                                      TextBlock.FontSize="14" />
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"
+                                              ContentSource="Header"
+                                              Margin="12 2 12 2"
+                                              RecognizesAccessKey="True" TextBlock.Foreground="White"
+                                              TextBlock.FontSize="14" />
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -114,13 +114,13 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGrid}">
                     <Border x:Name="border"
-                                SnapsToDevicePixels="True"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                Padding="{TemplateBinding Padding}" Background="DimGray">
+                            SnapsToDevicePixels="True"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}" Background="DimGray">
                         <ScrollViewer x:Name="DG_ScrollViewer"
-                                          Focusable="false"
-                                          Background="Black">
+                                      Focusable="false"
+                                      Background="Black">
                             <ScrollViewer.Template>
                                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
                                     <Grid>
@@ -136,43 +136,44 @@
                                         </Grid.RowDefinitions>
 
                                         <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter"
-                                                                            Grid.Column="1"
-                                                                            Visibility="{Binding HeadersVisibility, 
+                                                                        Grid.Column="1"
+                                                                        Visibility="{Binding HeadersVisibility, 
                       ConverterParameter={x:Static DataGridHeadersVisibility.Column}, 
                       Converter={x:Static DataGrid.HeadersVisibilityConverter}, 
                       RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
 
                                         <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
-                                          Grid.ColumnSpan="2" Grid.Column="0"
-                                          Grid.Row="1"
-                                          CanContentScroll="{TemplateBinding CanContentScroll}" />
+                                                                Grid.ColumnSpan="2" Grid.Column="0"
+                                                                Grid.Row="1"
+                                                                CanContentScroll="{TemplateBinding CanContentScroll}" />
 
                                         <ScrollBar x:Name="PART_VerticalScrollBar"
-                             Grid.Column="2"
-                             Grid.Row="1"
-                             Orientation="Vertical"
-                             ViewportSize="{TemplateBinding ViewportHeight}"
-                             Maximum="{TemplateBinding ScrollableHeight}"
-                             Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
-                             Value="{Binding VerticalOffset, Mode=OneWay, 
-                      RelativeSource={RelativeSource TemplatedParent}}"/>
+                                                   Grid.Column="2"
+                                                   Grid.Row="1"
+                                                   Orientation="Vertical"
+                                                   ViewportSize="{TemplateBinding ViewportHeight}"
+                                                   Maximum="{TemplateBinding ScrollableHeight}"
+                                                   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                                                   Value="{Binding VerticalOffset, Mode=OneWay, 
+                      RelativeSource={RelativeSource TemplatedParent}}" />
 
                                         <Grid Grid.Column="1"
-                        Grid.Row="2">
+                                              Grid.Row="2">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="{Binding NonFrozenColumnsViewportHorizontalOffset, 
+                                                <ColumnDefinition
+                                                    Width="{Binding NonFrozenColumnsViewportHorizontalOffset, 
                           RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
                                                 <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>
 
                                             <ScrollBar x:Name="PART_HorizontalScrollBar"
-                               Grid.Column="1"
-                               Orientation="Horizontal"
-                               ViewportSize="{TemplateBinding ViewportWidth}"
-                               Maximum="{TemplateBinding ScrollableWidth}"
-                               Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
-                               Value="{Binding HorizontalOffset, Mode=OneWay, 
-                        RelativeSource={RelativeSource TemplatedParent}}"/>
+                                                       Grid.Column="1"
+                                                       Orientation="Horizontal"
+                                                       ViewportSize="{TemplateBinding ViewportWidth}"
+                                                       Maximum="{TemplateBinding ScrollableWidth}"
+                                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                                                       Value="{Binding HorizontalOffset, Mode=OneWay, 
+                        RelativeSource={RelativeSource TemplatedParent}}" />
                                         </Grid>
                                     </Grid>
                                 </ControlTemplate>
@@ -185,26 +186,26 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsGrouping"
-             Value="true">
+                     Value="true">
                 <Setter Property="ScrollViewer.CanContentScroll"
-              Value="false" />
+                        Value="false" />
             </Trigger>
         </Style.Triggers>
     </Style>
 
     <Style TargetType="{x:Type DataGridRow}">
-        <Setter Property="Background" Value="DimGray"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Background" Value="DimGray" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="14" />
         <Setter Property="SnapsToDevicePixels" Value="true" />
-        <Setter Property="Height" Value="35"/>
+        <Setter Property="Height" Value="35" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridRow}">
                     <Border x:Name="DGR_Border"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                SnapsToDevicePixels="True" Background="DimGray">
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="True" Background="DimGray">
 
                         <SelectiveScrollingGrid>
                             <SelectiveScrollingGrid.ColumnDefinitions>
@@ -216,18 +217,18 @@
                                 <RowDefinition Height="Auto" />
                             </SelectiveScrollingGrid.RowDefinitions>
                             <DataGridCellsPresenter Grid.Column="1"
-                                                        ItemsPanel="{TemplateBinding ItemsPanel}"
-                                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                                    ItemsPanel="{TemplateBinding ItemsPanel}"
+                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             <DataGridDetailsPresenter Grid.Column="1"
-                                                          Grid.Row="1"
-                                                          Visibility="{TemplateBinding DetailsVisibility}"
-                                                          SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding AreRowDetailsFrozen, 
+                                                      Grid.Row="1"
+                                                      Visibility="{TemplateBinding DetailsVisibility}"
+                                                      SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding AreRowDetailsFrozen, 
                 ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical},
                 Converter={x:Static DataGrid.RowDetailsScrollingConverter}, 
                 RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
                             <DataGridRowHeader Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"
                                                SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
-                                               Visibility="Hidden"/>
+                                               Visibility="Hidden" />
                         </SelectiveScrollingGrid>
                     </Border>
                 </ControlTemplate>
@@ -237,26 +238,26 @@
 
     <Style TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Height" Value="35"/>
+        <Setter Property="Height" Value="35" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="FontSize" Value="14" />
-        <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
                     <Grid>
                         <Border x:Name="columnHeaderBorder"
-                                    BorderThickness="1"
-                                    Padding="3,0,3,0" Background="DimGray">
+                                BorderThickness="1"
+                                Padding="3,0,3,0" Background="DimGray">
 
                             <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    
+
 </ResourceDictionary>

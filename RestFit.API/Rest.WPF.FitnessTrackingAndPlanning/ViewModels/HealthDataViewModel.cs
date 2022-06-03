@@ -66,28 +66,39 @@ public sealed class HealthDataViewModel : ViewModelBase
 
     private async Task IsSavingHealthDataEnabled()
     {
-        IList<HealthUnitDto> todaysHealthData =
-            await Kernel.ClientHub?.V1.HealthUnitClient.GetHealthUnitsAsync(new HealthUnitSearchDto
-                { DateUtc = DateTime.Today })!;
-
-        if (todaysHealthData.Count != 0)
+        try
         {
-            SavingEnabled = false;
+            IList<HealthUnitDto> todaysHealthData =
+                await Kernel.ClientHub?.V1.HealthUnitClient.GetHealthUnitsAsync(new HealthUnitSearchDto
+                    { DateUtc = DateTime.UtcNow })!;
+
+            if (todaysHealthData.Count != 0)
+            {
+                SavingEnabled = false;
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Fehler beim Abrufen von heutigen Gesundheitsdaten: " + e.Message);
         }
     }
 
     private async Task SaveHealthData()
     {
-        HealthDataDto.DateUtc = DateTime.Today;
+        if (HealthDataDto.Weight > 0 && HealthDataDto.ArmSize > 0 && HealthDataDto.WaistSize > 0 &&
+            HealthDataDto.HipSize > 0 && HealthDataDto.ThightSize > 0)
+        {
+            HealthDataDto.DateUtc = DateTime.UtcNow;
 
-        try
-        {
-            await Kernel.ClientHub?.V1.HealthUnitClient.AddHealthUnitAsync(HealthDataDto)!;
-            SavingEnabled = false;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine("Fehler beim Speichern von der Gesundheitsdaten: " + e.Message);
+            try
+            {
+                await Kernel.ClientHub?.V1.HealthUnitClient.AddHealthUnitAsync(HealthDataDto)!;
+                SavingEnabled = false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Fehler beim Speichern von den Gesundheitsdaten: " + e.Message);
+            }
         }
     }
 }

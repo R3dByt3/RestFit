@@ -4,7 +4,7 @@
     {
         public static DateTime TruncateDateTimeUtc(this DateTime dateTime)
         {
-            return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0, DateTimeKind.Utc);
+            return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0);
         }
     }
 }

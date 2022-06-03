@@ -1,12 +1,12 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
+
     <!--Login Page-->
     <sys:String x:Key="LoginUserNameString">Benutzername:</sys:String>
     <sys:String x:Key="LoginPasswordString">Passwort:</sys:String>
     <sys:String x:Key="LoginWrongUserCredentialsString">Falscher Benutzername oder Passwort!</sys:String>
-    
+
     <!--Navigation-->
     <sys:String x:Key="UnitHeaderString">Trainingseinheit</sys:String>
     <sys:String x:Key="FriendsHeaderString">Freunde</sys:String>
@@ -29,7 +29,7 @@
     <sys:String x:Key="HealthDataHipSizeString">Hüftumfang:</sys:String>
     <sys:String x:Key="HealthDataThighSizeString">Oberschenkelumfang:</sys:String>
     <sys:String x:Key="HealthDataAlreadySavedString">Heute wurden schon Gesundheitsdaten gespeichert.</sys:String>
-    
+
     <!--Friends Page-->
     <sys:String x:Key="FriendsChooseFriendString">Freund auswählen</sys:String>
     <sys:String x:Key="FriendsChooseExerciseString">Übung auswählen</sys:String>
@@ -39,7 +39,7 @@
     <sys:String x:Key="FriendsWeightString">Gewicht:</sys:String>
     <sys:String x:Key="FriendsMotivationString">Du schaffst das!</sys:String>
     <sys:String x:Key="FriendsString">Freunde</sys:String>
-    
+
     <!--Button Strings-->
     <sys:String x:Key="LoginButtonString">Anmelden</sys:String>
     <sys:String x:Key="EditButtonString">Bearbeiten</sys:String>
