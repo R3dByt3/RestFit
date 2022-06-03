@@ -3,6 +3,7 @@
                     xmlns:resources="clr-namespace:Rest.WPF.FitnessTrackingAndPlanning.Resources">
 
     <Thickness x:Key="HalfBottomMargin" Left="0" Top="0" Right="0" Bottom="5"/>
+    <Thickness x:Key="TopMargin" Left="0" Top="10" Right="0" Bottom="0"/>
     <Thickness x:Key="RightMargin" Left="0" Top="0" Right="10" Bottom="0"/>
     <Thickness x:Key="BottomMargin" Left="0" Top="0" Right="0" Bottom="10"/>
     <Thickness x:Key="LeftBottomMargin" Left="10" Top="0" Right="0" Bottom="10"/>
@@ -40,6 +41,10 @@
         <Setter Property="Height" Value="30"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+    <Style TargetType="{x:Type ComboBox}">
+        <Setter Property="FontSize" Value="14"/>
     </Style>
 
     <Style TargetType="{x:Type TabControl}">

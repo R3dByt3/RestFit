@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:viewModels="clr-namespace:Rest.WPF.FitnessTrackingAndPlanning.ViewModels"
              xmlns:adorners="http://gu.se/Adorners"
              mc:Ignorable="d"
@@ -23,14 +24,39 @@
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0" Background="DimGray">
+        <!--Linke Hauptseite-->
+        <Grid Grid.Column="0" Background="DimGray" Margin="{StaticResource NavigationPageMargin}">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="2*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <ComboBox Grid.Row="0" Margin="20" />
-            <Grid Grid.Row="1" Margin="{StaticResource DoubleLeftRightBottomMargin}">
+            <ComboBox Grid.Row="0"
+                      Margin="{StaticResource BottomMargin}"
+                      adorners:Watermark.Text="{StaticResource FriendsChooseFriendString}"
+                      ItemsSource="{Binding Friends, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                      DisplayMemberPath="Name"
+                      SelectedItem="{Binding SelectedFriend, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectedFriendChangedCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
+            <ComboBox Grid.Row="1"
+                      Margin="{StaticResource BottomMargin}"
+                      adorners:Watermark.Text="{StaticResource FriendsChooseExerciseString}"
+                      ItemsSource="{Binding ExercisesList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                      SelectedItem="{Binding SelectedExercise, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                      DisplayMemberPath="Type">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectedExerciseChangedCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
+            <Grid Grid.Row="2" Margin="{StaticResource DoubleLeftRightBottomMargin}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -63,34 +89,53 @@
                        Grid.Row="3"
                        Content="{Binding AverageWeight}" />
             </Grid>
-            <StackPanel Grid.Row="2"
+            <StackPanel Grid.Row="3"
                         Background="DeepPink"
                         Margin="{StaticResource DoubleLeftRightBottomMargin}">
-                <Label Content="{Binding MotivationString}" />
+                <Label Content="{StaticResource FriendsMotivationString}" />
             </StackPanel>
         </Grid>
+        <!--Rechte Sidebar-->
         <DockPanel Grid.Column="1"
-                    Background="#404040">
+                   Background="#404040">
             <Label Content="{StaticResource FriendsString}"
-                   VerticalAlignment="Top" 
-                   DockPanel.Dock="Top"/>
+                   VerticalAlignment="Top"
+                   DockPanel.Dock="Top" />
             <Border BorderBrush="DimGray"
-                    BorderThickness="0 0 0 1" 
-                    DockPanel.Dock="Top"/>
-            <ListBox ItemsSource="{Binding Friends}" 
-                     DockPanel.Dock="Top" 
-                     Margin="0 10 0 0" 
-                     Background="#404040" 
-                     BorderBrush="#404040"/>
-            <Button Content="{StaticResource RequestButtonString}"
-                    VerticalAlignment="Bottom" DockPanel.Dock="Bottom"
-                    Margin="0 0 0 5"/>
-            <Button Content="{StaticResource AddButtonString}"
-                    VerticalAlignment="Bottom" DockPanel.Dock="Bottom" 
-                    Command="{Binding AddFriendCommand}"/>
-            <TextBox adorners:Watermark.Text="User hinzufügen" Text="{Binding AddUserString, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-
-            </TextBox>
+                    BorderThickness="0 0 0 1"
+                    DockPanel.Dock="Top" />
+            <ListBox ItemsSource="{Binding Friends}"
+                     DockPanel.Dock="Top"
+                     Margin="{StaticResource TopMargin}"
+                     Background="#404040"
+                     BorderBrush="#404040"
+                     Foreground="White"
+                     DisplayMemberPath="Name"
+                     FontSize="14" />
+            <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
+                <TextBox adorners:Watermark.Text="User hinzufügen"
+                         Text="{Binding AddUserString, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                         DockPanel.Dock="Bottom"
+                         Width="200" />
+                <Button Content="{StaticResource AddButtonString}"
+                        VerticalAlignment="Bottom" DockPanel.Dock="Bottom"
+                        Command="{Binding AddFriendCommand}" />
+                <TextBlock Text="{Binding FriendRequestString}" 
+                           Width="200" 
+                           Foreground="LightGray" 
+                           TextWrapping="Wrap"
+                           FontSize="14" 
+                           Margin="0 5 0 5" />
+                <Button Content="{StaticResource AcceptRequestButtonString}"
+                        VerticalAlignment="Bottom" DockPanel.Dock="Bottom"
+                        Command="{Binding AcceptFriendRequestCommand}"
+                        IsEnabled="{Binding HasInComingFriendRequest}" />
+                <Button Content="{StaticResource DeclineRequestButtonString}"
+                        VerticalAlignment="Bottom" DockPanel.Dock="Bottom"
+                        Margin="0 0 0 5"
+                        Command="{Binding DeclineFriendRequestCommand}"
+                        IsEnabled="{Binding HasInComingFriendRequest}" />
+            </StackPanel>
         </DockPanel>
     </Grid>
 </UserControl>
