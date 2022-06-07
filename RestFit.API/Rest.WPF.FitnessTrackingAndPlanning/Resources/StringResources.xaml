@@ -37,8 +37,12 @@
     <sys:String x:Key="FriendsSetsString">Sätze:</sys:String>
     <sys:String x:Key="FriendsRepsString">Wiederholungen:</sys:String>
     <sys:String x:Key="FriendsWeightString">Gewicht:</sys:String>
-    <sys:String x:Key="FriendsMotivationString">Du schaffst das!</sys:String>
+    <sys:String x:Key="FriendsMotivationString">Sei stärker als deine größte Ausrede!</sys:String>
     <sys:String x:Key="FriendsString">Freunde</sys:String>
+
+    <!--History Page-->
+    <sys:String x:Key="HistoryWeightString">Gewicht in kg</sys:String>
+    <sys:String x:Key="HistorySizeString">Umfang in cm</sys:String>
 
     <!--Button Strings-->
     <sys:String x:Key="LoginButtonString">Anmelden</sys:String>

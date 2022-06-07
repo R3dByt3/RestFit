@@ -245,6 +245,7 @@ public sealed class FriendsViewModel : ViewModelBase
 
             if (friendsFromDatabase.Count != 0)
             {
+                Friends = new List<FriendDto>();
                 Friends.AddRange(friendsFromDatabase);
             }
         }
@@ -291,7 +292,7 @@ public sealed class FriendsViewModel : ViewModelBase
         try
         {
             await Kernel.ClientHub?.V1.FriendClient.AcceptFriendRequestAsync(_currentPendingFriendRequest?.Id!)!;
-            await GetFriendsFromDatabase();
+            await GetFriendsFromDatabase().ConfigureAwait(true);
             UpdateExerciseAverage();
             CheckForNewFriendRequests();
         }
@@ -319,6 +320,7 @@ public sealed class FriendsViewModel : ViewModelBase
     private void CheckFrequentlyForNewFriendRequests(object? sender, ElapsedEventArgs e)
     {
         CheckForNewFriendRequests();
+        GetFriendsFromDatabase().ConfigureAwait(true);
     }
 
     private async void CheckForNewFriendRequests()
@@ -334,7 +336,7 @@ public sealed class FriendsViewModel : ViewModelBase
 
             if (CurrentPendingFriendRequest != null)
             {
-                FriendRequestString = "Freundschaftsanfrage von " + CurrentPendingFriendRequest;
+                FriendRequestString = "Freundschaftsanfrage von " + CurrentPendingFriendRequest.Username;
                 HasInComingFriendRequest = true;
             }
             else

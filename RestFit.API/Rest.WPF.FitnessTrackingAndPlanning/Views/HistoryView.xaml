@@ -25,11 +25,12 @@
                 <RowDefinition Height="200" />
                 <RowDefinition Height="200" />
                 <RowDefinition Height="200" />
+                <RowDefinition Height="200" />
             </Grid.RowDefinitions>
-            <lvc:CartesianChart Series="{Binding SeriesCollectionHealthData}" LegendLocation="Right" Grid.Row="0"
+            <lvc:CartesianChart Series="{Binding SeriesCollectionHealthDataWeight}" LegendLocation="Right" Grid.Row="0"
                                 Foreground="White" FontSize="14">
                 <lvc:CartesianChart.AxisY>
-                    <lvc:Axis Title="{StaticResource TrainingSetsHeaderString}" MinValue="0" Foreground="White"
+                    <lvc:Axis Title="{StaticResource HistoryWeightString}" MinValue="0" Foreground="White"
                               FontSize="14" />
                 </lvc:CartesianChart.AxisY>
                 <lvc:CartesianChart.AxisX>
@@ -37,7 +38,18 @@
                 </lvc:CartesianChart.AxisX>
             </lvc:CartesianChart>
 
-            <lvc:CartesianChart Series="{Binding SeriesCollectionExercisesSets}" LegendLocation="Right" Grid.Row="1"
+            <lvc:CartesianChart Series="{Binding SeriesCollectionHealthData}" LegendLocation="Right" Grid.Row="1"
+                                Foreground="White" FontSize="14">
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="{StaticResource HistorySizeString}" MinValue="0" Foreground="White"
+                              FontSize="14" />
+                </lvc:CartesianChart.AxisY>
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Datum" Labels="{Binding HealthDataLabels}" Foreground="White" FontSize="14" />
+                </lvc:CartesianChart.AxisX>
+            </lvc:CartesianChart>
+
+            <lvc:CartesianChart Series="{Binding SeriesCollectionExercisesSets}" LegendLocation="Right" Grid.Row="2"
                                 Foreground="White" FontSize="14">
                 <lvc:CartesianChart.AxisY>
                     <lvc:Axis Title="{StaticResource TrainingSetsHeaderString}" MinValue="0" Foreground="White"
@@ -48,7 +60,7 @@
                 </lvc:CartesianChart.AxisX>
             </lvc:CartesianChart>
 
-            <lvc:CartesianChart Series="{Binding SeriesCollectionExercisesReps}" LegendLocation="Right" Grid.Row="2"
+            <lvc:CartesianChart Series="{Binding SeriesCollectionExercisesReps}" LegendLocation="Right" Grid.Row="3"
                                 Foreground="White" FontSize="14">
                 <lvc:CartesianChart.AxisY>
                     <lvc:Axis Title="{StaticResource TrainingRepsHeaderString}" MinValue="0" Foreground="White"
@@ -59,7 +71,7 @@
                 </lvc:CartesianChart.AxisX>
             </lvc:CartesianChart>
 
-            <lvc:CartesianChart Series="{Binding SeriesCollectionExercisesWeight}" LegendLocation="Right" Grid.Row="3"
+            <lvc:CartesianChart Series="{Binding SeriesCollectionExercisesWeight}" LegendLocation="Right" Grid.Row="4"
                                 Foreground="White" FontSize="14">
                 <lvc:CartesianChart.AxisY>
                     <lvc:Axis Title="{StaticResource TrainingWeightHeaderString}" MinValue="0" Foreground="White"

@@ -90,9 +90,8 @@
                        Content="{Binding AverageWeight}" />
             </Grid>
             <StackPanel Grid.Row="3"
-                        Background="DeepPink"
-                        Margin="{StaticResource DoubleLeftRightBottomMargin}">
-                <Label Content="{StaticResource FriendsMotivationString}" />
+                        Background="DeepPink">
+                <Label Content="{StaticResource FriendsMotivationString}"/>
             </StackPanel>
         </Grid>
         <!--Rechte Sidebar-->
@@ -104,7 +103,7 @@
             <Border BorderBrush="DimGray"
                     BorderThickness="0 0 0 1"
                     DockPanel.Dock="Top" />
-            <ListBox ItemsSource="{Binding Friends}"
+            <ListBox ItemsSource="{Binding Friends, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                      DockPanel.Dock="Top"
                      Margin="{StaticResource TopMargin}"
                      Background="#404040"

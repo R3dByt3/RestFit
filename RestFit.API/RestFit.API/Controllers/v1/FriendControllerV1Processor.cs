@@ -114,6 +114,9 @@ namespace RestFit.API.Controllers.v1
             if (searchDto.Ids?.Any(x => !requestingUser.FriendUserIds.Contains(x)) ?? false)
                 throw new FriendsNotFoundException($"At least one requested friend is not a friend of the current user; Id: [{currentUserId}]");
 
+            if (!(searchDto.Ids?.Any() ?? false))
+                return new List<FriendDto>();
+
             var userGroupedUnitSearch = new UserGroupedUnitSearch
             {
                 UserIds = searchDto.Ids

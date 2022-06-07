@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using LiveCharts;
 using LiveCharts.Wpf;
@@ -16,6 +17,7 @@ public sealed partial class HistoryView : UserControl
 {
     #region Properties
 
+    public SeriesCollection? SeriesCollectionHealthDataWeight { get; }
     public SeriesCollection? SeriesCollectionHealthData { get; }
     public List<string>? HealthDataLabels { get; }
     public SeriesCollection? SeriesCollectionExercisesSets { get; }
@@ -29,6 +31,7 @@ public sealed partial class HistoryView : UserControl
     {
         InitializeComponent();
 
+        SeriesCollectionHealthDataWeight = new SeriesCollection();
         SeriesCollectionHealthData = new SeriesCollection();
 
         SeriesCollectionExercisesSets = new SeriesCollection();
@@ -97,7 +100,7 @@ public sealed partial class HistoryView : UserControl
             lineSeriesHealthDataThighSize.Values.Add(healthData.ThightSize);
         }
 
-        SeriesCollectionHealthData?.Add(lineSeriesHealthDataWeight);
+        SeriesCollectionHealthDataWeight?.Add(lineSeriesHealthDataWeight);
         SeriesCollectionHealthData?.Add(lineSeriesHealthDataArmSize);
         SeriesCollectionHealthData?.Add(lineSeriesHealthDataWaistSize);
         SeriesCollectionHealthData?.Add(lineSeriesHealthDataHipSize);
@@ -115,6 +118,17 @@ public sealed partial class HistoryView : UserControl
         {
             Console.WriteLine(e);
             throw;
+        }
+
+        if (allExercises.Count == 0)
+        {
+            SeriesCollectionExercisesSets?.Add(new LineSeries
+                { Title = "Übung", Values = new ChartValues<long>(), LineSmoothness = 0 });
+            SeriesCollectionExercisesReps?.Add(new LineSeries
+                { Title = "Übung", Values = new ChartValues<long>(), LineSmoothness = 0 });
+            SeriesCollectionExercisesWeight?.Add(new LineSeries
+                { Title = "Übung", Values = new ChartValues<double>(), LineSmoothness = 0 });
+            return;
         }
 
         foreach (Tuple<string, List<UnitDto>> exercise in SortAndOrderExercises(allExercises))

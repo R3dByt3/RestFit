@@ -26,7 +26,9 @@
                   Background="DimGray"
                   AutoGenerateColumns="False"
                   GridLinesVisibility="None"
-                  CanUserAddRows="False">
+                  CanUserAddRows="False"
+                  VerticalScrollBarVisibility="Auto"
+                  MaxHeight="310">
             <DataGrid.Columns>
                 <!-- Exercise -->
                 <DataGridTextColumn Header="{StaticResource TrainingExerciseHeaderString}"
