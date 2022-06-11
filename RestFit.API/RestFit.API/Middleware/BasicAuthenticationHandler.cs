@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Authentication;
@@ -40,10 +41,13 @@ namespace RestFit.API.Middleware
             try
             {
                 var authHeader = AuthenticationHeaderValue.Parse(Request.Headers["Authorization"]);
-                var credentialBytes = Convert.FromBase64String(authHeader?.Parameter ?? String.Empty);
+                var credentialBytes = Convert.FromBase64String(authHeader?.Parameter ?? string.Empty);
                 var credentials = Encoding.UTF8.GetString(credentialBytes).Split(new[] { ':' }, 2);
                 var username = credentials[0];
-                var password = credentials[1];
+                using var sha512 = SHA512.Create();
+                var bytes = Encoding.UTF8.GetBytes(credentials[1]);
+                using var stream = new MemoryStream(bytes);
+                var password = Encoding.UTF8.GetString(await sha512.ComputeHashAsync(stream).ConfigureAwait(false));
                 user = await _userService.Authenticate(username, password).ConfigureAwait(false);
             }
             catch

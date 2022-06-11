@@ -5,6 +5,8 @@ using RestFit.Client.Abstract.Model;
 using RestFit.DataAccess.Abstract.KnownSearches;
 using RestFit.Logic.Abstract;
 using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace RestFit.API.Controllers.v1
 {
@@ -21,6 +23,10 @@ namespace RestFit.API.Controllers.v1
 
         public async Task CreateUserAsync(UserDto user)
         {
+            using var sha512 = SHA512.Create();
+            var bytes = Encoding.UTF8.GetBytes(user.Password);
+            using var stream = new MemoryStream(bytes);
+            user = user with { Password = Encoding.UTF8.GetString(await sha512.ComputeHashAsync(stream).ConfigureAwait(false)) };
             await _processorHub.InsertProcessor.CreateUserAsync(UserDtoMapper.Instance.Convert(user))
                 .ConfigureAwait(false);
         }
