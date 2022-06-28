@@ -260,7 +260,9 @@ public sealed class FriendsViewModel : ViewModelBase
     {
         ExercisesList = new List<UnitAggregationDto>();
         SelectedExercise = null;
-        ExercisesList = SelectedFriend.UnitAggregationDtos.ToList();
+        
+        if (SelectedFriend != null)
+            ExercisesList = SelectedFriend.UnitAggregationDtos.ToList();
     }
 
     private void UpdateExerciseAverage()
