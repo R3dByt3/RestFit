@@ -25,6 +25,7 @@ namespace RestFit.API.Controllers.v1
         }
 
         [AllowAnonymous, HttpPost]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> CreateUserAsync([FromBody] UserDto user) => await ExecuteSafeAsync(async () =>
         {
             await _processor.CreateUserAsync(user).ConfigureAwait(false);

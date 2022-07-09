@@ -69,7 +69,7 @@ namespace RestFitAPI
                     }
                 });
                 options.ExampleFilters();
-                options.SchemaFilter<SwaggerExcludeFilter>();
+                options.OperationFilter<SwaggerExcludeFilter>();
                 options.OperationFilter<SwaggerQueryParameterAttributeFilter>();
                 options.ParameterFilter<SwaggerQueryParameterAttributeFilter>();
                 options.EnableAnnotations();

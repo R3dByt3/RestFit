@@ -77,6 +77,8 @@ namespace RestFit.API.Controllers.v1
         [MethodQueryParameter(nameof(FriendSearchDto.Ids), "Suche anhand von Ids")]
         [SwaggerResponse((int)HttpStatusCode.OK, "Alle Unit Objekte", typeof(List<FriendDto>))]
         [SwaggerResponseExample((int)HttpStatusCode.OK, typeof(FriendDtosExampleProvider))]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest, "Wenn mindestens eine der Ids der Anfrage kein Freund des Users sind", typeof(ErrorDataDto))]
+        [SwaggerResponseExample((int)HttpStatusCode.BadRequest, typeof(ErrorDataDtoExampleProvider))]
         [SwaggerResponse((int)HttpStatusCode.Unauthorized, "Nicht authorisiert")]
         [SwaggerResponse((int)HttpStatusCode.GatewayTimeout, "Wenn es ein Problem mit der Datenbank gibt", typeof(ErrorDataDto))]
         [SwaggerResponseExample((int)HttpStatusCode.GatewayTimeout, typeof(ErrorDataDtoExampleProvider))]
